@@ -1,0 +1,7 @@
+c:\users\jon\documents\visual studio 2010\Projects\HelperBot\HelperBot\bin\Debug\HelperBot.dll
+c:\users\jon\documents\visual studio 2010\Projects\HelperBot\HelperBot\bin\Debug\HelperBot.pdb
+c:\users\jon\documents\visual studio 2010\Projects\HelperBot\HelperBot\bin\Debug\fCraft.dll
+c:\users\jon\documents\visual studio 2010\Projects\HelperBot\HelperBot\bin\Debug\fCraft.pdb
+c:\users\jon\documents\visual studio 2010\Projects\HelperBot\HelperBot\obj\Debug\ResolveAssemblyReference.cache
+c:\users\jon\documents\visual studio 2010\Projects\HelperBot\HelperBot\obj\Debug\HelperBot.dll
+c:\users\jon\documents\visual studio 2010\Projects\HelperBot\HelperBot\obj\Debug\HelperBot.pdb
