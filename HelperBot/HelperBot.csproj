@@ -46,7 +46,9 @@
     <Compile Include="Constants.cs" />
     <Compile Include="Events.cs" />
     <Compile Include="HelperBot.cs" />
+    <Compile Include="Methods.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RandomStats.cs" />
     <Compile Include="Serialization.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

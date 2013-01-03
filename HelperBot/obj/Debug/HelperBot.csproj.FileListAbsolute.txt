@@ -5,3 +5,10 @@ c:\users\jon\documents\visual studio 2010\Projects\HelperBot\HelperBot\bin\Debug
 c:\users\jon\documents\visual studio 2010\Projects\HelperBot\HelperBot\obj\Debug\ResolveAssemblyReference.cache
 c:\users\jon\documents\visual studio 2010\Projects\HelperBot\HelperBot\obj\Debug\HelperBot.dll
 c:\users\jon\documents\visual studio 2010\Projects\HelperBot\HelperBot\obj\Debug\HelperBot.pdb
+C:\Users\Jon\Documents\GitHub\HelperBot\HelperBot\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\Jon\Documents\GitHub\HelperBot\HelperBot\obj\Debug\HelperBot.dll
+C:\Users\Jon\Documents\GitHub\HelperBot\HelperBot\obj\Debug\HelperBot.pdb
+C:\Users\Jon\Documents\GitHub\HelperBot\HelperBot\bin\Debug\HelperBot.dll
+C:\Users\Jon\Documents\GitHub\HelperBot\HelperBot\bin\Debug\HelperBot.pdb
+C:\Users\Jon\Documents\GitHub\HelperBot\HelperBot\bin\Debug\fCraft.dll
+C:\Users\Jon\Documents\GitHub\HelperBot\HelperBot\bin\Debug\fCraft.pdb

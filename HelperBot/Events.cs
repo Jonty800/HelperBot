@@ -12,8 +12,6 @@ namespace HelperBot {
         /// This will be our initilization. This has to happen once the server has fully been
         /// started so no errors occur
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         public static void ServerStarted ( object sender, EventArgs e ) {
 
         }
@@ -22,8 +20,6 @@ namespace HelperBot {
         /// This event happens when a chat message has been sent and shown on screen
         /// This should be used to relay the AI messages to the server / player
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         public static void ChatSentMessage ( object sender, ChatSentEventArgs e ) {
 
         }
