@@ -48,5 +48,23 @@ namespace HelperBot {
         {
 
         };
+
+        /// <summary>
+        /// An array of positive comments that the bot can add onto the end of a message
+        /// Examples: "How cool is that?", "Awesome sauce"
+        /// </summary>
+        public static string[] PositiveComments = new string[]
+        {
+
+        };
+
+        /// <summary>
+        /// An array of nagative comments that the bot can add onto the end of a message
+        /// Examples: "I don't like that behavior", "Please don't do it again"
+        /// </summary>
+        public static string[] NegativeComments = new string[]
+        {
+
+        };
     }
 }
