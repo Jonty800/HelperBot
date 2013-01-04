@@ -14,7 +14,7 @@ namespace HelperBot {
         /// <summary>
         /// Send a personal message to a player
         /// </summary>
-        /// <param name="player">The player object of thr target. Cannot be null</param>
+        /// <param name="player">The player object of the target. Cannot be null</param>
         /// <param name="msg">The message to send to the target, cannot be null or 0 length</param>
         public static void SendPM ( Player player, string msg ) {
             if ( player == null )
