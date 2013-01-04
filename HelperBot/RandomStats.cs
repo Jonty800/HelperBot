@@ -22,6 +22,10 @@ namespace HelperBot {
         CurrentTime = 8,
         FirstPersonKicked = 9,
         FirstPersonBanned = 10,
+        NewestStaff = 11,
+        OldestStaff = 12,
+        MostPMsSent = 13, //We can call them a spy
+        MostLogins
         //more soon
     }
 }
