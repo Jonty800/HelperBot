@@ -75,6 +75,12 @@ namespace HelperBot {
         #region Strings
 
         /// <summary>
+        /// The name of the bot
+        /// Deafult: Alice
+        /// </summary>
+        public static string Name = "Alice";
+
+        /// <summary>
         /// String value for "how do I get ranked" (builder)
         /// </summary>
         public static string HowToGetRankedBuilderString = "&S to get ranked, keep building then use /Review and a member of staff with check your build";
@@ -102,6 +108,10 @@ namespace HelperBot {
         #endregion
 
         #region Other
+        /// <summary>
+        /// The color of the bots name
+        /// Default: Red
+        /// </summary>
         public static string BotNameColor = Color.Red;
         #endregion
 

@@ -11,15 +11,12 @@ namespace HelperBot {
     /// This class will be used to store constant values, such as XML values and arrays of replies
     /// </summary>
     public static class Constants {
-
         /// <summary>
-        /// The name of the bot
-        /// Deafult: Alice
+        /// The name of the bot, colored using Settings.BotNameColor
         /// </summary>
-        public static string Name = "Alice";
-
+        /// <returns>Settings.BotNameColor + Name;</returns>
         public static string ClassyName {
-            get { return Settings.BotNameColor + Name; }
+            get { return Settings.BotNameColor + Settings.Name; }
         }
 
         #region Personality (Maybe)

@@ -23,7 +23,7 @@ namespace HelperBot {
                 throw new Exception( "HelperBot: Msg cannot be null" );
             if ( msg.Length < 1 )
                 throw new Exception( "HelperBot: Msg cannot be 0-length" );
-            player.Message( "{0}from {1}: {2}", Color.PM, Constants.Name, msg );
+            player.Message( "{0}from {1}: {2}", Color.PM, Settings.Name, msg );
         }
 
         /// <summary>
