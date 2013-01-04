@@ -8,7 +8,7 @@ using fCraft;
 
 namespace HelperBot {
     /// <summary>
-    /// This class will be used to store constant values, such as XML values and arrays of replies
+    /// This class will be used to store constant values, such as arrays of replies
     /// </summary>
     public static class Constants {
         /// <summary>

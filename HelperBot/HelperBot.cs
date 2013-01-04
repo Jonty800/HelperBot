@@ -16,6 +16,7 @@ namespace HelperBot {
         public void Initialize () {
             Logger.Log( LogType.ConsoleOutput, "Starting HelperBot " + Version +". Waiting for Init." );
             Server.Started += Events.ServerStarted;
+            Chat.Sent += Events.ChatSentMessage;
         }
 
         public string Name {

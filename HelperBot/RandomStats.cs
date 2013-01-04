@@ -24,8 +24,7 @@ namespace HelperBot {
         FirstPersonBanned = 10,
         NewestStaff = 11,
         OldestStaff = 12,
-        MostPMsSent = 13, //We can call them a spy
-        MostLogins
+        MostLogins = 13
         //more soon
     }
 }
