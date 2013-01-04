@@ -1,4 +1,9 @@
-﻿using System;
+﻿//HelperBot - Copyright (c) Jonty800 and LeChosenOne <2013> (http://forums.au70.net)
+//This plugin is open source and designed to be used with 800Craft and LegendCraft server softwares
+
+
+//NOTE: I am not happy with this class, I need to rethink and rewrite it
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,7 +13,7 @@ using System.Xml;
 using System.Xml.Linq;
 
 namespace HelperBot {
-    public static class Config {
+    public static class Settings {
 
         #region XML settings
         /// <summary>
@@ -96,6 +101,10 @@ namespace HelperBot {
 
         #endregion
 
+        #region Other
+        public static string BotNameColor = Color.Red;
+        #endregion
+
         /// <summary>
         /// Designed to load the settings from the XML config file and replace the default values
         /// </summary>
@@ -173,6 +182,5 @@ namespace HelperBot {
             }
             return true;
         }
-        
     }
 }

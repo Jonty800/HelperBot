@@ -18,11 +18,15 @@ namespace HelperBot {
         /// </summary>
         public static string Name = "Alice";
 
+        public static string ClassyName {
+            get { return Settings.BotNameColor + Name; }
+        }
+
         #region Personality (Maybe)
         public static int Age = 21;
         public static string Hometown = "London, England";
-        public static string Sex = "Female";
-        public static string Occupation = "Botting 'n stuff";
+        public static string Sex = "female";
+        public static string Occupation = "botting 'n stuff"; //My occupation is + Occupation (lowercase starting)
         #endregion
 
         /// <summary>
@@ -40,11 +44,12 @@ namespace HelperBot {
         public static string[] ThankyouReplies = new string[]
         { 
           "No problem",
-          "Your Welcome",
-          "Any time",
+          "You're Welcome",
+          "Anytime :P",
           "Only for you",
           "Np",
-          "Yw"
+          "Yw",
+          "^.^"
         };
 
         /// <summary>
@@ -69,7 +74,7 @@ namespace HelperBot {
          "AwesomeSauce!",
          "Well done!",
          "Great job!",
-         "This guy's on fire!",
+         "You're on fire!",
          "Way to go!"
         };
 
@@ -82,8 +87,9 @@ namespace HelperBot {
          "Please stop doing that.",
          "Stahp!",
          "Not cool bro!",
-         "I don't think that was very smart...",
-         "That wasn't a good idea now was it?"
+         "I don't think that was very smart...", //unsure
+         "That wasn't a good idea now was it?" // unsure
+         //@Jonty800 I noticed that you swore in a private message + That wasn't a good idea now was it?
         };
     }
 }
