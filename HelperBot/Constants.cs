@@ -21,12 +21,13 @@ namespace HelperBot {
         #region Personality (Maybe)
         public static int Age = 21;
         public static string Hometown = "London, England";
-        public static string Sex = "female";
-        public static string Occupation = "being a Bot";
+        public static string Sex = "Female";
+        public static string Occupation = "Botting 'n stuff";
         #endregion
 
         /// <summary>
         /// An array of RandomMessages to be said on a very long delayed timer - maybe 20mins
+        /// We can probably use this for the same thing as automated server messages
         /// </summary>
         public static string[] RandomMessage = new string[]
         {
@@ -37,8 +38,13 @@ namespace HelperBot {
         /// An array of thankyou replies to send back to the player
         /// </summary>
         public static string[] ThankyouReplies = new string[]
-        {
-
+        { 
+          "No problem",
+          "Your Welcome",
+          "Any time",
+          "Only for you",
+          "Np",
+          "Yw"
         };
 
         /// <summary>
@@ -46,7 +52,11 @@ namespace HelperBot {
         /// </summary>
         public static string[] Jokes = new string[]
         {
-
+         "Schrodinger's Cat: Wanted dead and alive.",
+         "Light travels faster than sound. This is why some people appear bright until you hear them speak.",
+         "War does not determine who is right – only who is left...",
+         "Never hit a man with glasses. Hit him with a baseball bat instead.",
+         "Nostalgia isn't what it used to be."                                                         
         };
 
         /// <summary>
@@ -55,16 +65,25 @@ namespace HelperBot {
         /// </summary>
         public static string[] PositiveComments = new string[]
         {
-
+         "Perfect!",
+         "AwesomeSauce!",
+         "Well done!",
+         "Great job!",
+         "This guy's on fire!",
+         "Way to go!"
         };
 
         /// <summary>
-        /// An array of nagative comments that the bot can add onto the end of a message
+        /// An array of negative comments that the bot can add onto the end of a message
         /// Examples: "I don't like that behavior", "Please don't do it again"
         /// </summary>
         public static string[] NegativeComments = new string[]
         {
-
+         "Please stop doing that.",
+         "Stahp!",
+         "Not cool bro!",
+         "I don't think that was very smart...",
+         "That wasn't a good idea now was it?"
         };
     }
 }
