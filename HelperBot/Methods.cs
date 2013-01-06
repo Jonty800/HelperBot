@@ -62,7 +62,7 @@ namespace HelperBot {
         /// <summary>
         /// Checks if the player has changed his displayedName to the bots
         /// </summary>
-        /// <param name="player"></param>
+        /// <param name="player">Player in question</param>
         /// <returns>true if the displayednames are the same</returns>
         public static bool IsPlayersDisplayedNameBots ( Player player ) {
             if ( player == null )
@@ -85,19 +85,19 @@ namespace HelperBot {
                 throw new Exception( "HelperBot: Message cannot be null" );
             Message = Color.StripColors( Message );
             //Say impersonation
-            if ( Message.StartsWith( Color.StripColors( "/say " + Values.ClassyName + ":" ) ) )
+            if ( Message.StartsWith( Color.StripColors( Values.ClassyName + ":" ) ) )
                 return true;
             //staff impersonation
-            if ( Message.StartsWith( Color.StripColors( "/say (staff)" + Values.ClassyName + ":" ) ) )
+            if ( Message.StartsWith( Color.StripColors( "(staff)" + Values.ClassyName + ":" ) ) )
                 return true;
             //adminchat impersonation
-            if ( Message.StartsWith( Color.StripColors( "/say (admin)" + Values.ClassyName + ":" ) ) )
+            if ( Message.StartsWith( Color.StripColors( "(admin)" + Values.ClassyName + ":" ) ) )
                 return true;
             //me impersonation
-            if ( Message.StartsWith( Color.StripColors( "/say *" + Values.ClassyName ) ) )
+            if ( Message.StartsWith( Color.StripColors( "*" + Values.ClassyName ) ) )
                 return true;
             //PM impersonation
-            if ( Message.StartsWith( Color.StripColors( "/say @" + Values.ClassyName ) ) )
+            if ( Message.StartsWith( Color.StripColors( "@" + Values.ClassyName ) ) )
                 return true;
             else
                 return false;
