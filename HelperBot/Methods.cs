@@ -18,6 +18,9 @@ namespace HelperBot {
         /// <param name="player">The player object of the target. Cannot be null</param>
         /// <param name="msg">The message to send to the target, cannot be null or 0 length</param>
         public static void SendPM ( Player player, string msg ) {
+            if ( Settings.ReleaseFlag == Flags.Debug ) {
+                Logger.Log( LogType.SystemActivity, "HelperBot: SendPM Method" );
+            }
             if ( player == null )
                 throw new Exception( "HelperBot: Player cannot be null" );
             if ( msg == null )
@@ -32,6 +35,9 @@ namespace HelperBot {
         /// </summary>
         /// <param name="msg">The message to send to the server, cannot be null or 0 length</param>
         public static void SendChat ( string msg ) {
+            if ( Settings.ReleaseFlag == Flags.Debug ) {
+                Logger.Log( LogType.SystemActivity, "HelperBot: SendChat Method" );
+            }
             if ( msg == null )
                 throw new Exception( "HelperBot: Msg cannot be null" );
             if ( msg.Length < 1 )
@@ -46,6 +52,9 @@ namespace HelperBot {
         /// </summary>
         /// <param name="msg">The message to send to the staff, cannot be null or 0 length</param>
         public static void SendStaff ( string msg ) {
+            if ( Settings.ReleaseFlag == Flags.Debug ) {
+                Logger.Log( LogType.SystemActivity, "HelperBot: SendStaff Method" );
+            }
             if ( msg == null )
                 throw new Exception( "HelperBot: Msg cannot be null" );
             if ( msg.Length < 1 )
@@ -65,6 +74,9 @@ namespace HelperBot {
         /// <param name="player">Player in question</param>
         /// <returns>true if the displayednames are the same</returns>
         public static bool IsPlayersDisplayedNameBots ( Player player ) {
+            if ( Settings.ReleaseFlag == Flags.Debug ) {
+                Logger.Log( LogType.SystemActivity, "HelperBot: IsPlayersDisplayedNameBots Method" );
+            }
             if ( player == null )
                 return false;
             if ( player.Info.DisplayedName == null )
@@ -81,6 +93,9 @@ namespace HelperBot {
         /// <param name="Message"></param>
         /// <returns>true if the player is suspected of impersonation</returns>
         public static bool DetectMessageImpersonation ( string Message ) {
+            if ( Settings.ReleaseFlag == Flags.Debug ) {
+                Logger.Log( LogType.SystemActivity, "HelperBot: DetectMessageImpersonation Method" );
+            }
             if ( Message == null )
                 throw new Exception( "HelperBot: Message cannot be null" );
             Message = Color.StripColors( Message );
@@ -112,10 +127,7 @@ namespace HelperBot {
             if ( Message == null )
                 throw new Exception( "HelperBot: Message cannot be null" );
             Message = Message.ToLower();
-            if ( Message.Contains( Settings.Name.ToLower() ) )
-                return true;
-            else
-                return false;
+            return Message.Contains( Settings.Name.ToLower() );
         }
 
         #endregion
@@ -126,7 +138,10 @@ namespace HelperBot {
         /// </summary>
         /// <param name="player">The player in question [NotNull]</param>
         /// <returns>A string message containing the statistical information</returns>
-        public static string GetRandomStatisticString ( Player player ) {
+        public static string GetRandomStatString ( Player player ) {
+            if ( Settings.ReleaseFlag == Flags.Debug ) {
+                Logger.Log( LogType.SystemActivity, "HelperBot: GetRandomStatString Method" );
+            }
             if ( player == null ) throw new Exception( "HelperBot: Player cannot be null" );
             byte Max = 13; //Max enum byte
             int StringID = new Random().Next( 0, Max );

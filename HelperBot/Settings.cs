@@ -13,7 +13,14 @@ using System.Xml;
 using System.Xml.Linq;
 
 namespace HelperBot {
+    enum Flags {
+        Debug,
+        Release
+    }
+
     public static class Settings {
+
+        public static Flags ReleaseFlag = Flags.Debug;
 
         #region XML settings
         /// <summary>
@@ -120,6 +127,9 @@ namespace HelperBot {
         /// </summary>
         /// <returns>true if everything went smoothly</returns>
         public static bool Load ( ) {
+            if ( Settings.ReleaseFlag == Flags.Debug ) {
+                Logger.Log( LogType.SystemActivity, "HelperBot: Settings.Load called" );
+            }
             bool fromFile = false;
             XDocument file;
             if ( File.Exists( FilePath ) ) {

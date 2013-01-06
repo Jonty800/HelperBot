@@ -13,6 +13,7 @@ namespace HelperBot {
     /// The initilization of the bot should happen inside ServerStarted event in Events.cs
     /// </summary>
     public class Init : Plugin {
+
         public void Initialize () {
             Logger.Log( LogType.ConsoleOutput, "Starting HelperBot " + Version +". Waiting for Init." );
             Server.Started += Events.ServerStarted;

@@ -14,7 +14,9 @@ namespace HelperBot {
         /// started so no errors occur
         /// </summary>
         public static void ServerStarted ( object sender, EventArgs e ) {
-
+            if ( Settings.ReleaseFlag == Flags.Debug ) {
+                Logger.Log( LogType.SystemActivity, "HelperBot: ServerStartedEvent" );
+            }
         }
 
         /// <summary>
@@ -22,7 +24,9 @@ namespace HelperBot {
         /// This should be used to relay the AI messages to the server / player
         /// </summary>
         public static void ChatSentMessage ( object sender, ChatSentEventArgs e ) {
-
+            if ( Settings.ReleaseFlag == Flags.Debug ) {
+                Logger.Log( LogType.SystemActivity, "HelperBot: ChatSentMessage P="+e.Player.Name +"; ML="+e.Message.Length + "; MT="+e.MessageType );
+            }
         }
 
         /// <summary>
@@ -30,6 +34,9 @@ namespace HelperBot {
         /// This should be used to check for impersonation
         /// </summary>
         public static void CommandCalled ( object sender, CommandCalledEventArgs e ) {
+            if ( Settings.ReleaseFlag == Flags.Debug ) {
+                Logger.Log( LogType.SystemActivity, "HelperBot: CommandCalledEvent" );
+            }
             if ( e.Command == null || e.CommandDescriptor == null || e.Player == null ) return;
             if ( e.CommandDescriptor.Name.ToLower() == "say" ) { //say doesnt have aliases
                 if ( Methods.DetectMessageImpersonation( e.Command.NextAll() ) ) {
