@@ -127,13 +127,11 @@ namespace HelperBot {
         /// <param name="player">The player in question [NotNull]</param>
         /// <returns>A string message containing the statistical information</returns>
         public static string GetRandomStatisticString ( Player player ) {
-            byte Max = 12; //Max enum byte - 1
+            if ( player == null ) throw new Exception( "HelperBot: Player cannot be null" );
+            byte Max = 13; //Max enum byte
             int StringID = new Random().Next( 0, Max );
             RandomStat Picked = ( RandomStat )StringID;
-            string StartOfMessage = "";
-            if ( player != null ) {
-               StartOfMessage = player.ClassyName + "&F, ";
-            }
+            string StartOfMessage = player.ClassyName + "&F, ";
             switch ( Picked ) {
                 case RandomStat.CurrentTime:
                     return "";
