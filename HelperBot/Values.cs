@@ -19,6 +19,9 @@ namespace HelperBot {
             get { return Settings.BotNameColor + Settings.Name; }
         }
 
+        public static PlayerInfo FirstJoined;
+        public static PlayerInfo OldestStaff;
+        public static PlayerInfo FirstBanned;
         #region Personality (Maybe)
         public static int Age = 21;
         public static string Hometown = "London, England";

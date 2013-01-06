@@ -90,12 +90,12 @@ namespace HelperBot {
         /// <summary>
         /// String value for "how do I get ranked" (builder)
         /// </summary>
-        public static string HowToGetRankedBuilderString = "&S to get ranked, keep building then use /Review and a member of staff with check your build";
+        public static string HowToGetRankedBuilderString = "&F to get ranked, keep building then use /Review and a member of staff with check your build";
 
         /// <summary>
         /// String value for "how do I get ranked" (staff)
         /// </summary>
-        public static string HowToGetRankedStaffString = "&S to get the next staff rank, try to moderate the server in the best way possible";
+        public static string HowToGetRankedStaffString = "&F to get the next staff rank, try to moderate the server in the best way possible";
 
         /// <summary>
         /// String value for the server's website
@@ -105,12 +105,12 @@ namespace HelperBot {
         /// <summary>
         /// String value for "I got demoted" reply
         /// </summary>
-        public static string DemotedMessage = "&S, if you were wrongfully demoted you can appeal at " + Website;
+        public static string DemotedMessage = "&F, if you were wrongfully demoted you can appeal at " + Website;
 
         /// <summary>
         /// String value for "I am stuck" reply
         /// </summary>
-        public static string StuckMessage = "&S, if you are stuck press R to respawn";
+        public static string StuckMessage = "&F, if you are stuck press R to respawn";
 
         #endregion
 

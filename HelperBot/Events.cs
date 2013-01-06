@@ -16,6 +16,7 @@ namespace HelperBot {
         public static void ServerStarted ( object sender, EventArgs e ) {
             if ( Settings.ReleaseFlag == Flags.Debug ) {
                 Logger.Log( LogType.SystemActivity, "HelperBot: ServerStartedEvent" );
+                Methods.SetAllValues(); //Load all the player reply values
             }
         }
 

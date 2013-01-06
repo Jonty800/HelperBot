@@ -151,7 +151,7 @@ namespace HelperBot {
                 case RandomStat.CurrentTime:
                     return "";
                 case RandomStat.FirstPersonBanned:
-                    return "";
+                    return "The first person to get banned on this server was "+ Values.FirstBanned.ClassyName;
                 case RandomStat.FirstPersonKicked:
                     return "";
                 case RandomStat.MostBanned:
@@ -175,9 +175,41 @@ namespace HelperBot {
                 case RandomStat.NewestStaff:
                     return "";
                 case RandomStat.OldestStaff:
-                    return "";
-                default: return null;//shouldn't happen
+                    return "Our oldest active staff member is " + Values.OldestStaff.ClassyName;
+                case RandomStat.FirstJoined:
+                    return "The first person to join the server was " + 
+                        Values.FirstJoined.ClassyName + "&Fon " + Values.FirstJoined.FirstLoginDate +
+                        " ("+ Values.FirstJoined.TimeSinceFirstLogin.ToMiniString() + " ago).";
+                default: return null; //shouldn't happen
             }
+        }
+
+        public static void SetAllValues () {
+            SetFirstJoined();
+            SetFirstBanned();
+            SetOldestStaff();
+        }
+
+        public static void SetFirstJoined () {
+            if ( PlayerDB.PlayerInfoList == null ) {
+                Logger.Log( LogType.Error, "HelperBot: PlayerInfoList is null @ SetFirstJoined" );
+                return;
+            }
+           Values.FirstJoined = PlayerDB.PlayerInfoList.OrderBy( pi => pi.FirstLoginDate ).FirstOrDefault( pi => pi.FirstLoginDate != DateTime.MinValue );
+        }
+        public static void SetOldestStaff () {
+            if ( PlayerDB.PlayerInfoList == null ) {
+                Logger.Log( LogType.Error, "HelperBot: PlayerInfoList is null @ SetOldestStaff" );
+                return;
+            }
+            Values.OldestStaff = PlayerDB.PlayerInfoList.Where(p=> p.Can(Permission.ReadStaffChat)).OrderBy( pi => pi.FirstLoginDate ).FirstOrDefault( pi => pi.FirstLoginDate != DateTime.MinValue );
+        }
+        public static void SetFirstBanned () {
+            if ( PlayerDB.PlayerInfoList == null ) {
+                Logger.Log( LogType.Error, "HelperBot: PlayerInfoList is null @ SetFirstBanned" );
+                return;
+            }
+            Values.FirstJoined = PlayerDB.PlayerInfoList.Where(p=> p.IsBanned).OrderBy( pi => pi.FirstLoginDate ).FirstOrDefault( pi => pi.FirstLoginDate != DateTime.MinValue );
         }
     }
 }
