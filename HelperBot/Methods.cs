@@ -209,7 +209,7 @@ namespace HelperBot {
                 Logger.Log( LogType.Error, "HelperBot: PlayerInfoList is null @ SetFirstBanned" );
                 return;
             }
-            Values.FirstJoined = PlayerDB.PlayerInfoList.Where(p=> p.IsBanned).OrderBy( pi => pi.FirstLoginDate ).FirstOrDefault( pi => pi.FirstLoginDate != DateTime.MinValue );
+            Values.FirstBanned = PlayerDB.PlayerInfoList.Where( p => p.IsBanned ).OrderBy( pi => pi.BanDate ).FirstOrDefault( pi => pi.BanDate != DateTime.MinValue );
         }
     }
 }

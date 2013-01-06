@@ -13,7 +13,7 @@ using System.Xml;
 using System.Xml.Linq;
 
 namespace HelperBot {
-    enum Flags {
+    public enum Flags {
         Debug,
         Release
     }
