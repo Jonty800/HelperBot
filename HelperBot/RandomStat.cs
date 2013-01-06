@@ -10,7 +10,7 @@ namespace HelperBot {
     /// An enumerable containing Random Fact types. 
     /// The idea is to use Math.Random() to pick one out of this list
     /// </summary>
-    public enum RandomStats : byte {
+    public enum RandomStat : byte {
         MostPromoted = 0,
         MostBuilt = 1,
         MostKicked = 2,

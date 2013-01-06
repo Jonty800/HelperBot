@@ -10,7 +10,7 @@ namespace HelperBot {
     /// <summary>
     /// This class will be used to store constant values, such as arrays of replies
     /// </summary>
-    public static class Constants {
+    public static class Values {
         /// <summary>
         /// The name of the bot, colored using Settings.BotNameColor
         /// </summary>

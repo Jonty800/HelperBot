@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using fCraft;
 using fCraft.Events;
 
 namespace HelperBot {
@@ -22,6 +23,19 @@ namespace HelperBot {
         /// </summary>
         public static void ChatSentMessage ( object sender, ChatSentEventArgs e ) {
 
+        }
+
+        /// <summary>
+        /// This event happens when a command is called
+        /// This should be used to check for impersonation
+        /// </summary>
+        public static void CommandCalled ( object sender, CommandCalledEventArgs e ) {
+            if ( e.Command == null || e.CommandDescriptor == null || e.Player == null ) return;
+            if ( e.CommandDescriptor.Name.ToLower() == "say" ) { //say doesnt have aliases
+                if ( Methods.DetectMessageImpersonation( e.Command.NextAll() ) ) {
+                    e.Player.Kick( Player.Console, "Impersonation Detected", LeaveReason.Kick, true, true, false );
+                }
+            }
         }
     }
 }

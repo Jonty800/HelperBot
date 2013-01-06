@@ -17,8 +17,12 @@ namespace HelperBot {
             Logger.Log( LogType.ConsoleOutput, "Starting HelperBot " + Version +". Waiting for Init." );
             Server.Started += Events.ServerStarted;
             Chat.Sent += Events.ChatSentMessage;
+            CommandManager.CommandCalled += Events.CommandCalled; //need to test how this works
         }
 
+        /// <summary>
+        /// Name of the plugin
+        /// </summary>
         public string Name {
             get {
                 return "HelperBot";
@@ -28,6 +32,9 @@ namespace HelperBot {
             }
         }
 
+        /// <summary>
+        /// Version of the plugin
+        /// </summary>
         public string Version {
             get {
                 return "1.0";
