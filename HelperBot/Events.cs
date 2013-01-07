@@ -23,26 +23,35 @@ namespace HelperBot {
         /// <summary>
         /// This event happens when a chat message has been sent and shown on screen
         /// This should be used to relay the AI messages to the server / player
+        /// NOTE IRC is not controlable, which means we can't do !Players
         /// </summary>
         public static void ChatSentMessage ( object sender, ChatSentEventArgs e ) {
             if ( Settings.ReleaseFlag == Flags.Debug ) {
-                Logger.Log( LogType.SystemActivity, "HelperBot: ChatSentMessage P="+e.Player.Name +"; ML="+e.Message.Length + "; MT="+e.MessageType );
+                Logger.Log( LogType.SystemActivity, "HelperBot: ChatSentMessage P=" + e.Player.Name + "; ML=" + e.Message.Length + "; MT=" + e.MessageType );
             }
-        }
-
-        /// <summary>
-        /// This event happens when a command is called
-        /// This should be used to check for impersonation
-        /// </summary>
-        public static void CommandCalled ( object sender, CommandCalledEventArgs e ) {
-            if ( Settings.ReleaseFlag == Flags.Debug ) {
-                Logger.Log( LogType.SystemActivity, "HelperBot: CommandCalledEvent" );
-            }
-            if ( e.Command == null || e.CommandDescriptor == null || e.Player == null ) return;
-            if ( e.CommandDescriptor.Name.ToLower() == "say" ) { //say doesnt have aliases
-                if ( Methods.DetectMessageImpersonation( e.Command.NextAll() ) ) {
-                    e.Player.Kick( Player.Console, "Impersonation Detected", LeaveReason.Kick, true, true, false );
-                }
+            if(e.Message == null) return;
+            switch ( e.MessageType ) {
+                /*case ChatMessageType.IRC:
+                    if ( e.Message.ToLower() == "!players" ) {
+                        IRC.SendChannelMessage( "Players online: " + Server.Players.Where( p => !p.Info.IsHidden ).JoinToClassyString() );
+                    }
+                    break;*/
+                case ChatMessageType.Global:
+                    break;
+                case ChatMessageType.PM:
+                    break;
+                case ChatMessageType.Say:
+                    if ( Methods.DetectMessageImpersonation( e.Message ) ) {
+                        e.Player.Kick( Player.Console, "Impersonation Detected", LeaveReason.Kick, true, true, false );
+                    }
+                    break;
+                case ChatMessageType.Staff:
+                    break;
+                case ChatMessageType.Rank:
+                    break;
+                default:
+                    //dunno
+                    break;
             }
         }
     }

@@ -18,7 +18,6 @@ namespace HelperBot {
             Logger.Log( LogType.ConsoleOutput, "Starting HelperBot " + Version +". Waiting for Init." );
             Server.Started += Events.ServerStarted;
             Chat.Sent += Events.ChatSentMessage;
-            CommandManager.CommandCalled += Events.CommandCalled; //need to test how this works
         }
 
         /// <summary>
