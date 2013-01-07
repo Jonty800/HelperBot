@@ -22,12 +22,6 @@ namespace HelperBot {
         public static PlayerInfo FirstJoined;
         public static PlayerInfo OldestStaff;
         public static PlayerInfo FirstBanned;
-        #region Personality (Maybe)
-        public static int Age = 21;
-        public static string Hometown = "London, England";
-        public static string Sex = "female";
-        public static string Occupation = "botting 'n stuff"; //My occupation is + Occupation (lowercase starting)
-        #endregion
 
         /// <summary>
         /// An array of RandomMessages to be said on a very long delayed timer - maybe 20mins

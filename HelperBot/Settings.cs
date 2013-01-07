@@ -112,6 +112,13 @@ namespace HelperBot {
         /// </summary>
         public static string StuckMessage = "&F, if you are stuck press R to respawn";
 
+        #region Personality (Maybe)
+        public static int Age = 21;
+        public static string Hometown = "London, England";
+        public static string Sex = "female";
+        public static string Occupation = "botting 'n stuff"; //My occupation is + Occupation (lowercase starting)
+        #endregion
+
         #endregion
 
         #region Other
