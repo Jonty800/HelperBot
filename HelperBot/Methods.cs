@@ -12,6 +12,38 @@ namespace HelperBot {
     /// </summary>
     class Methods {
         #region Chat
+
+        /// <summary>
+        /// Send a message without the need of a player name (DO NOT use this for PMs)
+        /// </summary>
+        public static void SendMessage ( string Message, MessageChannel Channel ) {
+            SendMessage( null, Message, Channel );
+        }
+
+        /// <summary>
+        /// Send a message
+        /// </summary>
+        public static void SendMessage ( Player player, string Message, MessageChannel Channel ) {
+            switch ( Channel ) {
+                case MessageChannel.Admin:
+                    //TODO
+                    break;
+                case MessageChannel.Global:
+                    SendChat( Message );
+                    break;
+                case MessageChannel.Me: 
+                   //TODO
+                    break;
+                case MessageChannel.PM:
+                    SendPM( player, Message );
+                    break;
+                case MessageChannel.Staff:
+                    SendStaff( Message );
+                    break;
+            }
+        }
+
+
         /// <summary>
         /// Send a personal message to a player
         /// </summary>

@@ -9,6 +9,8 @@ using fCraft.Events;
 
 namespace HelperBot {
     public static class Events {
+
+        public static SchedulerTask PlayerPromotedCheck;
         /// <summary>
         /// This will be our initilization. This has to happen once the server has fully been
         /// started so no errors occur
@@ -16,8 +18,10 @@ namespace HelperBot {
         public static void ServerStarted ( object sender, EventArgs e ) {
             if ( Settings.ReleaseFlag == Flags.Debug ) {
                 Logger.Log( LogType.SystemActivity, "HelperBot: ServerStartedEvent" );
-                Methods.SetAllValues(); //Load all the player reply values
             }
+            Methods.SetAllValues(); //Load all the player reply values
+            Chat.Sent += ChatSentMessage;
+            PlayerInfo.RankChanged += PlayerPromoted;
         }
 
         /// <summary>
@@ -37,6 +41,20 @@ namespace HelperBot {
                     }
                     break;*/
                 case ChatMessageType.Global:
+                    if ( Triggers.AggrevateOutput( e.Message, RankTriggers.NextRankFullTrigger ) ) {
+                        if ( e.Player.Info.Rank != RankManager.HighestRank ) {
+                            Methods.SendMessage( e.Player.ClassyName + "&F, your next rank is " + e.Player.Info.Rank.NextRankUp.ClassyName, MessageChannel.Global );
+                        } else {
+                            Methods.SendMessage( e.Player.ClassyName + "&F, you are already the highest rank!", MessageChannel.Global );
+                        }
+                    }
+                    if ( Triggers.AggrevateOutput( e.Message, RankTriggers.HowDoFullTrigger ) ) {
+                        if ( e.Player.Info.Rank == RankManager.HighestRank ) return;
+                        if ( e.Player.Can( Permission.ReadStaffChat ) )
+                            Methods.SendMessage( e.Player.ClassyName + Settings.HowToGetRankedStaffString, MessageChannel.Global );
+                        else
+                            Methods.SendMessage( e.Player.ClassyName + Settings.HowToGetRankedBuilderString, MessageChannel.Global );
+                    }
                     break;
                 case ChatMessageType.PM:
                     break;
@@ -52,6 +70,12 @@ namespace HelperBot {
                 default:
                     //dunno
                     break;
+            }
+        }
+
+        public static void PlayerPromoted ( object sender, PlayerInfoRankChangedEventArgs e ) {
+            if ( e.NewRank > e.OldRank ) {
+                Scheduler.NewTask( t => Methods.SendMessage( e.PlayerInfo.ClassyName + "&F, congrats on your new rank!!!", MessageChannel.Global ) ).RunOnce( TimeSpan.FromSeconds( 3 ) );
             }
         }
     }
