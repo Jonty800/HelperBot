@@ -47,6 +47,7 @@
     <Compile Include="Settings.cs" />
     <Compile Include="Triggers.cs" />
     <Compile Include="Triggers\RankTriggers.cs" />
+    <Compile Include="Triggers\MiscTriggers" />
     <Compile Include="Values.cs" />
     <Compile Include="Events.cs" />
     <Compile Include="HelperBot.cs" />
