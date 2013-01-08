@@ -1,0 +1,97 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+//May rename/move when other trigger files are created
+
+namespace HelperBot {
+    public static class MiscTriggers {
+        
+        static String[] FellTrigger = new String[]
+        {
+           "I",
+           "Fell" 
+        };
+        static String[] FellTrigger2 = new String[]
+        {
+           "I",
+           "am",
+           "stuck"
+        };
+
+        static String[] FellTrigger3 = new String[]
+        {
+           "I'm",
+           "stuck"
+        };
+
+        static String[] JokeTrigger = new String[]
+        {
+           "Helperbot", //will replace with custom bot name
+           "joke"
+        };
+        
+        static String[] JokeTrigger2 = new String[]
+        {
+           "tell",
+           "a",
+           "joke"
+        };
+       
+        static String[] JokeTrigger3 = new String[]
+        {
+           "say",
+           "a",
+           "joke"
+        };
+
+        static String[] WebTrigger = new String[]
+        {
+           "what",
+           "website"
+        };
+
+        static String[] WebTrigger2 = new String[]
+        {
+           "server",
+           "website"
+        };
+
+        static String[] ServTrigger = new String[]
+        {
+           "what",
+           "server"
+        };
+
+        static String[] ServTrigger2 = new String[]
+        {
+           "this",
+           "server"
+        };
+
+
+        public static String[][] FellFullTrigger = new String[][]
+        {
+            FellTrigger,
+            FellTrigger2,
+            FellTrigger3
+        };
+        public static String[][] JokeFullTrigger = new String[][]
+        {
+            JokeTrigger,
+            JokeTrigger2,
+            JokeTrigger3
+        };
+        public static String[][] WebFullTrigger = new String[][]
+        {
+            WebTrigger,
+            WebTrigger2
+        };
+        public static String[][] ServFullTrigger = new String[][]
+        {
+            ServTrigger,
+            ServTrigger2
+        };
+    }
+}
