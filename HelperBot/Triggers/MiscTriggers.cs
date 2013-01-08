@@ -1,3 +1,6 @@
+//HelperBot - Copyright (c) Jonty800 and LeChosenOne <2013> (http://forums.au70.net)
+//This plugin is open source and designed to be used with 800Craft and LegendCraft server softwares
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,35 +13,43 @@ namespace HelperBot {
         
         static String[] FellTrigger = new String[]
         {
-           "I",
-           "Fell" 
+           "i",
+           "fell" 
         };
         static String[] FellTrigger2 = new String[]
         {
-           "I",
+           "i",
            "am",
            "stuck"
         };
 
         static String[] FellTrigger3 = new String[]
         {
-           "I'm",
+           "i'm",
            "stuck"
         };
 
+        /// <summary>
+        /// This requres the MatchesNameAndTrigger method
+        /// </summary>
         static String[] JokeTrigger = new String[]
         {
-           "Helperbot", //will replace with custom bot name
            "joke"
         };
-        
+
+        /// <summary>
+        /// This requres the MatchesNameAndTrigger method
+        /// </summary>
         static String[] JokeTrigger2 = new String[]
         {
            "tell",
            "a",
            "joke"
         };
-       
+
+        /// <summary>
+        /// This requres the MatchesNameAndTrigger method
+        /// </summary>
         static String[] JokeTrigger3 = new String[]
         {
            "say",
@@ -66,6 +77,7 @@ namespace HelperBot {
 
         static String[] ServTrigger2 = new String[]
         {
+            "what",
            "this",
            "server"
         };

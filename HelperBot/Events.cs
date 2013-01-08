@@ -9,8 +9,6 @@ using fCraft.Events;
 
 namespace HelperBot {
     public static class Events {
-
-        public static SchedulerTask PlayerPromotedCheck;
         /// <summary>
         /// This will be our initilization. This has to happen once the server has fully been
         /// started so no errors occur
@@ -41,14 +39,14 @@ namespace HelperBot {
                     }
                     break;*/
                 case ChatMessageType.Global:
-                    if ( Triggers.AggrevateOutput( e.Message, RankTriggers.NextRankFullTrigger ) ) {
+                    if ( Triggers.MatchesTrigger( e.Message, RankTriggers.NextRankFullTrigger ) ) {
                         if ( e.Player.Info.Rank != RankManager.HighestRank ) {
                             Methods.SendMessage( e.Player.ClassyName + "&F, your next rank is " + e.Player.Info.Rank.NextRankUp.ClassyName, MessageChannel.Global );
                         } else {
                             Methods.SendMessage( e.Player.ClassyName + "&F, you are already the highest rank!", MessageChannel.Global );
                         }
                     }
-                    if ( Triggers.AggrevateOutput( e.Message, RankTriggers.HowDoFullTrigger ) ) {
+                    if ( Triggers.MatchesTrigger( e.Message, RankTriggers.HowDoFullTrigger ) ) {
                         if ( e.Player.Info.Rank == RankManager.HighestRank ) return;
                         if ( e.Player.Can( Permission.ReadStaffChat ) )
                             Methods.SendMessage( e.Player.ClassyName + Settings.HowToGetRankedStaffString, MessageChannel.Global );
