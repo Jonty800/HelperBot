@@ -13,7 +13,7 @@ namespace HelperBot {
     public static class Triggers {
 
         public static bool MatchesNameAndTrigger ( string rawMessage, String[][] ArrayContainer ) {
-            if ( rawMessage.ToLower().Contains( Settings.Name ) ) {
+            if ( rawMessage.ToLower().Contains( Settings.Name.ToLower() ) ) {
                 if ( MatchesTrigger( rawMessage, ArrayContainer ) ) {
                     return true;
                 }
