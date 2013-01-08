@@ -89,7 +89,7 @@ namespace HelperBot {
         /// <summary>
         /// String value for "how do I get ranked" (builder)
         /// </summary>
-        public static string HowToGetRankedBuilderString = "&F to get ranked, keep building then use /Review and a member of staff with check your build";
+        public static string HowToGetRankedBuilderString = "&F to get ranked, keep building then use /Review and a member of staff will check your build";
 
         /// <summary>
         /// String value for "how do I get ranked" (staff)
