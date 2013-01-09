@@ -40,7 +40,8 @@ namespace HelperBot {
             MessageChannel Channel = Methods.ParseChatType( e.MessageType );
             
             Triggers.CheckRankTriggers( e.Player, e.Message, Channel );
-            
+            Triggers.CheckMiscTriggers( e.Player, e.Message, Channel );
+            Triggers.CheckMaintenanceTriggers( e.Player, e.Message, Channel );
         }
 
         public static void PlayerPromoted ( object sender, PlayerInfoRankChangedEventArgs e ) {
