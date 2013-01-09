@@ -45,23 +45,23 @@ namespace HelperBot {
                     {
                         Methods.SendMessage(e.Player.ClassyName + "&F, " + Values.Jokes[rand.Next(0, Values.Jokes.Length)] + ".", MessageChannel.Global);
                     }
-                    if (Triggers.MatchesNameAndTrigger(e.Message, MaintenanceTriggers.FellFullTrigger))
+                    if (Triggers.MatchesTrigger(e.Message, MaintenanceTriggers.FellFullTrigger))
                     {
                         Methods.SendMessage(e.Player.ClassyName + "&F, " + Settings.StuckMessage, MessageChannel.Global);                           
                     }
-                    if (Triggers.MatchesNameAndTrigger(e.Message, MaintenanceTriggers.HoursFullTrigger))
+                    if (Triggers.MatchesTrigger(e.Message, MaintenanceTriggers.HoursFullTrigger))
                     {
                         Methods.SendMessage(e.Player.ClassyName + "&F, you have " + time.ToMiniString() +".", MessageChannel.Global);
                     }
-                    if (Triggers.MatchesNameAndTrigger(e.Message, MaintenanceTriggers.SwearFullTrigger))
+                    if (Triggers.MatchesTrigger(e.Message, MaintenanceTriggers.SwearFullTrigger))
                     {
                         Methods.SendMessage(e.Player.ClassyName + "&F, Please refrain from swearing." , MessageChannel.PM);
                     }         
-                    if (Triggers.MatchesNameAndTrigger(e.Message, MaintenanceTriggers.WebFullTrigger))
+                    if (Triggers.MatchesTrigger(e.Message, MaintenanceTriggers.WebFullTrigger))
                     {
                         Methods.SendMessage(e.Player.ClassyName + "&F, the server's website is " + Settings.Website + ".", MessageChannel.Global);
                     }
-                    if (Triggers.MatchesNameAndTrigger(e.Message, MaintenanceTriggers.ServFullTrigger))
+                    if (Triggers.MatchesTrigger(e.Message, MaintenanceTriggers.ServFullTrigger))
                     {
                         Methods.SendMessage(e.Player.ClassyName + "&F, you are currently playing on " + ConfigKey.ServerName.GetString() + ".", MessageChannel.Global);
                     }
