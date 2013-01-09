@@ -24,7 +24,7 @@ namespace HelperBot {
         /// <summary>
         /// This requres the MatchesNameAndTrigger method
         /// </summary>
-        static String[] JokeTrigger2 = new String[]
+        static String[] JokeTrigger2 = new String[] //no point in these two if the first one is just 'joke'
         {
            "tell",
            "a",
