@@ -42,7 +42,7 @@ namespace HelperBot {
                     Random rand = new Random(); //best i can do for now
                     if (Triggers.MatchesNameAndTrigger(e.Message, MiscTriggers.FellFullTrigger))
                     {
-                        Methods.SendMessage(e.Player.ClassyName + "&F, if you fell, hit 'r' to get to the spawn point.", MessageChannel.Global);                           
+                        Methods.SendMessage(e.Player.ClassyName + "&F, " + Settings.StuckMessage, MessageChannel.Global);                           
                     }                    
                     if (Triggers.MatchesNameAndTrigger(e.Message, MiscTriggers.JokeFullTrigger))
                     {
@@ -75,7 +75,7 @@ namespace HelperBot {
                     break;
                 case ChatMessageType.Say:
                     if ( Methods.DetectMessageImpersonation( e.Message ) ) {
-                        e.Player.Kick( Player.Console, "Impersonation Detected", LeaveReason.Kick, true, true, false );
+                        e.Player.Kick( Player.Console, "Impersonation Detected", LeaveReason.Kick, true, true, false ); //tad harsh?
                     }
                     break;
                 case ChatMessageType.Staff:
@@ -90,7 +90,8 @@ namespace HelperBot {
 
         public static void PlayerPromoted ( object sender, PlayerInfoRankChangedEventArgs e ) {
             if ( e.NewRank > e.OldRank ) {
-                Scheduler.NewTask( t => Methods.SendMessage( e.PlayerInfo.ClassyName + "&F, congrats on your new rank!!!", MessageChannel.Global ) ).RunOnce( TimeSpan.FromSeconds( 3 ) );
+                Scheduler.NewTask( t => Methods.SendMessage( e.PlayerInfo.ClassyName + "&F, congradulations on your new rank! " + Values.PositiveComments, MessageChannel.Global ) ).RunOnce( TimeSpan.FromSeconds( 3 ) );
+                return;
             }
         }
     }
