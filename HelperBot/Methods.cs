@@ -216,6 +216,32 @@ namespace HelperBot {
             }
         }
 
+        public static MessageChannel ParseChatType ( ChatMessageType MessageType ) {
+            switch ( MessageType ) {
+                case ChatMessageType.Global:
+                    return MessageChannel.Global;
+                case ChatMessageType.Me:
+                    return MessageChannel.Me;
+                case ChatMessageType.PM:
+                    return MessageChannel.PM;
+                case ChatMessageType.Staff:
+                    return MessageChannel.Staff;
+                default: return MessageChannel.Admin;
+            }
+        }
+
+        public static String GetPlayerTotalHoursString ( Player player ) {
+            TimeSpan totalTime = player.Info.TotalTime;
+            return player.ClassyName + "&F, you have spent " + 
+                totalTime.TotalHours + " hours (" + 
+                totalTime.TotalMinutes + 
+                " minutes) here.";
+        }
+
+        public static string GetRandomJoke () {
+            return Values.Jokes[new Random().Next( 0, Values.Jokes.Length - 1 )];
+        }
+
         public static void SetAllValues () {
             SetFirstJoined();
             SetFirstBanned();
@@ -229,6 +255,7 @@ namespace HelperBot {
             }
            Values.FirstJoined = PlayerDB.PlayerInfoList.OrderBy( pi => pi.FirstLoginDate ).FirstOrDefault( pi => pi.FirstLoginDate != DateTime.MinValue );
         }
+
         public static void SetOldestStaff () {
             if ( PlayerDB.PlayerInfoList == null ) {
                 Logger.Log( LogType.Error, "HelperBot: PlayerInfoList is null @ SetOldestStaff" );
@@ -236,6 +263,7 @@ namespace HelperBot {
             }
             Values.OldestStaff = PlayerDB.PlayerInfoList.Where(p=> p.Can(Permission.ReadStaffChat)).OrderBy( pi => pi.FirstLoginDate ).FirstOrDefault( pi => pi.FirstLoginDate != DateTime.MinValue );
         }
+
         public static void SetFirstBanned () {
             if ( PlayerDB.PlayerInfoList == null ) {
                 Logger.Log( LogType.Error, "HelperBot: PlayerInfoList is null @ SetFirstBanned" );

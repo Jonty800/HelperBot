@@ -5,12 +5,54 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using fCraft;
 
 namespace HelperBot {
     /// <summary>
     /// Static class containing Trigger for the bot to respond to a player.
     /// </summary>
     public static class Triggers {
+
+        public static void CheckRankTriggers ( Player player, String Message, MessageChannel Channel) {
+            if ( Triggers.MatchesTrigger( Message, RankTriggers.NextRankFullTrigger ) ) {
+                if ( player.Info.Rank != RankManager.HighestRank ) {
+                    Methods.SendMessage( player.ClassyName + "&F, your next rank is " + player.Info.Rank.NextRankUp.ClassyName, Channel );
+                } else {
+                    Methods.SendMessage( player.ClassyName + "&F, you are already the highest rank!", Channel );
+                }
+            }
+            if ( Triggers.MatchesTrigger( Message, RankTriggers.HowDoFullTrigger ) ) {
+                if ( player.Info.Rank == RankManager.HighestRank ) return;
+                if ( player.Can( Permission.ReadStaffChat ) )
+                    Methods.SendMessage( player.ClassyName + Settings.HowToGetRankedStaffString, Channel);
+                else
+                    Methods.SendMessage( player.ClassyName + Settings.HowToGetRankedBuilderString, Channel );
+            }
+        }
+
+        public static void CheckMaintenanceTriggers ( Player player, String Message, MessageChannel Channel ) {
+            if ( Triggers.MatchesTrigger( Message, MaintenanceTriggers.FellFullTrigger ) ) {
+                Methods.SendMessage( player.ClassyName + "&F, " + Settings.StuckMessage, Channel );
+            }
+            if ( Triggers.MatchesTrigger( Message, MaintenanceTriggers.HoursFullTrigger ) ) {
+                Methods.SendMessage( Methods.GetPlayerTotalHoursString( player ), Channel );
+            }
+            if ( Triggers.MatchesTrigger( Message, MaintenanceTriggers.SwearFullTrigger ) ) {
+                Methods.SendMessage( player.ClassyName + "&F, Please refrain from swearing.", Channel );
+            }
+            if ( Triggers.MatchesTrigger( Message, MaintenanceTriggers.WebFullTrigger ) ) {
+                Methods.SendMessage( player.ClassyName + "&F, the server's website is " + Settings.Website, Channel );
+            }
+            if ( Triggers.MatchesTrigger( Message, MaintenanceTriggers.ServFullTrigger ) ) {
+                Methods.SendMessage( player.ClassyName + "&F, you are currently playing on " + ConfigKey.ServerName.GetString(), Channel );
+            }
+        }
+
+        public static void CheckMiscTriggers ( Player player, String Message, MessageChannel Channel ) {
+            if ( Triggers.MatchesNameAndTrigger( Message, MiscTriggers.JokeFullTrigger ) ) {
+                Methods.SendMessage( Methods.GetRandomJoke(), MessageChannel.Global );
+            }
+        }
 
         public static bool MatchesNameAndTrigger ( string rawMessage, String[][] ArrayContainer ) {
             if ( rawMessage.ToLower().Contains( Settings.Name.ToLower() ) ) {

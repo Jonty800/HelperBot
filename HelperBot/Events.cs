@@ -31,70 +31,16 @@ namespace HelperBot {
             if ( Settings.ReleaseFlag == Flags.Debug ) {
                 Logger.Log( LogType.SystemActivity, "HelperBot: ChatSentMessage P=" + e.Player.Name + "; ML=" + e.Message.Length + "; MT=" + e.MessageType );
             }
-            if(e.Message == null) return;
-            switch ( e.MessageType ) {
-                /*case ChatMessageType.IRC:
-                    if ( e.Message.ToLower() == "!players" ) {
-                        IRC.SendChannelMessage( "Players online: " + Server.Players.Where( p => !p.Info.IsHidden ).JoinToClassyString() );
-                    }
-                    break;*/
-                case ChatMessageType.Global:
-                    Random rand = new Random(); //best i can do for now
-                    TimeSpan time = TimeSpan.FromHours(e.Player.Info.TotalTime.TotalHours);
-                    if (Triggers.MatchesNameAndTrigger(e.Message, MiscTriggers.JokeFullTrigger))
-                    {
-                        Methods.SendMessage(e.Player.ClassyName + "&F, " + Values.Jokes[rand.Next(0, Values.Jokes.Length)] + ".", MessageChannel.Global);
-                    }
-                    if (Triggers.MatchesTrigger(e.Message, MaintenanceTriggers.FellFullTrigger))
-                    {
-                        Methods.SendMessage(e.Player.ClassyName + "&F, " + Settings.StuckMessage, MessageChannel.Global);                           
-                    }
-                    if (Triggers.MatchesTrigger(e.Message, MaintenanceTriggers.HoursFullTrigger))
-                    {
-                        Methods.SendMessage(e.Player.ClassyName + "&F, you have " + time.ToMiniString() +".", MessageChannel.Global);
-                    }
-                    if (Triggers.MatchesTrigger(e.Message, MaintenanceTriggers.SwearFullTrigger))
-                    {
-                        Methods.SendMessage(e.Player.ClassyName + "&F, Please refrain from swearing." , MessageChannel.PM);
-                    }         
-                    if (Triggers.MatchesTrigger(e.Message, MaintenanceTriggers.WebFullTrigger))
-                    {
-                        Methods.SendMessage(e.Player.ClassyName + "&F, the server's website is " + Settings.Website + ".", MessageChannel.Global);
-                    }
-                    if (Triggers.MatchesTrigger(e.Message, MaintenanceTriggers.ServFullTrigger))
-                    {
-                        Methods.SendMessage(e.Player.ClassyName + "&F, you are currently playing on " + ConfigKey.ServerName.GetString() + ".", MessageChannel.Global);
-                    }
-                    if ( Triggers.MatchesTrigger( e.Message, RankTriggers.NextRankFullTrigger ) ) {
-                        if ( e.Player.Info.Rank != RankManager.HighestRank ) {
-                            Methods.SendMessage( e.Player.ClassyName + "&F, your next rank is " + e.Player.Info.Rank.NextRankUp.ClassyName, MessageChannel.Global );
-                        } else {
-                            Methods.SendMessage( e.Player.ClassyName + "&F, you are already the highest rank!", MessageChannel.Global );
-                        }
-                    }
-                    if ( Triggers.MatchesTrigger( e.Message, RankTriggers.HowDoFullTrigger ) ) {
-                        if ( e.Player.Info.Rank == RankManager.HighestRank ) return;
-                        if ( e.Player.Can( Permission.ReadStaffChat ) )
-                            Methods.SendMessage( e.Player.ClassyName + Settings.HowToGetRankedStaffString, MessageChannel.Global );
-                        else
-                            Methods.SendMessage( e.Player.ClassyName + Settings.HowToGetRankedBuilderString, MessageChannel.Global );
-                    }
-                    break;
-                case ChatMessageType.PM:
-                    break;
-                case ChatMessageType.Say:
-                    if ( Methods.DetectMessageImpersonation( e.Message ) ) {
-                        e.Player.Kick( Player.Console, "Impersonation Detected", LeaveReason.Kick, true, true, false ); //tad harsh?
-                    }
-                    break;
-                case ChatMessageType.Staff:
-                    break;
-                case ChatMessageType.Rank:
-                    break;
-                default:
-                    //dunno
-                    break;
+            if ( e.Message == null ) return;
+            if ( Methods.DetectMessageImpersonation( e.Message ) ) {
+                e.Player.Kick( Player.Console, "Impersonation Detected", LeaveReason.Kick, true, true, false ); //tad harsh? //it will stop it from happening!
+                //plus it will be optional for the host
             }
+            if ( e.MessageType == ChatMessageType.IRC || e.MessageType == ChatMessageType.Say || e.MessageType == ChatMessageType.Rank ) return;
+            MessageChannel Channel = Methods.ParseChatType( e.MessageType );
+            
+            Triggers.CheckRankTriggers( e.Player, e.Message, Channel );
+            
         }
 
         public static void PlayerPromoted ( object sender, PlayerInfoRankChangedEventArgs e ) {
