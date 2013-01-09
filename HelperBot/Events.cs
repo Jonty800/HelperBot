@@ -42,6 +42,10 @@ namespace HelperBot {
             Triggers.CheckRankTriggers( e.Player, e.Message, Channel );
             Triggers.CheckMiscTriggers( e.Player, e.Message, Channel );
             Triggers.CheckMaintenanceTriggers( e.Player, e.Message, Channel );
+
+            if ( Triggers.MatchesNameAndTrigger( e.Message, MiscTriggers.FunFactTrigger ) ) {
+                Methods.SendMessage( Methods.GetRandomStatString( e.Player ), Channel );
+            }
         }
 
         public static void PlayerPromoted ( object sender, PlayerInfoRankChangedEventArgs e ) {

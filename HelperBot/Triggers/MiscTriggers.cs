@@ -13,17 +13,11 @@ namespace HelperBot {
         
         //I'll throw some funfacts from RandomStat.cs later
 
-        /// <summary>
-        /// This requres the MatchesNameAndTrigger method
-        /// </summary>
         static String[] JokeTrigger = new String[]
         {
            "joke"
         };
 
-        /// <summary>
-        /// This requres the MatchesNameAndTrigger method
-        /// </summary>
         static String[] JokeTrigger2 = new String[]
         {
            "tell",
@@ -31,9 +25,6 @@ namespace HelperBot {
            "joke"
         };
 
-        /// <summary>
-        /// This requres the MatchesNameAndTrigger method
-        /// </summary>
         static String[] JokeTrigger3 = new String[]
         {
            "say",
@@ -41,11 +32,22 @@ namespace HelperBot {
            "joke"
         };
 
+        /// <summary>
+        /// This requres the MatchesNameAndTrigger method
+        /// </summary>
         public static String[][] JokeFullTrigger = new String[][]
         {
             JokeTrigger,
             JokeTrigger2,
             JokeTrigger3
+        };
+
+        /// <summary>
+        /// This requres the MatchesNameAndTrigger method
+        /// </summary>
+        public static String[][] FunFactTrigger = new String[][]
+        {
+            new String[]{"fun", "fact"}
         };
 
     }
