@@ -1,4 +1,4 @@
-﻿//HelperBot - Copyright (c) Jonty800 and LeChosenOne <2013> (http://forums.au70.net)
+//HelperBot - Copyright (c) Jonty800 and LeChosenOne <2013> (http://forums.au70.net)
 //This plugin is open source and designed to be used with 800Craft and LegendCraft server softwares
 using System;
 using System.Collections.Generic;
@@ -39,6 +39,23 @@ namespace HelperBot {
                     }
                     break;*/
                 case ChatMessageType.Global:
+                    Random rand = new Random(); //best i can do for now
+                    if (Triggers.MatchesNameAndTrigger(e.Message, MiscTriggers.FellFullTrigger))
+                    {
+                        Methods.SendMessage(e.Player.ClassyName + "&F, if you fell, hit 'r' to get to the spawn point.", MessageChannel.Global);                           
+                    }                    
+                    if (Triggers.MatchesNameAndTrigger(e.Message, MiscTriggers.JokeFullTrigger))
+                    {
+                        Methods.SendMessage(e.Player.ClassyName + "&F, " + Values.Jokes[rand.Next(0, Values.Jokes.Length)] + ".", MessageChannel.Global);
+                    }
+                    if (Triggers.MatchesNameAndTrigger(e.Message, MiscTriggers.WebFullTrigger))
+                    {
+                        Methods.SendMessage(e.Player.ClassyName + "&F, the server's website is " + Settings.Website + ".", MessageChannel.Global);
+                    }
+                    if (Triggers.MatchesNameAndTrigger(e.Message, MiscTriggers.ServFullTrigger))
+                    {
+                        Methods.SendMessage(e.Player.ClassyName + "&F, you are currently playing on " + ConfigKey.ServerName.GetString() + ".", MessageChannel.Global);
+                    }
                     if ( Triggers.MatchesTrigger( e.Message, RankTriggers.NextRankFullTrigger ) ) {
                         if ( e.Player.Info.Rank != RankManager.HighestRank ) {
                             Methods.SendMessage( e.Player.ClassyName + "&F, your next rank is " + e.Player.Info.Rank.NextRankUp.ClassyName, MessageChannel.Global );
