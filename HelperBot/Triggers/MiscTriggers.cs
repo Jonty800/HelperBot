@@ -11,23 +11,7 @@ using System.Text;
 namespace HelperBot {
     public static class MiscTriggers {
         
-        static String[] FellTrigger = new String[]
-        {
-           "i",
-           "fell" 
-        };
-        static String[] FellTrigger2 = new String[]
-        {
-           "i",
-           "am",
-           "stuck"
-        };
-
-        static String[] FellTrigger3 = new String[]
-        {
-           "i'm",
-           "stuck"
-        };
+        //I'll throw some funfacts from RandomStat.cs later
 
         /// <summary>
         /// This requres the MatchesNameAndTrigger method
@@ -57,53 +41,12 @@ namespace HelperBot {
            "joke"
         };
 
-        static String[] WebTrigger = new String[]
-        {
-           "what",
-           "website"
-        };
-
-        static String[] WebTrigger2 = new String[]
-        {
-           "server",
-           "website"
-        };
-
-        static String[] ServTrigger = new String[]
-        {
-           "what",
-           "server"
-        };
-
-        static String[] ServTrigger2 = new String[]
-        {
-            "what",
-           "this",
-           "server"
-        };
-
-
-        public static String[][] FellFullTrigger = new String[][]
-        {
-            FellTrigger,
-            FellTrigger2,
-            FellTrigger3
-        };
         public static String[][] JokeFullTrigger = new String[][]
         {
             JokeTrigger,
             JokeTrigger2,
             JokeTrigger3
         };
-        public static String[][] WebFullTrigger = new String[][]
-        {
-            WebTrigger,
-            WebTrigger2
-        };
-        public static String[][] ServFullTrigger = new String[][]
-        {
-            ServTrigger,
-            ServTrigger2
-        };
+
     }
 }
