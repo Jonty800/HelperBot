@@ -13,6 +13,18 @@ namespace HelperBot {
         
         //I'll throw some funfacts from RandomStat.cs later
 
+        static String[] FlyTrigger = new String[]
+        {
+           "how",
+           "fly"
+        };
+
+        static String[] FlyTrigger2 = new String[]
+        {
+           "help",
+           "fly"
+        };
+
         /// <summary>
         /// This requres the MatchesNameAndTrigger method
         /// </summary>
@@ -46,6 +58,11 @@ namespace HelperBot {
             JokeTrigger,
             JokeTrigger2,
             JokeTrigger3
+        };
+        public static String[][] FlyFullTrigger = new String[][]
+        {
+            FlyTrigger,
+            FlyTrigger2,
         };
 
     }
