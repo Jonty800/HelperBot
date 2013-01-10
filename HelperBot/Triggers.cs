@@ -1,10 +1,11 @@
-﻿//HelperBot - Copyright (c) Jonty800 and LeChosenOne <2013> (http://forums.au70.net)
+//HelperBot - Copyright (c) Jonty800 and LeChosenOne <2013> (http://forums.au70.net)
 //This plugin is open source and designed to be used with 800Craft and LegendCraft server softwares
 
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.IO;
 using fCraft;
 
 namespace HelperBot {
@@ -37,8 +38,12 @@ namespace HelperBot {
             if ( Triggers.MatchesTrigger( Message, MaintenanceTriggers.HoursFullTrigger ) ) {
                 Methods.SendMessage( Methods.GetPlayerTotalHoursString( player ), Channel );
             }
-            if ( Triggers.MatchesTrigger( Message, MaintenanceTriggers.SwearFullTrigger ) ) {
-                Methods.SendMessage( player.ClassyName + "&F, Please refrain from swearing.", Channel );
+            if (File.Exists("SwearWords.txt"))
+            {
+                if (Triggers.MatchesTrigger(Message, MaintenanceTriggers.SwearFullTrigger))
+                {
+                    Methods.SendMessage(player.ClassyName + "&F, Please refrain from swearing.", Channel);
+                }
             }
             if ( Triggers.MatchesTrigger( Message, MaintenanceTriggers.WebFullTrigger ) ) {
                 Methods.SendMessage( player.ClassyName + "&F, the server's website is " + Settings.Website, Channel );
@@ -51,6 +56,10 @@ namespace HelperBot {
         public static void CheckMiscTriggers ( Player player, String Message, MessageChannel Channel ) {
             if ( Triggers.MatchesNameAndTrigger( Message, MiscTriggers.JokeFullTrigger ) ) {
                 Methods.SendMessage( Methods.GetRandomJoke(), MessageChannel.Global );
+            }
+            if (Triggers.MatchesTrigger(Message, MiscTriggers.FlyFullTrigger))
+            {
+                Methods.SendMessage(player.ClassyName + "&F, to fly, type /fly, or download WoM at womjr.com/game_client.", MessageChannel.Global);
             }
         }
 
