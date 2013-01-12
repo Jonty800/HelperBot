@@ -21,6 +21,7 @@ namespace HelperBot {
             Methods.SetAllValues(); //Load all the player reply values
             Chat.Sent += ChatSentMessage;
             PlayerInfo.RankChanged += PlayerPromoted;
+            Player.BeingKicked += PlayerKicked;
         }
 
         /// <summary>
