@@ -21,7 +21,7 @@ namespace HelperBot {
             Methods.SetAllValues(); //Load all the player reply values
             Chat.Sent += ChatSentMessage;
             PlayerInfo.RankChanged += PlayerPromoted;
-            Player.BeingKicked += PlayerKicked;
+            Player.Connected += PlayerConnected;
         }
 
         /// <summary>
@@ -45,21 +45,19 @@ namespace HelperBot {
             Triggers.CheckMiscTriggers( e.Player, e.Message, Channel );
             Triggers.CheckMaintenanceTriggers( e.Player, e.Message, Channel );
         }
-        public static void PlayerKicked(object sender, PlayerBeingKickedEventArgs e)
+        public static void PlayerConnected(PlayerInfo info, PlayerConnectedEventArgs e)
         {
-            Stopwatch time = Stopwatch.StartNew();
-            //check if player has logged in
-            if (e.Player.Info.IsOnline == true)
+            int LastKick = info.TimeSinceLastKick.Milliseconds;
+            //if the player left due to a kick, and it has been under two minutes
+            if(info.LeaveReason == LeaveReason.Kick && LastKick < 120000)
             {
-                time.Stop();
-                //if the player logs in within 30 seconds
-                if (time.ElapsedMilliseconds < 30000)
-                {
-                    Methods.SendMessage("&F You have been kicked by a staff member. Please follow the rules in /rules next time!", MessageChannel.PM);
-                    return;
-                }
+                Methods.SendMessage(e + "&F, You have been kicked by a staff member. Please follow the rules in /rules next time! Kick Reason: " + info.LastKickReason, MessageChannel.PM);
+            }
+            else
+            {
                 return;
             }
+            
         }
         public static void PlayerPromoted ( object sender, PlayerInfoRankChangedEventArgs e ) {
             if ( e.NewRank > e.OldRank ) {
