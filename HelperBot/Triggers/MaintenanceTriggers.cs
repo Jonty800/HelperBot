@@ -5,65 +5,104 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.IO;
 
 //May rename/move when other trigger files are created
 
-namespace HelperBot {
-    public static class MiscTriggers {
-        
-        //I'll throw some funfacts from RandomStat.cs later
+namespace HelperBot
+{
+    public static class MaintenanceTriggers
+    {
+        static String[] FellTrigger = new String[]
+        {
+           "i",
+           "fell" 
+        };
+        static String[] FellTrigger2 = new String[]
+        {
+           "i",
+           "am",
+           "stuck"
+        };
 
-        static String[] FlyTrigger = new String[]
+        static String[] FellTrigger3 = new String[]
+        {
+           "i'm",
+           "stuck"
+        };
+         static String[] WebTrigger = new String[]
+        {
+           "what",
+           "website"
+        };
+
+        static String[] WebTrigger2 = new String[]
+        {
+           "server",
+           "website"
+        };
+
+        static String[] ServTrigger = new String[]
+        {
+           "what",
+           "server"
+        };
+
+        static String[] ServTrigger2 = new String[]
+        {
+            "what",
+           "this",
+           "server"
+        };
+        static String[] TimeTrigger = new String[]
+        {
+           "what",
+           "time"
+        };
+      
+        static FileInfo swearFile = new FileInfo("swearwords.txt");
+        public static string[] SwearTrigger = File.ReadAllLines(swearFile.FullName);
+    
+        static String[] HoursTrigger = new String[]
         {
            "how",
-           "fly"
+           "many",
+           "hours"
+        };
+        static String[] HoursTrigger2 = new String[]
+        {
+           "my",
+           "hours"
         };
 
-        static String[] FlyTrigger2 = new String[]
+        public static String[][] TimeFullTrigger = new String[][]
         {
-           "help",
-           "fly"
+            TimeTrigger
         };
-
-        /// <summary>
-        /// This requres the MatchesNameAndTrigger method
-        /// </summary>
-        static String[] JokeTrigger = new String[]
+        public static String[][] SwearFullTrigger = new String[][]
         {
-           "joke"
+            SwearTrigger
         };
-
-        /// <summary>
-        /// This requres the MatchesNameAndTrigger method
-        /// </summary>
-        static String[] JokeTrigger2 = new String[] //no point in these two if the first one is just 'joke'
+        public static String[][] FellFullTrigger = new String[][]
         {
-           "tell",
-           "a",
-           "joke"
+            FellTrigger,
+            FellTrigger2,
+            FellTrigger3
         };
-
-        /// <summary>
-        /// This requres the MatchesNameAndTrigger method
-        /// </summary>
-        static String[] JokeTrigger3 = new String[]
+        public static String[][] HoursFullTrigger = new String[][]
         {
-           "say",
-           "a",
-           "joke"
+            HoursTrigger,
+            HoursTrigger2,
         };
-
-        public static String[][] JokeFullTrigger = new String[][]
+        public static String[][] WebFullTrigger = new String[][]
         {
-            JokeTrigger,
-            JokeTrigger2,
-            JokeTrigger3
+            WebTrigger,
+            WebTrigger2
         };
-        public static String[][] FlyFullTrigger = new String[][]
+        public static String[][] ServFullTrigger = new String[][]
         {
-            FlyTrigger,
-            FlyTrigger2,
+            ServTrigger,
+            ServTrigger2
         };
-
     }
 }
