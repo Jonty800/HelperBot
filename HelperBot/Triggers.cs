@@ -25,15 +25,19 @@ namespace HelperBot {
             if ( Triggers.MatchesTrigger( Message, RankTriggers.HowDoFullTrigger ) ) {
                 if ( player.Info.Rank == RankManager.HighestRank ) return;
                 if ( player.Can( Permission.ReadStaffChat ) )
-                    Methods.SendMessage( player.ClassyName + Settings.HowToGetRankedStaffString, Channel);
+                    Methods.SendMessage( player.ClassyName + "&f, " + Settings.HowToGetRankedStaffString, Channel);
                 else
-                    Methods.SendMessage( player.ClassyName + Settings.HowToGetRankedBuilderString, Channel );
+                    Methods.SendMessage( player.ClassyName + "&f, " + Settings.HowToGetRankedBuilderString, Channel);
             }
         }
 
         public static void CheckMaintenanceTriggers ( Player player, String Message, MessageChannel Channel ) {
+            if (Triggers.MatchesNameAndTrigger(Message, MaintenanceTriggers.TimeFullTrigger))
+            {
+                Methods.SendMessage(player.ClassyName + "&f, the time is currently " +  DateTime.Now.ToShortTimeString() + ".", Channel);
+            }
             if ( Triggers.MatchesTrigger( Message, MaintenanceTriggers.FellFullTrigger ) ) {
-                Methods.SendMessage( player.ClassyName + "&F, " + Settings.StuckMessage, Channel );
+                Methods.SendMessage( player.ClassyName + Settings.StuckMessage, Channel );
             }
             if ( Triggers.MatchesTrigger( Message, MaintenanceTriggers.HoursFullTrigger ) ) {
                 Methods.SendMessage( Methods.GetPlayerTotalHoursString( player ), Channel );
