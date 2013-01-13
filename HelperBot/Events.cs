@@ -56,30 +56,20 @@ namespace HelperBot {
                 Methods.SendMessage( Methods.GetRandomStatString( e.Player ), Channel );
             }
         }
-<<<<<<< HEAD
 
         /// <summary>
         /// Player getting promoted event
         /// Used to say well done to ranking up players
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-=======
-        public static void PlayerConnected(PlayerInfo info, PlayerConnectedEventArgs e)
-        {
+        public static void PlayerConnected ( object sender, PlayerConnectedEventArgs e ) {
+            PlayerInfo info = e.Player.Info;
             int LastKick = info.TimeSinceLastKick.Milliseconds;
             //if the player left due to a kick, and it has been under two minutes
-            if(info.LeaveReason == LeaveReason.Kick && LastKick < 120000)
-            {
-                Methods.SendMessage(e + "&F, You have been kicked by a staff member. Please follow the rules in /rules next time! Kick Reason: " + info.LastKickReason, MessageChannel.PM);
+            if ( info.LeaveReason == LeaveReason.Kick && LastKick < 120000 ) {
+                Methods.SendMessage( info.ClassyName + "&F, you were kicked by a staff member. Please follow the /Rules next time! Kick Reason: " + info.LastKickReason, MessageChannel.PM );
             }
-            else
-            {
-                return;
-            }
-            
         }
->>>>>>> df0918acae3205799af5d3f587980cc1ed7e5095
+
         public static void PlayerPromoted ( object sender, PlayerInfoRankChangedEventArgs e ) {
             if ( e.NewRank > e.OldRank ) {
                 Scheduler.NewTask( t => AnnouncePlayerPromotion(e.PlayerInfo)).RunOnce( TimeSpan.FromSeconds( 3 ) );

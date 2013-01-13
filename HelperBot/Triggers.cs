@@ -43,16 +43,13 @@ namespace HelperBot {
             if ( Triggers.MatchesTrigger( Message, MaintenanceTriggers.HoursFullTrigger ) ) {
                 Methods.SendMessage( Methods.GetPlayerTotalHoursString( player ), Channel );
             }
-<<<<<<< HEAD
-=======
-            if (File.Exists("SwearWords.txt"))
-            {
-                if (Triggers.MatchesTrigger(Message, MaintenanceTriggers.SwearFullTrigger))
-                {
-                    Methods.SendMessage(player.ClassyName + "&F, Please refrain from swearing.", Channel);
+            if ( File.Exists( "SwearWords.txt" ) ) {
+                if ( !player.Can( Permission.Swear ) ) {
+                    if ( Triggers.MatchesTrigger( Message, MaintenanceTriggers.SwearFullTrigger ) ) {
+                        Methods.SendMessage( player.ClassyName + "&F, Please refrain from swearing.", Channel );
+                    }
                 }
             }
->>>>>>> df0918acae3205799af5d3f587980cc1ed7e5095
             if ( Triggers.MatchesTrigger( Message, MaintenanceTriggers.WebFullTrigger ) ) {
                 Methods.SendMessage( player.ClassyName + "&F, the server's website is " + Settings.Website, Channel );
             }
@@ -62,16 +59,15 @@ namespace HelperBot {
         }
 
         public static void CheckMiscTriggers ( Player player, String Message, MessageChannel Channel ) {
-            if (Triggers.MatchesNameAndTrigger(Message, MiscTriggers.SpleefFullTrigger))
-            {
+            if ( Triggers.MatchesNameAndTrigger( Message, MiscTriggers.SpleefFullTrigger ) ) {
                 //cheap timer is cheap
-                Methods.SendMessage("&f3", MessageChannel.Global);
-                Thread.Sleep(1000);
-                Methods.SendMessage("&f2", MessageChannel.Global);
-                Thread.Sleep(1000);
-                Methods.SendMessage("&f1", MessageChannel.Global);
-                Thread.Sleep(1000);
-                Methods.SendMessage("&fGO!", MessageChannel.Global);
+                Methods.SendMessage( "&f3", MessageChannel.Global );
+                Thread.Sleep( 1000 );
+                Methods.SendMessage( "&f2", MessageChannel.Global );
+                Thread.Sleep( 1000 );
+                Methods.SendMessage( "&f1", MessageChannel.Global );
+                Thread.Sleep( 1000 );
+                Methods.SendMessage( "&fGO!", MessageChannel.Global );
             }
             if ( Triggers.MatchesNameAndTrigger( Message, MiscTriggers.JokeFullTrigger ) ) {
                 Methods.SendMessage( Methods.GetRandomJoke(), MessageChannel.Global );
