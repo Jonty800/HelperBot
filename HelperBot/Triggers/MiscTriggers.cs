@@ -13,12 +13,44 @@ namespace HelperBot {
         
         //I'll throw some funfacts from RandomStat.cs later
 
+<<<<<<< HEAD
+=======
+        static String[] FlyTrigger = new String[]
+        {
+           "how",
+           "fly"
+        };
+
+        static String[] FlyTrigger2 = new String[]
+        {
+           "help",
+           "fly"
+        };
+        /// <summary>
+        /// This requres the MatchesNameAndTrigger method
+        /// </summary>
+        static String[] SpleefTrigger = new String[]
+        {
+            "spleef"
+        };
+
+        /// <summary>
+        /// This requres the MatchesNameAndTrigger method
+        /// </summary>
+>>>>>>> df0918acae3205799af5d3f587980cc1ed7e5095
         static String[] JokeTrigger = new String[]
         {
            "joke"
         };
 
+<<<<<<< HEAD
         static String[] JokeTrigger2 = new String[]
+=======
+        /// <summary>
+        /// This requres the MatchesNameAndTrigger method
+        /// </summary>
+        static String[] JokeTrigger2 = new String[] //no point in these two if the first one is just 'joke'
+>>>>>>> df0918acae3205799af5d3f587980cc1ed7e5095
         {
            "tell",
            "a",
@@ -31,15 +63,27 @@ namespace HelperBot {
            "a",
            "joke"
         };
+<<<<<<< HEAD
 
         /// <summary>
         /// This requres the MatchesNameAndTrigger method
         /// </summary>
+=======
+        public static String[][] SpleefFullTrigger = new String[][]
+        {
+            SpleefTrigger
+        };
+>>>>>>> df0918acae3205799af5d3f587980cc1ed7e5095
         public static String[][] JokeFullTrigger = new String[][]
         {
             JokeTrigger,
             JokeTrigger2,
             JokeTrigger3
+        };
+        public static String[][] FlyFullTrigger = new String[][]
+        {
+            FlyTrigger,
+            FlyTrigger2,
         };
 
         /// <summary>

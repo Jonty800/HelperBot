@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Diagnostics;
 using fCraft;
 using fCraft.Events;
 
@@ -20,6 +21,7 @@ namespace HelperBot {
             Methods.SetAllValues(); //Load all the player reply values
             Chat.Sent += ChatSentMessage;
             PlayerInfo.RankChanged += PlayerPromoted;
+            Player.Connected += PlayerConnected;
         }
 
         /// <summary>
@@ -54,6 +56,7 @@ namespace HelperBot {
                 Methods.SendMessage( Methods.GetRandomStatString( e.Player ), Channel );
             }
         }
+<<<<<<< HEAD
 
         /// <summary>
         /// Player getting promoted event
@@ -61,6 +64,22 @@ namespace HelperBot {
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
+=======
+        public static void PlayerConnected(PlayerInfo info, PlayerConnectedEventArgs e)
+        {
+            int LastKick = info.TimeSinceLastKick.Milliseconds;
+            //if the player left due to a kick, and it has been under two minutes
+            if(info.LeaveReason == LeaveReason.Kick && LastKick < 120000)
+            {
+                Methods.SendMessage(e + "&F, You have been kicked by a staff member. Please follow the rules in /rules next time! Kick Reason: " + info.LastKickReason, MessageChannel.PM);
+            }
+            else
+            {
+                return;
+            }
+            
+        }
+>>>>>>> df0918acae3205799af5d3f587980cc1ed7e5095
         public static void PlayerPromoted ( object sender, PlayerInfoRankChangedEventArgs e ) {
             if ( e.NewRank > e.OldRank ) {
                 Scheduler.NewTask( t => AnnouncePlayerPromotion(e.PlayerInfo)).RunOnce( TimeSpan.FromSeconds( 3 ) );

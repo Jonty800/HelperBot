@@ -54,6 +54,11 @@ namespace HelperBot
            "this",
            "server"
         };
+        static String[] TimeTrigger = new String[]
+        {
+           "what",
+           "time"
+        };
       
         static FileInfo swearFile = new FileInfo("swearwords.txt");
         public static string[] SwearTrigger = File.ReadAllLines(swearFile.FullName);
@@ -70,6 +75,10 @@ namespace HelperBot
            "hours"
         };
 
+        public static String[][] TimeFullTrigger = new String[][]
+        {
+            TimeTrigger
+        };
         public static String[][] SwearFullTrigger = new String[][]
         {
             SwearTrigger
