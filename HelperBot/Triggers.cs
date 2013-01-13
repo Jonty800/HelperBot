@@ -33,9 +33,8 @@ namespace HelperBot {
         }
 
         public static void CheckMaintenanceTriggers ( Player player, String Message, MessageChannel Channel ) {
-            if (Triggers.MatchesNameAndTrigger(Message, MaintenanceTriggers.TimeFullTrigger))
-            {
-                Methods.SendMessage(player.ClassyName + "&f, the time is currently " +  DateTime.Now.ToShortTimeString() + ".", Channel);
+            if ( Triggers.MatchesNameAndTrigger( Message, MaintenanceTriggers.TimeFullTrigger ) ) {
+                Methods.SendMessage( player.ClassyName + "&f, the time is currently " + DateTime.Now.ToShortTimeString(), Channel );
             }
             if ( Triggers.MatchesTrigger( Message, MaintenanceTriggers.FellFullTrigger ) ) {
                 Methods.SendMessage( player.ClassyName + Settings.StuckMessage, Channel );
@@ -46,7 +45,7 @@ namespace HelperBot {
             if ( File.Exists( "SwearWords.txt" ) ) {
                 if ( !player.Can( Permission.Swear ) ) {
                     if ( Triggers.MatchesTrigger( Message, MaintenanceTriggers.SwearFullTrigger ) ) {
-                        Methods.SendMessage( player.ClassyName + "&F, Please refrain from swearing.", Channel );
+                        Methods.SendMessage( player.ClassyName + "&F, please refrain from swearing.", Channel );
                     }
                 }
             }
@@ -60,21 +59,22 @@ namespace HelperBot {
 
         public static void CheckMiscTriggers ( Player player, String Message, MessageChannel Channel ) {
             if ( Triggers.MatchesNameAndTrigger( Message, MiscTriggers.SpleefFullTrigger ) ) {
-                //cheap timer is cheap
-                Methods.SendMessage( "&f3", MessageChannel.Global );
-                Thread.Sleep( 1000 );
-                Methods.SendMessage( "&f2", MessageChannel.Global );
-                Thread.Sleep( 1000 );
-                Methods.SendMessage( "&f1", MessageChannel.Global );
-                Thread.Sleep( 1000 );
-                Methods.SendMessage( "&fGO!", MessageChannel.Global );
+                try {
+                    Thread t = new Thread( new ThreadStart( delegate {
+                        for ( int i = 3; i >= 1; i-- ) {
+                            Thread.Sleep( 1000 );
+                            Methods.SendChat( i.ToString() );
+                        }
+                        Methods.SendChat( "SPLEEF!" );
+                    } ) );
+                    t.Start();
+                } catch { }
             }
             if ( Triggers.MatchesNameAndTrigger( Message, MiscTriggers.JokeFullTrigger ) ) {
                 Methods.SendMessage( Methods.GetRandomJoke(), MessageChannel.Global );
             }
-            if (Triggers.MatchesTrigger(Message, MiscTriggers.FlyFullTrigger))
-            {
-                Methods.SendMessage(player.ClassyName + "&F, to fly, type /fly, or download WoM at womjr.com/game_client.", MessageChannel.Global);
+            if ( Triggers.MatchesTrigger( Message, MiscTriggers.FlyFullTrigger ) ) {
+                Methods.SendMessage( player.ClassyName + "&F, to fly, type /fly, or download WoM at womjr.com/game_client.", MessageChannel.Global );
             }
         }
 

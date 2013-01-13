@@ -39,7 +39,7 @@ namespace HelperBot {
                 if ( Settings.KickForImpersonation ) {
                     e.Player.Kick( Player.Console, "Impersonation Detected", LeaveReason.Kick, true, true, false ); //tad harsh? //it will stop it from happening!
                 } else {
-                    Methods.SendMessage( "That wasn't me, that was " + e.Player, Channel ); //DetectMessageImpersonation shouldnt work for PMs
+                    Methods.SendMessage( "That wasn't me, that was " + e.Player.ClassyName, Channel ); //DetectMessageImpersonation shouldnt work for PMs
                 }
             }
             if ( e.MessageType == ChatMessageType.IRC || e.MessageType == ChatMessageType.Say || e.MessageType == ChatMessageType.Rank ) return;
@@ -56,23 +56,32 @@ namespace HelperBot {
                 Methods.SendMessage( Methods.GetRandomStatString( e.Player ), Channel );
             }
         }
-
-        /// <summary>
-        /// Player getting promoted event
-        /// Used to say well done to ranking up players
-        /// </summary>
+        
         public static void PlayerConnected ( object sender, PlayerConnectedEventArgs e ) {
             PlayerInfo info = e.Player.Info;
             int LastKick = info.TimeSinceLastKick.Milliseconds;
             //if the player left due to a kick, and it has been under two minutes
             if ( info.LeaveReason == LeaveReason.Kick && LastKick < 120000 ) {
-                Methods.SendMessage( info.ClassyName + "&F, you were kicked by a staff member. Please follow the /Rules next time! Kick Reason: " + info.LastKickReason, MessageChannel.PM );
+                if ( info.LastKickReason != null ) {
+                    if ( info.LastKickReason.Length > 0 ) {
+                        Methods.SendMessage( info.Name + ", you were kicked by a staff member. Please follow the /Rules next time! Kick Reason: " + info.LastKickReason, MessageChannel.PM );
+                    } else {
+                        Methods.SendMessage( info.Name + ", you were kicked by a staff member. Please follow the /Rules next time!", MessageChannel.PM );
+                    }
+                } else {
+                    Methods.SendMessage( info.Name + ", you were kicked by a staff member. Please follow the /Rules next time!", MessageChannel.PM );
+                }
             }
         }
 
+        /// <summary>
+        /// Player getting promoted event
+        /// Used to say well done to ranking up players
+        /// </summary>
         public static void PlayerPromoted ( object sender, PlayerInfoRankChangedEventArgs e ) {
             if ( e.NewRank > e.OldRank ) {
-                Scheduler.NewTask( t => AnnouncePlayerPromotion(e.PlayerInfo)).RunOnce( TimeSpan.FromSeconds( 3 ) );
+                //3 second wait so its not announced before the promotion itself
+                Scheduler.NewTask( t => AnnouncePlayerPromotion( e.PlayerInfo ) ).RunOnce( TimeSpan.FromSeconds( 3 ) );
                 return;
             }
         }
@@ -83,7 +92,7 @@ namespace HelperBot {
         /// <param name="playerInfo"></param>
         static void AnnouncePlayerPromotion ( PlayerInfo playerInfo ) {
             if(playerInfo == null) return;
-            Methods.SendMessage( playerInfo.ClassyName + "&F, congradulations on your new rank! " + Values.PositiveComments, MessageChannel.Global );
+            Methods.SendMessage( playerInfo.ClassyName + "&F, congratulations on your new rank! " + Methods.GetRandomPosComment(), MessageChannel.Global );
         }
     }
 }

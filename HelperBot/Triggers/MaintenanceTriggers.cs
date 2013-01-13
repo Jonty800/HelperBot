@@ -33,11 +33,13 @@ namespace HelperBot
          static String[] WebTrigger = new String[]
         {
            "what",
-           "website"
+           "website",
+           "this"
         };
 
         static String[] WebTrigger2 = new String[]
         {
+           "what",
            "server",
            "website"
         };
@@ -45,7 +47,8 @@ namespace HelperBot
         static String[] ServTrigger = new String[]
         {
            "what",
-           "server"
+           "server",
+           "name"
         };
 
         static String[] ServTrigger2 = new String[]
@@ -57,20 +60,24 @@ namespace HelperBot
         static String[] TimeTrigger = new String[]
         {
            "what",
+           "is",
+           "the",
            "time"
         };
       
-        static FileInfo swearFile = new FileInfo("swearwords.txt");
-        public static string[] SwearTrigger = File.ReadAllLines(swearFile.FullName);
+        public static FileInfo swearFile = new FileInfo("swearwords.txt");
+        public static string[] SwearTrigger;
     
         static String[] HoursTrigger = new String[]
         {
            "how",
            "many",
-           "hours"
+           "hours",
+           "have"
         };
         static String[] HoursTrigger2 = new String[]
         {
+            "are",
            "my",
            "hours"
         };

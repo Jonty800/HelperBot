@@ -23,12 +23,10 @@ namespace HelperBot {
            "help",
            "fly"
         };
-        /// <summary>
-        /// This requres the MatchesNameAndTrigger method
-        /// </summary>
+
         static String[] SpleefTrigger = new String[]
         {
-            "spleef"
+            "!spleef"
         };
 
         /// <summary>

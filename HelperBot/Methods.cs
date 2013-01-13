@@ -246,6 +246,13 @@ namespace HelperBot {
             SetFirstJoined();
             SetFirstBanned();
             SetOldestStaff();
+            LoadSwearArray();
+        }
+
+        public static void LoadSwearArray () {
+            if ( MaintenanceTriggers.SwearTrigger == null ) {
+                MaintenanceTriggers.SwearTrigger = System.IO.File.ReadAllLines( MaintenanceTriggers.swearFile.FullName );
+            }
         }
 
         public static void SetFirstJoined () {
@@ -270,6 +277,10 @@ namespace HelperBot {
                 return;
             }
             Values.FirstBanned = PlayerDB.PlayerInfoList.Where( p => p.IsBanned ).OrderBy( pi => pi.BanDate ).FirstOrDefault( pi => pi.BanDate != DateTime.MinValue );
+        }
+
+        public static string GetRandomPosComment () {
+            return Values.PositiveComments[new Random().Next( 0, Values.PositiveComments.Length - 1 )];
         }
     }
 }
