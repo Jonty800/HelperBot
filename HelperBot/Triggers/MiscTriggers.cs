@@ -12,6 +12,7 @@ namespace HelperBot {
     public static class MiscTriggers {
         
         //I'll throw some funfacts from RandomStat.cs later
+        
         static String[] FlyTrigger = new String[]
         {
            "how",
@@ -24,22 +25,10 @@ namespace HelperBot {
            "fly"
         };
 
-        static String[] SpleefTrigger = new String[]
-        {
-            "!spleef"
-        };
-
-        /// <summary>
-        /// This requres the MatchesNameAndTrigger method
-        /// </summary>
-        static String[] JokeTrigger = new String[]
-        {
-           "joke"
-        };
 
         public static String[][] SpleefFullTrigger = new String[][]
         {
-            SpleefTrigger
+            new String[]{"!spleef"}
         };
 
         /// <summary>
@@ -47,18 +36,19 @@ namespace HelperBot {
         /// </summary>
         public static String[][] JokeFullTrigger = new String[][]
         {
-            JokeTrigger
+            new String[]{"joke"}
         };
+
         public static String[][] FlyFullTrigger = new String[][]
         {
             FlyTrigger,
-            FlyTrigger2,
+            FlyTrigger2
         };
 
         /// <summary>
         /// This requres the MatchesNameAndTrigger method
         /// </summary>
-        public static String[][] FunFactTrigger = new String[][]
+        public static String[][] FunFactFullTrigger = new String[][]
         {
             new String[]{"fun", "fact"}
         };
