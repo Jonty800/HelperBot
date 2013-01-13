@@ -24,6 +24,13 @@ namespace HelperBot {
            "help",
            "fly"
         };
+        /// <summary>
+        /// This requres the MatchesNameAndTrigger method
+        /// </summary>
+        static String[] SpleefTrigger = new String[]
+        {
+            "spleef"
+        };
 
         /// <summary>
         /// This requres the MatchesNameAndTrigger method
@@ -52,7 +59,10 @@ namespace HelperBot {
            "a",
            "joke"
         };
-
+        public static String[][] SpleefFullTrigger = new String[][]
+        {
+            SpleefTrigger
+        };
         public static String[][] JokeFullTrigger = new String[][]
         {
             JokeTrigger,
