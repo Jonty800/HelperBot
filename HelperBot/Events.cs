@@ -32,12 +32,19 @@ namespace HelperBot {
                 Logger.Log( LogType.SystemActivity, "HelperBot: ChatSentMessage P=" + e.Player.Name + "; ML=" + e.Message.Length + "; MT=" + e.MessageType );
             }
             if ( e.Message == null ) return;
+            MessageChannel Channel = Methods.ParseChatType( e.MessageType );
             if ( Methods.DetectMessageImpersonation( e.Message ) ) {
-                e.Player.Kick( Player.Console, "Impersonation Detected", LeaveReason.Kick, true, true, false ); //tad harsh? //it will stop it from happening!
-                //plus it will be optional for the host
+                if ( Settings.KickForImpersonation ) {
+                    e.Player.Kick( Player.Console, "Impersonation Detected", LeaveReason.Kick, true, true, false ); //tad harsh? //it will stop it from happening!
+                } else {
+                    Methods.SendMessage( "That wasn't me, that was " + e.Player, Channel ); //DetectMessageImpersonation shouldnt work for PMs
+                }
             }
             if ( e.MessageType == ChatMessageType.IRC || e.MessageType == ChatMessageType.Say || e.MessageType == ChatMessageType.Rank ) return;
-            MessageChannel Channel = Methods.ParseChatType( e.MessageType );
+            
+            if ( Triggers.MatchesTrigger( e.Message, MaintenanceTriggers.SwearFullTrigger ) ) {
+                Methods.SendMessage( e.Player.ClassyName + "&F, please refrain from swearing.", Channel );
+            }
             
             Triggers.CheckRankTriggers( e.Player, e.Message, Channel );
             Triggers.CheckMiscTriggers( e.Player, e.Message, Channel );
@@ -48,11 +55,26 @@ namespace HelperBot {
             }
         }
 
+        /// <summary>
+        /// Player getting promoted event
+        /// Used to say well done to ranking up players
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         public static void PlayerPromoted ( object sender, PlayerInfoRankChangedEventArgs e ) {
             if ( e.NewRank > e.OldRank ) {
-                Scheduler.NewTask( t => Methods.SendMessage( e.PlayerInfo.ClassyName + "&F, congradulations on your new rank! " + Values.PositiveComments, MessageChannel.Global ) ).RunOnce( TimeSpan.FromSeconds( 3 ) );
+                Scheduler.NewTask( t => AnnouncePlayerPromotion(e.PlayerInfo)).RunOnce( TimeSpan.FromSeconds( 3 ) );
                 return;
             }
+        }
+
+        /// <summary>
+        /// Used in the PlayerPromoted event, so a null check can be implemented after the timer
+        /// </summary>
+        /// <param name="playerInfo"></param>
+        static void AnnouncePlayerPromotion ( PlayerInfo playerInfo ) {
+            if(playerInfo == null) return;
+            Methods.SendMessage( playerInfo.ClassyName + "&F, congradulations on your new rank! " + Values.PositiveComments, MessageChannel.Global );
         }
     }
 }

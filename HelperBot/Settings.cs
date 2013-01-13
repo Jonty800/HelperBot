@@ -76,6 +76,8 @@ namespace HelperBot {
         /// </summary>
         public static bool SuggestBan = true;
 
+        public static bool KickForImpersonation = true;
+
         #endregion
 
         #region Strings

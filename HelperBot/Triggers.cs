@@ -37,9 +37,6 @@ namespace HelperBot {
             if ( Triggers.MatchesTrigger( Message, MaintenanceTriggers.HoursFullTrigger ) ) {
                 Methods.SendMessage( Methods.GetPlayerTotalHoursString( player ), Channel );
             }
-            if ( Triggers.MatchesTrigger( Message, MaintenanceTriggers.SwearFullTrigger ) ) {
-                Methods.SendMessage( player.ClassyName + "&F, Please refrain from swearing.", Channel );
-            }
             if ( Triggers.MatchesTrigger( Message, MaintenanceTriggers.WebFullTrigger ) ) {
                 Methods.SendMessage( player.ClassyName + "&F, the server's website is " + Settings.Website, Channel );
             }
