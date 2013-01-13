@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.IO;
+using System.Threading;
 using fCraft;
 
 namespace HelperBot {
@@ -58,6 +59,17 @@ namespace HelperBot {
         }
 
         public static void CheckMiscTriggers ( Player player, String Message, MessageChannel Channel ) {
+            if (Triggers.MatchesNameAndTrigger(Message, MiscTriggers.SpleefFullTrigger))
+            {
+                //cheap timer is cheap
+                Methods.SendMessage("&f3", MessageChannel.Global);
+                Thread.Sleep(1000);
+                Methods.SendMessage("&f2", MessageChannel.Global);
+                Thread.Sleep(1000);
+                Methods.SendMessage("&f1", MessageChannel.Global);
+                Thread.Sleep(1000);
+                Methods.SendMessage("&fGO!", MessageChannel.Global);
+            }
             if ( Triggers.MatchesNameAndTrigger( Message, MiscTriggers.JokeFullTrigger ) ) {
                 Methods.SendMessage( Methods.GetRandomJoke(), MessageChannel.Global );
             }
