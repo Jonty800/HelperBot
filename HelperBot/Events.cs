@@ -35,6 +35,7 @@ namespace HelperBot {
             }
             if ( e.Message == null ) return;
             MessageChannel Channel = Methods.ParseChatType( e.MessageType );
+            bool SendViaPM = Channel.Equals( MessageChannel.PM );
             if ( Methods.DetectMessageImpersonation( e.Message ) ) {
                 if ( Settings.KickForImpersonation ) {
                     e.Player.Kick( Player.Console, "Impersonation Detected", LeaveReason.Kick, true, true, false ); //tad harsh? //it will stop it from happening!
@@ -46,7 +47,7 @@ namespace HelperBot {
 
             if ( !e.Player.Can( Permission.Swear ) ) {
                 if ( Triggers.MatchesTrigger( e.Message, MaintenanceTriggers.SwearFullTrigger ) ) {
-                    Methods.SendMessage( "Please refrain from swearing :)", MessageChannel.PM );
+                    Methods.SendMessage( e.Player, "Please refrain from swearing :)", MessageChannel.PM );
                 }
             }
             
@@ -66,12 +67,12 @@ namespace HelperBot {
             if ( info.LeaveReason == LeaveReason.Kick && LastKick < 120000 ) {
                 if ( info.LastKickReason != null ) {
                     if ( info.LastKickReason.Length > 0 ) {
-                        Methods.SendMessage( info.Name + ", you were kicked by a staff member. Please follow the /Rules next time! Kick Reason: " + info.LastKickReason, MessageChannel.PM );
+                        Methods.SendMessage( e.Player, info.Name + ", you were kicked by a staff member. Please follow the /Rules next time! Kick Reason: " + info.LastKickReason, MessageChannel.PM );
                     } else {
-                        Methods.SendMessage( info.Name + ", you were kicked by a staff member. Please follow the /Rules next time!", MessageChannel.PM );
+                        Methods.SendMessage( e.Player, info.Name + ", you were kicked by a staff member. Please follow the /Rules next time!", MessageChannel.PM );
                     }
                 } else {
-                    Methods.SendMessage( info.Name + ", you were kicked by a staff member. Please follow the /Rules next time!", MessageChannel.PM );
+                    Methods.SendMessage( e.Player, info.Name + ", you were kicked by a staff member. Please follow the /Rules next time!", MessageChannel.PM );
                 }
             }
         }

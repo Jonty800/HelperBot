@@ -16,6 +16,7 @@ namespace HelperBot {
     public static class Triggers {
 
         public static void CheckRankTriggers ( Player player, String Message, MessageChannel Channel) {
+            if ( Channel == MessageChannel.PM ) return;
             if ( Triggers.MatchesTrigger( Message, RankTriggers.NextRankFullTrigger ) ) {
                 if ( player.Info.Rank != RankManager.HighestRank ) {
                     Methods.SendMessage( player.ClassyName + "&F, your next rank is " + player.Info.Rank.NextRankUp.ClassyName, Channel );
@@ -33,6 +34,7 @@ namespace HelperBot {
         }
 
         public static void CheckMaintenanceTriggers ( Player player, String Message, MessageChannel Channel ) {
+            if ( Channel == MessageChannel.PM ) return;
             if ( Triggers.MatchesNameAndTrigger( Message, MaintenanceTriggers.TimeFullTrigger ) ) {
                 Methods.SendMessage( player.ClassyName + "&f, the time is currently " + DateTime.Now.ToShortTimeString(), Channel );
             }
@@ -59,6 +61,7 @@ namespace HelperBot {
 
         public static bool SpleefInProgress = false;
         public static void CheckMiscTriggers ( Player player, String Message, MessageChannel Channel ) {
+            if ( Channel == MessageChannel.PM ) return;
             if ( Triggers.MatchesNameAndTrigger( Message, MiscTriggers.SpleefFullTrigger ) ) {
                 if ( SpleefInProgress ) return;
                 try {
