@@ -6,6 +6,19 @@ using System.Linq;
 using System.Text;
 using fCraft;
 
+/*        ____
+         [____]   ____
+          )__(   [____]
+         /    \   )__(
+        | .--. | /    \
+        | '--' || .--. |
+        |      || '--' |
+        |      ||      |
+        |      ||      |
+        '.____.'|      |
+                '.____.'*/
+
+
 namespace HelperBot {
     /// <summary>
     /// This class will be used to store constant values, such as arrays of replies
