@@ -57,18 +57,23 @@ namespace HelperBot {
             }
         }
 
+        public static bool SpleefInProgress = false;
         public static void CheckMiscTriggers ( Player player, String Message, MessageChannel Channel ) {
             if ( Triggers.MatchesNameAndTrigger( Message, MiscTriggers.SpleefFullTrigger ) ) {
+                if ( SpleefInProgress ) return;
                 try {
                     Thread t = new Thread( new ThreadStart( delegate {
+                        SpleefInProgress = true;
                         for ( int i = 3; i >= 1; i-- ) {
                             Thread.Sleep( 1000 );
                             Methods.SendChat( i.ToString() );
                         }
+                        Thread.Sleep( 1000 );
                         Methods.SendChat( "SPLEEF!" );
+                        SpleefInProgress = false;
                     } ) );
                     t.Start();
-                } catch { }
+                } catch { SpleefInProgress = false; }
             }
             if ( Triggers.MatchesNameAndTrigger( Message, MiscTriggers.JokeFullTrigger ) ) {
                 Methods.SendMessage( Methods.GetRandomJoke(), MessageChannel.Global );

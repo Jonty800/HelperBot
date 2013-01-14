@@ -11,6 +11,7 @@ namespace HelperBot {
         Staff,
         PM, 
         Me,
-        Admin
+        Admin,
+        Logger
     }
 }

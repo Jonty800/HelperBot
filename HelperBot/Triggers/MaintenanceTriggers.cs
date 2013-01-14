@@ -66,7 +66,6 @@ namespace HelperBot
         };
       
         public static FileInfo swearFile = new FileInfo("swearwords.txt");
-        public static string[] SwearTrigger;
     
         static String[] HoursTrigger = new String[]
         {
@@ -86,10 +85,8 @@ namespace HelperBot
         {
             TimeTrigger
         };
-        public static String[][] SwearFullTrigger = new String[][]
-        {
-            SwearTrigger
-        };
+        public static String[][] SwearFullTrigger;
+
         public static String[][] FellFullTrigger = new String[][]
         {
             FellTrigger,

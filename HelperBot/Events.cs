@@ -43,16 +43,18 @@ namespace HelperBot {
                 }
             }
             if ( e.MessageType == ChatMessageType.IRC || e.MessageType == ChatMessageType.Say || e.MessageType == ChatMessageType.Rank ) return;
-            
-            if ( Triggers.MatchesTrigger( e.Message, MaintenanceTriggers.SwearFullTrigger ) ) {
-                Methods.SendMessage( e.Player.ClassyName + "&F, please refrain from swearing.", Channel );
+
+            if ( !e.Player.Can( Permission.Swear ) ) {
+                if ( Triggers.MatchesTrigger( e.Message, MaintenanceTriggers.SwearFullTrigger ) ) {
+                    Methods.SendMessage( "Please refrain from swearing :)", MessageChannel.PM );
+                }
             }
             
             Triggers.CheckRankTriggers( e.Player, e.Message, Channel );
             Triggers.CheckMiscTriggers( e.Player, e.Message, Channel );
             Triggers.CheckMaintenanceTriggers( e.Player, e.Message, Channel );
 
-            if ( Triggers.MatchesNameAndTrigger( e.Message, MiscTriggers.FunFactTrigger ) ) {
+            if ( Triggers.MatchesNameAndTrigger( e.Message, MiscTriggers.FunFactFullTrigger) ) {
                 Methods.SendMessage( Methods.GetRandomStatString( e.Player ), Channel );
             }
         }

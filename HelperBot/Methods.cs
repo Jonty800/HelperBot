@@ -53,13 +53,19 @@ namespace HelperBot {
             if ( Settings.ReleaseFlag == Flags.Debug ) {
                 Logger.Log( LogType.SystemActivity, "HelperBot: SendPM Method" );
             }
-            if ( player == null )
-                throw new Exception( "HelperBot: Player cannot be null" );
-            if ( msg == null )
-                throw new Exception( "HelperBot: Msg cannot be null" );
-            if ( msg.Length < 1 )
-                throw new Exception( "HelperBot: Msg cannot be 0-length" );
-            player.Message( "{0}from {1}: {2}", Color.PM, Settings.Name, msg );
+            if ( player == null ) {
+                SendError( player, "HelperBot: Player cannot be null", MessageChannel.PM );
+                return;
+            }
+            if ( msg == null ) {
+                SendError( player, "HelperBot: Msg cannot be null", MessageChannel.PM );
+                return;
+            }
+            if ( msg.Length < 1 ) {
+                SendError( player, "HelperBot: Msg cannot be 0-length", MessageChannel.PM );
+                return;
+            }
+                player.Message( "{0}from {1}: {2}", Color.PM, Settings.Name, msg );
         }
 
         /// <summary>
@@ -70,10 +76,14 @@ namespace HelperBot {
             if ( Settings.ReleaseFlag == Flags.Debug ) {
                 Logger.Log( LogType.SystemActivity, "HelperBot: SendChat Method" );
             }
-            if ( msg == null )
-                throw new Exception( "HelperBot: Msg cannot be null" );
-            if ( msg.Length < 1 )
-                throw new Exception( "HelperBot: Msg cannot be 0-length" );
+            if ( msg == null ) {
+                SendError( "HelperBot: Msg cannot be null", MessageChannel.Global);
+                return;
+            }
+            if ( msg.Length < 1 ) {
+                SendError( "HelperBot: Msg cannot be 0-length", MessageChannel.Global );
+                return;
+            }
             msg = Chat.ReplaceEmoteKeywords( msg );
             msg = Color.ReplacePercentCodes( msg );
             Server.Players.Message( "{0}&F: {1}", Values.ClassyName, msg );
@@ -87,14 +97,38 @@ namespace HelperBot {
             if ( Settings.ReleaseFlag == Flags.Debug ) {
                 Logger.Log( LogType.SystemActivity, "HelperBot: SendStaff Method" );
             }
-            if ( msg == null )
-                throw new Exception( "HelperBot: Msg cannot be null" );
-            if ( msg.Length < 1 )
-                throw new Exception( "HelperBot: Msg cannot be 0-length" );
+            if ( msg == null ) {
+                SendError( "HelperBot: Msg cannot be null", MessageChannel.Staff );
+                return;
+            }
+            if ( msg.Length < 1 ) {
+                SendError( "HelperBot: Msg cannot be 0-length", MessageChannel.Staff );
+                return;
+            }
             msg = Chat.ReplaceEmoteKeywords( msg );
             msg = Color.ReplacePercentCodes( msg );
             Server.Players.Can( Permission.ReadStaffChat ).Message( "{0}(staff){1}{2}: {3}",
                 Color.PM, Values.ClassyName, Color.PM, msg );
+        }
+
+        public static void SendError ( Exception e, MessageChannel Channel) {
+            SendError( null, "&WError!!! " + e.Message, Channel );
+        }
+
+        public static void SendError ( String Msg, MessageChannel Channel ) {
+            if ( Channel != MessageChannel.Logger ) {
+                SendError( null, "&WError!!! " + Msg, Channel );
+            } else {
+                Logger.Log( LogType.Error, Msg );
+            }
+        }
+
+        public static void SendError ( Player player, String Msg, MessageChannel Channel ) {
+            if ( player != null ) {
+                SendMessage( player, "&WError!!! " + Msg, Channel );
+            } else {
+                SendMessage( "&WError!!! " + Msg, Channel );
+            }
         }
         #endregion
 
@@ -129,7 +163,7 @@ namespace HelperBot {
                 Logger.Log( LogType.SystemActivity, "HelperBot: DetectMessageImpersonation Method" );
             }
             if ( Message == null )
-                throw new Exception( "HelperBot: Message cannot be null" );
+                SendError( "HelperBot: Message cannot be null", MessageChannel.Logger );
             Message = Color.StripColors( Message );
             //Say impersonation
             if ( Message.StartsWith( Color.StripColors( Values.ClassyName + ":" ) ) )
@@ -157,7 +191,7 @@ namespace HelperBot {
         /// <returns>true if it does</returns>
         public static bool ContainsBotName ( String Message ) {
             if ( Message == null )
-                throw new Exception( "HelperBot: Message cannot be null" );
+                SendError ( "HelperBot: Message cannot be null", MessageChannel.Logger );
             Message = Message.ToLower();
             return Message.Contains( Settings.Name.ToLower() );
         }
@@ -174,7 +208,7 @@ namespace HelperBot {
             if ( Settings.ReleaseFlag == Flags.Debug ) {
                 Logger.Log( LogType.SystemActivity, "HelperBot: GetRandomStatString Method" );
             }
-            if ( player == null ) throw new Exception( "HelperBot: Player cannot be null" );
+            if ( player == null ) SendError( "HelperBot: Player cannot be null", MessageChannel.Global );
             byte Max = 13; //Max enum byte
             int StringID = new Random().Next( 0, Max );
             RandomStat Picked = ( RandomStat )StringID;
@@ -250,8 +284,8 @@ namespace HelperBot {
         }
 
         public static void LoadSwearArray () {
-            if ( MaintenanceTriggers.SwearTrigger == null ) {
-                MaintenanceTriggers.SwearTrigger = System.IO.File.ReadAllLines( MaintenanceTriggers.swearFile.FullName );
+            if ( MaintenanceTriggers.SwearFullTrigger == null){
+                MaintenanceTriggers.SwearFullTrigger = new String[][] { System.IO.File.ReadAllLines( MaintenanceTriggers.swearFile.FullName ) };
             }
         }
 
