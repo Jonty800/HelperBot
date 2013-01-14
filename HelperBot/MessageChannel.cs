@@ -9,7 +9,7 @@ namespace HelperBot {
     public enum MessageChannel {
         Global,
         Staff,
-        PM, 
+        PM,
         Me,
         Admin,
         Logger

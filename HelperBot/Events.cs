@@ -35,31 +35,26 @@ namespace HelperBot {
             }
             if ( e.Message == null ) return;
             MessageChannel Channel = Methods.ParseChatType( e.MessageType );
-            bool SendViaPM = Channel.Equals( MessageChannel.PM );
             if ( Methods.DetectMessageImpersonation( e.Message ) ) {
-                if ( Settings.KickForImpersonation ) {
-                    e.Player.Kick( Player.Console, "Impersonation Detected", LeaveReason.Kick, true, true, false ); //tad harsh? //it will stop it from happening!
-                } else {
-                    Methods.SendMessage( "That wasn't me, that was " + e.Player.ClassyName, Channel ); //DetectMessageImpersonation shouldnt work for PMs
+                if ( e.Player != Player.Console ) {
+                    if ( Settings.KickForImpersonation ) {
+                        e.Player.Kick( Player.Console, "Impersonation Detected", LeaveReason.Kick, true, true, false ); //tad harsh? //it will stop it from happening!
+                    } else {
+                        Methods.SendMessage( "That wasn't me, that was " + e.Player.ClassyName, Channel ); //DetectMessageImpersonation shouldnt work for PMs
+                    }
                 }
             }
             if ( e.MessageType == ChatMessageType.IRC || e.MessageType == ChatMessageType.Say || e.MessageType == ChatMessageType.Rank ) return;
 
-            if ( !e.Player.Can( Permission.Swear ) ) {
-                if ( Triggers.MatchesTrigger( e.Message, MaintenanceTriggers.SwearFullTrigger ) ) {
-                    Methods.SendMessage( e.Player, "Please refrain from swearing :)", MessageChannel.PM );
-                }
-            }
-            
             Triggers.CheckRankTriggers( e.Player, e.Message, Channel );
             Triggers.CheckMiscTriggers( e.Player, e.Message, Channel );
             Triggers.CheckMaintenanceTriggers( e.Player, e.Message, Channel );
 
-            if ( Triggers.MatchesNameAndTrigger( e.Message, MiscTriggers.FunFactFullTrigger) ) {
+            if ( Triggers.MatchesNameAndTrigger( e.Message, MiscTriggers.FunFactFullTrigger ) ) {
                 Methods.SendMessage( Methods.GetRandomStatString( e.Player ), Channel );
             }
         }
-        
+
         public static void PlayerConnected ( object sender, PlayerConnectedEventArgs e ) {
             PlayerInfo info = e.Player.Info;
             int LastKick = info.TimeSinceLastKick.Milliseconds;
@@ -94,7 +89,7 @@ namespace HelperBot {
         /// </summary>
         /// <param name="playerInfo"></param>
         static void AnnouncePlayerPromotion ( PlayerInfo playerInfo ) {
-            if(playerInfo == null) return;
+            if ( playerInfo == null ) return;
             Methods.SendMessage( playerInfo.ClassyName + "&F, congratulations on your new rank! " + Methods.GetRandomPosComment(), MessageChannel.Global );
         }
     }

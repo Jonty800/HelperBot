@@ -15,7 +15,7 @@ namespace HelperBot {
     public class Init : Plugin {
 
         public void Initialize () {
-            Logger.Log( LogType.ConsoleOutput, "Starting HelperBot " + Version +". Waiting for Init." );
+            Logger.Log( LogType.ConsoleOutput, "Starting HelperBot " + Version + ". Waiting for Init." );
             Server.Started += Events.ServerStarted;
         }
 

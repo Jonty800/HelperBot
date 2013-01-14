@@ -9,10 +9,8 @@ using System.IO;
 
 //May rename/move when other trigger files are created
 
-namespace HelperBot
-{
-    public static class MaintenanceTriggers
-    {
+namespace HelperBot {
+    public static class MaintenanceTriggers {
         static String[] FellTrigger = new String[]
         {
            "i",
@@ -30,7 +28,7 @@ namespace HelperBot
            "i'm",
            "stuck"
         };
-         static String[] WebTrigger = new String[]
+        static String[] WebTrigger = new String[]
         {
            "what",
            "website",
@@ -64,9 +62,9 @@ namespace HelperBot
            "the",
            "time"
         };
-      
-        public static FileInfo swearFile = new FileInfo("swearwords.txt");
-    
+
+        public static FileInfo swearFile = new FileInfo( "swearwords.txt" );
+
         static String[] HoursTrigger = new String[]
         {
            "how",

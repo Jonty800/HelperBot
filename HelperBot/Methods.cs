@@ -31,8 +31,8 @@ namespace HelperBot {
                 case MessageChannel.Global:
                     SendChat( Message );
                     break;
-                case MessageChannel.Me: 
-                   //TODO
+                case MessageChannel.Me:
+                    //TODO
                     break;
                 case MessageChannel.PM:
                     SendPM( player, Message );
@@ -65,7 +65,7 @@ namespace HelperBot {
                 SendError( player, "HelperBot: Msg cannot be 0-length", MessageChannel.PM );
                 return;
             }
-                player.Message( "{0}from {1}: {2}", Color.PM, Settings.Name, msg );
+            player.Message( "{0}from {1}: {2}", Color.PM, Settings.Name, msg );
         }
 
         /// <summary>
@@ -77,7 +77,7 @@ namespace HelperBot {
                 Logger.Log( LogType.SystemActivity, "HelperBot: SendChat Method" );
             }
             if ( msg == null ) {
-                SendError( "HelperBot: Msg cannot be null", MessageChannel.Global);
+                SendError( "HelperBot: Msg cannot be null", MessageChannel.Global );
                 return;
             }
             if ( msg.Length < 1 ) {
@@ -111,7 +111,7 @@ namespace HelperBot {
                 Color.PM, Values.ClassyName, Color.PM, msg );
         }
 
-        public static void SendError ( Exception e, MessageChannel Channel) {
+        public static void SendError ( Exception e, MessageChannel Channel ) {
             SendError( null, "&WError!!! " + e.Message, Channel );
         }
 
@@ -191,7 +191,7 @@ namespace HelperBot {
         /// <returns>true if it does</returns>
         public static bool ContainsBotName ( String Message ) {
             if ( Message == null )
-                SendError ( "HelperBot: Message cannot be null", MessageChannel.Logger );
+                SendError( "HelperBot: Message cannot be null", MessageChannel.Logger );
             Message = Message.ToLower();
             return Message.Contains( Settings.Name.ToLower() );
         }
@@ -217,11 +217,11 @@ namespace HelperBot {
                 case RandomStat.CurrentTime:
                     return "";
                 case RandomStat.FirstPersonBanned:
-                    return "The first person to get banned on this server was "+ Values.FirstBanned.ClassyName;
+                    return "The first person to get banned on this server was " + Values.FirstBanned.ClassyName;
                 case RandomStat.FirstPersonKicked:
-                    return "";
+                    return "The first person to get kicked on this server was " + Values.FirstKicked.ClassyName;
                 case RandomStat.MostBanned:
-                    return "";
+                    return "The person with the most bans on this server is " + Values.MostBans.ClassyName;
                 case RandomStat.MostBlocksDrawn:
                     return "";
                 case RandomStat.MostBuilt:
@@ -229,7 +229,7 @@ namespace HelperBot {
                 case RandomStat.MostHours:
                     return "";
                 case RandomStat.MostKicked:
-                    return "";
+                    return "The person with the most kicks on this server is " + Values.MostKicks.ClassyName;
                 case RandomStat.MostLogins:
                     return "";
                 case RandomStat.MostMessagesSent:
@@ -243,9 +243,9 @@ namespace HelperBot {
                 case RandomStat.OldestStaff:
                     return "Our oldest active staff member is " + Values.OldestStaff.ClassyName;
                 case RandomStat.FirstJoined:
-                    return "The first person to join the server was " + 
+                    return "The first person to join the server was " +
                         Values.FirstJoined.ClassyName + "&Fon " + Values.FirstJoined.FirstLoginDate +
-                        " ("+ Values.FirstJoined.TimeSinceFirstLogin.ToMiniString() + " ago).";
+                        " (" + Values.FirstJoined.TimeSinceFirstLogin.ToMiniString() + " ago).";
                 default: return null; //shouldn't happen
             }
         }
@@ -266,9 +266,9 @@ namespace HelperBot {
 
         public static String GetPlayerTotalHoursString ( Player player ) {
             TimeSpan totalTime = player.Info.TotalTime;
-            return player.ClassyName + "&F, you have spent " + 
-                totalTime.TotalHours + " hours (" + 
-                totalTime.TotalMinutes + 
+            return player.ClassyName + "&F, you have spent " +
+                totalTime.TotalHours + " hours (" +
+                totalTime.TotalMinutes +
                 " minutes) here.";
         }
 
@@ -281,10 +281,14 @@ namespace HelperBot {
             SetFirstBanned();
             SetOldestStaff();
             LoadSwearArray();
+            SetFirstKicked();
+            SetMostBans();
+            SetMostKicks();
         }
 
+        #region SetValues
         public static void LoadSwearArray () {
-            if ( MaintenanceTriggers.SwearFullTrigger == null){
+            if ( MaintenanceTriggers.SwearFullTrigger == null ) {
                 MaintenanceTriggers.SwearFullTrigger = new String[][] { System.IO.File.ReadAllLines( MaintenanceTriggers.swearFile.FullName ) };
             }
         }
@@ -294,7 +298,7 @@ namespace HelperBot {
                 Logger.Log( LogType.Error, "HelperBot: PlayerInfoList is null @ SetFirstJoined" );
                 return;
             }
-           Values.FirstJoined = PlayerDB.PlayerInfoList.OrderBy( pi => pi.FirstLoginDate ).FirstOrDefault( pi => pi.FirstLoginDate != DateTime.MinValue );
+            Values.FirstJoined = PlayerDB.PlayerInfoList.OrderBy( pi => pi.FirstLoginDate ).FirstOrDefault( pi => pi.FirstLoginDate != DateTime.MinValue );
         }
 
         public static void SetOldestStaff () {
@@ -302,7 +306,7 @@ namespace HelperBot {
                 Logger.Log( LogType.Error, "HelperBot: PlayerInfoList is null @ SetOldestStaff" );
                 return;
             }
-            Values.OldestStaff = PlayerDB.PlayerInfoList.Where(p=> p.Can(Permission.ReadStaffChat)).OrderBy( pi => pi.FirstLoginDate ).FirstOrDefault( pi => pi.FirstLoginDate != DateTime.MinValue );
+            Values.OldestStaff = PlayerDB.PlayerInfoList.Where( p => p.Can( Permission.ReadStaffChat ) ).OrderByDescending( pi => pi.FirstLoginDate ).FirstOrDefault( pi => pi.FirstLoginDate != DateTime.MinValue );
         }
 
         public static void SetFirstBanned () {
@@ -310,9 +314,33 @@ namespace HelperBot {
                 Logger.Log( LogType.Error, "HelperBot: PlayerInfoList is null @ SetFirstBanned" );
                 return;
             }
-            Values.FirstBanned = PlayerDB.PlayerInfoList.Where( p => p.IsBanned ).OrderBy( pi => pi.BanDate ).FirstOrDefault( pi => pi.BanDate != DateTime.MinValue );
+            Values.FirstBanned = PlayerDB.PlayerInfoList.Where( p => p.IsBanned ).OrderByDescending( pi => pi.BanDate ).FirstOrDefault( pi => pi.BanDate != DateTime.MinValue );
+        }
+        public static void SetFirstKicked () {
+            if ( PlayerDB.PlayerInfoList == null ) {
+                Logger.Log( LogType.Error, "HelperBot: PlayerInfoList is null @ SetFirstKicked" );
+                return;
+            }
+            Values.FirstKicked = PlayerDB.PlayerInfoList.Where( p => p.LastKickDate != null ).OrderByDescending( pi => pi.LastKickDate ).FirstOrDefault( pi => pi.LastKickDate != DateTime.MinValue );
         }
 
+        public static void SetMostBans () {
+            if ( PlayerDB.PlayerInfoList == null ) {
+                Logger.Log( LogType.Error, "HelperBot: PlayerInfoList is null @ SetMostBans" );
+                return;
+            }
+            Values.MostBans = PlayerDB.PlayerInfoList.Where( p => p.TimesBannedOthers != 0 ).OrderByDescending( pi => pi.TimesBannedOthers ).FirstOrDefault( pi => pi.TimesBannedOthers != 0 );
+        }
+
+        public static void SetMostKicks () {
+            if ( PlayerDB.PlayerInfoList == null ) {
+                Logger.Log( LogType.Error, "HelperBot: PlayerInfoList is null @ SetMostKicks" );
+                return;
+            }
+            Values.MostKicks = PlayerDB.PlayerInfoList.Where( p => p.TimesKickedOthers != 0 ).OrderByDescending( pi => pi.TimesKickedOthers ).FirstOrDefault( pi => pi.TimesKickedOthers != 0 );
+        }
+
+        #endregion
         public static string GetRandomPosComment () {
             return Values.PositiveComments[new Random().Next( 0, Values.PositiveComments.Length - 1 )];
         }

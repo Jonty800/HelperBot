@@ -15,7 +15,7 @@ namespace HelperBot {
     /// </summary>
     public static class Triggers {
 
-        public static void CheckRankTriggers ( Player player, String Message, MessageChannel Channel) {
+        public static void CheckRankTriggers ( Player player, String Message, MessageChannel Channel ) {
             if ( Channel == MessageChannel.PM ) return;
             if ( Triggers.MatchesTrigger( Message, RankTriggers.NextRankFullTrigger ) ) {
                 if ( player.Info.Rank != RankManager.HighestRank ) {
@@ -27,15 +27,15 @@ namespace HelperBot {
             if ( Triggers.MatchesTrigger( Message, RankTriggers.HowDoFullTrigger ) ) {
                 if ( player.Info.Rank == RankManager.HighestRank ) return;
                 if ( player.Can( Permission.ReadStaffChat ) )
-                    Methods.SendMessage( player.ClassyName + "&f, " + Settings.HowToGetRankedStaffString, Channel);
+                    Methods.SendMessage( player.ClassyName + "&f, " + Settings.HowToGetRankedStaffString, Channel );
                 else
-                    Methods.SendMessage( player.ClassyName + "&f, " + Settings.HowToGetRankedBuilderString, Channel);
+                    Methods.SendMessage( player.ClassyName + "&f, " + Settings.HowToGetRankedBuilderString, Channel );
             }
         }
 
         public static void CheckMaintenanceTriggers ( Player player, String Message, MessageChannel Channel ) {
             if ( Channel == MessageChannel.PM ) return;
-            if ( Triggers.MatchesNameAndTrigger( Message, MaintenanceTriggers.TimeFullTrigger ) ) {
+            if ( Triggers.MatchesTrigger( Message, MaintenanceTriggers.TimeFullTrigger ) ) {
                 Methods.SendMessage( player.ClassyName + "&f, the time is currently " + DateTime.Now.ToShortTimeString(), Channel );
             }
             if ( Triggers.MatchesTrigger( Message, MaintenanceTriggers.FellFullTrigger ) ) {
@@ -47,7 +47,7 @@ namespace HelperBot {
             if ( File.Exists( "SwearWords.txt" ) ) {
                 if ( !player.Can( Permission.Swear ) ) {
                     if ( Triggers.MatchesTrigger( Message, MaintenanceTriggers.SwearFullTrigger ) ) {
-                        Methods.SendMessage( player.ClassyName + "&F, please refrain from swearing.", Channel );
+                        Methods.SendMessage( player, "Please refrain from swearing :)", MessageChannel.PM );
                     }
                 }
             }
@@ -62,7 +62,7 @@ namespace HelperBot {
         public static bool SpleefInProgress = false;
         public static void CheckMiscTriggers ( Player player, String Message, MessageChannel Channel ) {
             if ( Channel == MessageChannel.PM ) return;
-            if ( Triggers.MatchesNameAndTrigger( Message, MiscTriggers.SpleefFullTrigger ) ) {
+            if ( Triggers.MatchesTrigger( Message, MiscTriggers.SpleefFullTrigger ) ) {
                 if ( SpleefInProgress ) return;
                 try {
                     Thread t = new Thread( new ThreadStart( delegate {
@@ -72,7 +72,7 @@ namespace HelperBot {
                             Methods.SendChat( i.ToString() );
                         }
                         Thread.Sleep( 1000 );
-                        Methods.SendChat( "SPLEEF!" );
+                        Methods.SendChat( "&WSPLEEF!" );
                         SpleefInProgress = false;
                     } ) );
                     t.Start();

@@ -8,7 +8,7 @@ using System.Text;
 
 namespace HelperBot {
     public static class RankTriggers {
-        
+
         static String[] NextRankTrigger1 = new String[]
         {
            "how",
@@ -17,6 +17,7 @@ namespace HelperBot {
            "next", 
            "rank"
         };
+
         static String[] NextRankTrigger2 = new String[]
         {
            "how",
@@ -38,12 +39,14 @@ namespace HelperBot {
            "get",
            "ranks"
         };
+
         static String[] HowDoTrigger2 = new String[]
         {
            "how",
            "get",
            "ranked"
         };
+
         static String[] HowDoTrigger3 = new String[]
         {
            "how",
@@ -57,6 +60,7 @@ namespace HelperBot {
             NextRankTrigger2,
             NextRankTrigger3
         };
+
         public static String[][] HowDoFullTrigger = new String[][]
         {
             HowDoTrigger1,

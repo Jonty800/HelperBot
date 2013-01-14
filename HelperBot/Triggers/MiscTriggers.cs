@@ -10,9 +10,9 @@ using System.Text;
 
 namespace HelperBot {
     public static class MiscTriggers {
-        
+
         //I'll throw some funfacts from RandomStat.cs later
-        
+
         static String[] FlyTrigger = new String[]
         {
            "how",

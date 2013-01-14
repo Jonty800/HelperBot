@@ -35,6 +35,10 @@ namespace HelperBot {
         public static PlayerInfo FirstJoined;
         public static PlayerInfo OldestStaff;
         public static PlayerInfo FirstBanned;
+        public static PlayerInfo FirstKicked;
+        public static PlayerInfo MostBans;
+        public static PlayerInfo MostKicks;
+
 
         /// <summary>
         /// An array of RandomMessages to be said on a very long delayed timer - maybe 20mins
@@ -66,7 +70,7 @@ namespace HelperBot {
         {
          "Schrodinger's Cat: Wanted dead and alive.",
          "Light travels faster than sound. This is why some people appear bright until you hear them speak.",
-         "War does not determine who is right – only who is left...",
+         "War does not determine who is right - only who is left...",
          "Never hit a man with glasses. Hit him with a baseball bat instead.",
          "Nostalgia isn't what it used to be."                                                         
         };
