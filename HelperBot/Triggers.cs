@@ -15,7 +15,9 @@ namespace HelperBot {
     /// </summary>
     public static class Triggers {
 
-        public static void CheckRankTriggers ( Player player, String Message, MessageChannel Channel ) {
+        public static bool SpleefInProgress = false;
+
+        public static void CheckTriggers ( Player player, String Message, MessageChannel Channel ) {
             if ( Channel == MessageChannel.PM ) return;
             if ( Triggers.MatchesTrigger( Message, RankTriggers.NextRankFullTrigger ) ) {
                 if ( player.Info.Rank != RankManager.HighestRank ) {
@@ -23,45 +25,45 @@ namespace HelperBot {
                 } else {
                     Methods.SendMessage( player.ClassyName + "&F, you are already the highest rank!", Channel );
                 }
+                return;
             }
             if ( Triggers.MatchesTrigger( Message, RankTriggers.HowDoFullTrigger ) ) {
                 if ( player.Info.Rank == RankManager.HighestRank ) return;
-                if ( player.Can( Permission.ReadStaffChat ) )
+                if ( player.Can( Permission.ReadStaffChat ) ) {
                     Methods.SendMessage( player.ClassyName + "&f, " + Settings.HowToGetRankedStaffString, Channel );
-                else
+                } else {
                     Methods.SendMessage( player.ClassyName + "&f, " + Settings.HowToGetRankedBuilderString, Channel );
+                }
+                return;
             }
-        }
-
-        public static void CheckMaintenanceTriggers ( Player player, String Message, MessageChannel Channel ) {
-            if ( Channel == MessageChannel.PM ) return;
             if ( Triggers.MatchesTrigger( Message, MaintenanceTriggers.TimeFullTrigger ) ) {
                 Methods.SendMessage( player.ClassyName + "&f, the time is currently " + DateTime.Now.ToShortTimeString(), Channel );
+                return;
             }
             if ( Triggers.MatchesTrigger( Message, MaintenanceTriggers.FellFullTrigger ) ) {
                 Methods.SendMessage( player.ClassyName + Settings.StuckMessage, Channel );
+                return;
             }
             if ( Triggers.MatchesTrigger( Message, MaintenanceTriggers.HoursFullTrigger ) ) {
                 Methods.SendMessage( Methods.GetPlayerTotalHoursString( player ), Channel );
+                return;
             }
             if ( File.Exists( "SwearWords.txt" ) ) {
                 if ( !player.Can( Permission.Swear ) ) {
                     if ( Triggers.MatchesTrigger( Message, MaintenanceTriggers.SwearFullTrigger ) ) {
                         Methods.SendMessage( player, "Please refrain from swearing :)", MessageChannel.PM );
+                        return;
                     }
                 }
             }
             if ( Triggers.MatchesTrigger( Message, MaintenanceTriggers.WebFullTrigger ) ) {
                 Methods.SendMessage( player.ClassyName + "&F, the server's website is " + Settings.Website, Channel );
+                return;
             }
             if ( Triggers.MatchesTrigger( Message, MaintenanceTriggers.ServFullTrigger ) ) {
                 Methods.SendMessage( player.ClassyName + "&F, you are currently playing on " + ConfigKey.ServerName.GetString(), Channel );
+                return;
             }
-        }
-
-        public static bool SpleefInProgress = false;
-        public static void CheckMiscTriggers ( Player player, String Message, MessageChannel Channel ) {
-            if ( Channel == MessageChannel.PM ) return;
             if ( Triggers.MatchesTrigger( Message, MiscTriggers.SpleefFullTrigger ) ) {
                 if ( SpleefInProgress ) return;
                 try {
@@ -77,12 +79,15 @@ namespace HelperBot {
                     } ) );
                     t.Start();
                 } catch { SpleefInProgress = false; }
+                return;
             }
             if ( Triggers.MatchesNameAndTrigger( Message, MiscTriggers.JokeFullTrigger ) ) {
                 Methods.SendMessage( Methods.GetRandomJoke(), MessageChannel.Global );
+                return;
             }
             if ( Triggers.MatchesTrigger( Message, MiscTriggers.FlyFullTrigger ) ) {
                 Methods.SendMessage( player.ClassyName + "&F, to fly, type /fly, or download WoM at womjr.com/game_client.", MessageChannel.Global );
+                return;
             }
         }
 

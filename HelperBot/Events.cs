@@ -46,12 +46,11 @@ namespace HelperBot {
             }
             if ( e.MessageType == ChatMessageType.IRC || e.MessageType == ChatMessageType.Say || e.MessageType == ChatMessageType.Rank ) return;
 
-            Triggers.CheckRankTriggers( e.Player, e.Message, Channel );
-            Triggers.CheckMiscTriggers( e.Player, e.Message, Channel );
-            Triggers.CheckMaintenanceTriggers( e.Player, e.Message, Channel );
+            Triggers.CheckTriggers( e.Player, e.Message, Channel );
 
             if ( Triggers.MatchesNameAndTrigger( e.Message, MiscTriggers.FunFactFullTrigger ) ) {
                 Methods.SendMessage( Methods.GetRandomStatString( e.Player ), Channel );
+                return;
             }
         }
 
