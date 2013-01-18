@@ -61,13 +61,17 @@ namespace HelperBot {
             if ( info.LeaveReason == LeaveReason.Kick && LastKick < 120000 ) {
                 if ( info.LastKickReason != null ) {
                     if ( info.LastKickReason.Length > 0 ) {
-                        Methods.SendMessage( e.Player, info.Name + ", you were kicked by a staff member. Please follow the /Rules next time! Kick Reason: " + info.LastKickReason, MessageChannel.PM );
+                        Methods.SendMessage( e.Player, info.Name + "&f, you were kicked by a staff member. Please follow the /Rules next time! Kick Reason: " + info.LastKickReason, MessageChannel.PM );
                     } else {
-                        Methods.SendMessage( e.Player, info.Name + ", you were kicked by a staff member. Please follow the /Rules next time!", MessageChannel.PM );
+                        Methods.SendMessage( e.Player, info.Name + "&f, you were kicked by a staff member. Please follow the /Rules next time!", MessageChannel.PM );
                     }
                 } else {
-                    Methods.SendMessage( e.Player, info.Name + ", you were kicked by a staff member. Please follow the /Rules next time!", MessageChannel.PM );
-                }
+                    Methods.SendMessage( e.Player, info.Name + "&f, you were kicked by a staff member. Please follow the /Rules next time!", MessageChannel.PM );
+                }                
+            }
+            else if (e.Player.Info.TimesVisited < 1)
+            {
+                Methods.SendMessage(e.Player, info.Name + "&f, Welcome to " + ConfigKey.ServerName.GetString() + "!", MessageChannel.Admin);
             }
         }
 
