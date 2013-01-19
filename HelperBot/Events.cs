@@ -69,9 +69,18 @@ namespace HelperBot {
                     Methods.SendMessage( e.Player, info.Name + "&f, you were kicked by a staff member. Please follow the /Rules next time!", MessageChannel.PM );
                 }                
             }
-            else if (e.Player.Info.TimesVisited < 1)
+            else if (info.TimesVisited == 1)
             {
-                Methods.SendMessage(e.Player, info.Name + "&f, Welcome to " + ConfigKey.ServerName.GetString() + "!", MessageChannel.Admin);
+                //should pick out all the admins online
+                var admins = Server.Players.Can(Permission.ReadAdminChat);
+                if (admins == null)
+                {
+                    Methods.SendMessage(e.Player, info.Name + "&f, just logged on for the first time! Welcome him to the server!", MessageChannel.Staff);
+                }
+                else
+                {
+                    Methods.SendMessage(e.Player, info.Name + "&f, just logged on for the first time! Welcome him to the server!", MessageChannel.Admin);
+                }
             }
         }
 
