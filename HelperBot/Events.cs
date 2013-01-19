@@ -75,11 +75,11 @@ namespace HelperBot {
                 var admins = Server.Players.Can(Permission.ReadAdminChat);
                 if (admins == null)
                 {
-                    Methods.SendMessage(e.Player, info.Name + "&f, just logged on for the first time! Welcome him to the server!", MessageChannel.Staff);
+                    Methods.SendMessage(info.Name + "&f, just logged on for the first time! Welcome him to the server!", MessageChannel.Staff);
                 }
                 else
                 {
-                    Methods.SendMessage(e.Player, info.Name + "&f, just logged on for the first time! Welcome him to the server!", MessageChannel.Admin);
+                    Methods.SendMessage(info.Name + "&f, just logged on for the first time! Welcome him to the server!", MessageChannel.Admin);
                 }
             }
         }
