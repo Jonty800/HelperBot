@@ -23,6 +23,7 @@ namespace HelperBot {
                 if (!Char.IsUpper(text[i]))
                     return false;
             }
+
             return true;
         }
 
@@ -48,6 +49,11 @@ namespace HelperBot {
                 } else {
                     Methods.SendMessage( player.ClassyName + "&f, " + Settings.HowToGetRankedBuilderString, Channel );
                 }
+                return;
+            }
+            if (Triggers.MatchesTrigger(Message, MaintenanceTriggers.PMFullTrigger))
+            {
+                Methods.SendMessage(player.ClassyName + "&f, to PM, type '@playername [message]'.", Channel);
                 return;
             }
             if ( Triggers.MatchesTrigger( Message, MaintenanceTriggers.TimeFullTrigger ) ) {
