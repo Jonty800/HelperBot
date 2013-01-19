@@ -71,9 +71,20 @@ namespace HelperBot {
            "my",
            "hours"
         };
+        static String[] PMTrigger = new String[]
+        {
+           "how",
+           "PM"
+        };
+        static String[] PMTrigger2 = new String[]
+        {
+           "how",
+           "whisper"
+        };
         public static String[][] PMFullTrigger = new String[][]
         {
-            new String[]{"how", "whisper" }
+            PMTrigger,
+            PMTrigger2
         };
         public static String[][] TimeFullTrigger = new String[][]
         {
