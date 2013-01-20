@@ -72,14 +72,14 @@ namespace HelperBot {
             else if (info.TimesVisited == 1)
             {
                 //should pick out all the admins online
-                var admins = Server.Players.Can(Permission.ReadAdminChat);
-                if (admins == null)
+                String OnlineStaff = Server.Players.Can(Permission.ReadStaffChat).ToString();
+                if (OnlineStaff.Count() != 0)
                 {
-                    Methods.SendMessage(info.Name + "&f, just logged on for the first time! Welcome him to the server!", MessageChannel.Staff);
+                    Methods.SendStaff(info.Name + "&f, just logged on for the first time! Welcome them to the server!");
                 }
                 else
                 {
-                    Methods.SendMessage(info.Name + "&f, just logged on for the first time! Welcome him to the server!", MessageChannel.Admin);
+                    Methods.SendPM(e.Player, info.Name + "&f, welcome to the server!");
                 }
             }
         }
