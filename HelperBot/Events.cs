@@ -18,10 +18,10 @@ namespace HelperBot {
             if ( Settings.ReleaseFlag == Flags.Debug ) {
                 Logger.Log( LogType.SystemActivity, "HelperBot: ServerStartedEvent" );
             }
-            Methods.SetAllValues(); //Load all the player reply values
-            Chat.Sent += ChatSentMessage;
-            PlayerInfo.RankChanged += PlayerPromoted;
-            Player.Connected += PlayerConnected;
+            Methods.SetAllValues(); //Load any player reply values
+            Chat.Sent += ChatSentMessage; //chat event
+            PlayerInfo.RankChanged += PlayerPromoted; //rankchanged event
+            Player.Connected += PlayerConnected; //connection event
         }
 
         /// <summary>
@@ -35,30 +35,27 @@ namespace HelperBot {
             }
             if ( e.Message == null ) return;
             MessageChannel Channel = Methods.ParseChatType( e.MessageType );
-            if ( Methods.DetectMessageImpersonation( e.Message ) ) {
+            if ( Methods.DetectMessageImpersonation( e.Message ) || Methods.IsPlayersDisplayedNameBots(e.Player)) {
                 if ( e.Player != Player.Console ) {
                     if ( Settings.KickForImpersonation ) {
                         e.Player.Kick( Player.Console, "Impersonation Detected", LeaveReason.Kick, true, true, false ); //tad harsh? //it will stop it from happening!
                     } else {
-                        Methods.SendMessage( "That wasn't me, that was " + e.Player.ClassyName, Channel ); //DetectMessageImpersonation shouldnt work for PMs
+                        Methods.SendMessage( "That wasn't me, that was " + e.Player.Info.Rank.Color + e.Player.Name, Channel ); //DetectMessageImpersonation shouldnt work for PMs
                     }
                 }
             }
             if ( e.MessageType == ChatMessageType.IRC || e.MessageType == ChatMessageType.Say || e.MessageType == ChatMessageType.Rank ) return;
 
             Triggers.CheckTriggers( e.Player, e.Message, Channel );
-
-            if ( Triggers.MatchesNameAndTrigger( e.Message, MiscTriggers.FunFactFullTrigger ) ) {
-                Methods.SendMessage( Methods.GetRandomStatString( e.Player ), Channel );
-                return;
-            }
         }
 
+        /// <summary>
+        /// Player connected successfully to the server event
+        /// </summary>
         public static void PlayerConnected ( object sender, PlayerConnectedEventArgs e ) {
             PlayerInfo info = e.Player.Info;
-            int LastKick = info.TimeSinceLastKick.Milliseconds;
-            //if the player left due to a kick, and it has been under two minutes
-            if ( info.LeaveReason == LeaveReason.Kick && LastKick < 120000 ) {
+            //if the player left due to a kick
+            if ( info.LeaveReason == LeaveReason.Kick ) {
                 if ( info.LastKickReason != null ) {
                     if ( info.LastKickReason.Length > 0 ) {
                         Methods.SendMessage( e.Player, info.Name + ", you were kicked by a staff member. Please follow the /Rules next time! Kick Reason: " + info.LastKickReason, MessageChannel.PM );

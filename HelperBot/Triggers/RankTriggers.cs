@@ -9,23 +9,7 @@ using System.Text;
 namespace HelperBot {
     public static class RankTriggers {
 
-        static String[] NextRankTrigger1 = new String[]
-        {
-           "how",
-           "do", //I
-           "get", //the
-           "next", 
-           "rank"
-        };
-
-        static String[] NextRankTrigger2 = new String[]
-        {
-           "how",
-           "do",
-           "promoted"
-        };
-
-        static String[] NextRankTrigger3 = new String[]
+        static String[] NextRankTrigger = new String[]
         {
            "what",
            "my",
@@ -54,18 +38,24 @@ namespace HelperBot {
            "promoted"
         };
 
+        static String[] HowDoTrigger4 = new String[]
+        {
+           "how",
+           "do",
+           "promoted"
+        };
+
         public static String[][] NextRankFullTrigger = new String[][]
         {
-            NextRankTrigger1,
-            NextRankTrigger2,
-            NextRankTrigger3
+            NextRankTrigger
         };
 
         public static String[][] HowDoFullTrigger = new String[][]
         {
             HowDoTrigger1,
             HowDoTrigger2,
-            HowDoTrigger3
+            HowDoTrigger3,
+            HowDoTrigger4
         };
     }
 }

@@ -65,7 +65,10 @@ namespace HelperBot {
                 return;
             }
             if ( Triggers.MatchesTrigger( Message, MiscTriggers.SpleefFullTrigger ) ) {
-                if ( SpleefInProgress ) return;
+                if ( SpleefInProgress ) {
+                    Methods.SendPM( player, "There is already a spleef timer!" );
+                    return;
+                }
                 try {
                     Thread t = new Thread( new ThreadStart( delegate {
                         SpleefInProgress = true;
@@ -87,6 +90,10 @@ namespace HelperBot {
             }
             if ( Triggers.MatchesTrigger( Message, MiscTriggers.FlyFullTrigger ) ) {
                 Methods.SendMessage( player.ClassyName + "&F, to fly, type /fly, or download WoM at womjr.com/game_client.", MessageChannel.Global );
+                return;
+            }
+            if ( Triggers.MatchesNameAndTrigger( Message, MiscTriggers.FunFactFullTrigger ) ) {
+                Methods.SendMessage( Methods.GetRandomStatString( player ), Channel );
                 return;
             }
         }
