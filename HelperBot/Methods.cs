@@ -1,4 +1,4 @@
-﻿//HelperBot - Copyright (c) Jonty800 and LeChosenOne <2013> (http://forums.au70.net)
+//HelperBot - Copyright (c) Jonty800 and LeChosenOne <2013> (http://forums.au70.net)
 //This plugin is open source and designed to be used with 800Craft and LegendCraft server softwares
 using System;
 using System.Collections.Generic;
@@ -84,7 +84,6 @@ namespace HelperBot {
                 SendError( "HelperBot: Msg cannot be 0-length", MessageChannel.Global );
                 return;
             }
-            msg = Chat.ReplaceEmoteKeywords( msg );
             msg = Color.ReplacePercentCodes( msg );
             Server.Players.Message( "{0}&F: {1}", Values.ClassyName, msg );
         }
@@ -105,7 +104,6 @@ namespace HelperBot {
                 SendError( "HelperBot: Msg cannot be 0-length", MessageChannel.Staff );
                 return;
             }
-            msg = Chat.ReplaceEmoteKeywords( msg );
             msg = Color.ReplacePercentCodes( msg );
             Server.Players.Can( Permission.ReadStaffChat ).Message( "{0}(staff){1}{2}: {3}",
                 Color.PM, Values.ClassyName, Color.PM, msg );

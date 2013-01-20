@@ -16,6 +16,16 @@ namespace HelperBot {
     public static class Triggers {
 
         public static bool SpleefInProgress = false;
+        public static bool IsAllUpper(string text)
+        {
+            for (int i = 0; i < text.Length; i++)
+            {
+                if (!Char.IsUpper(text[i]))
+                    return false;
+            }
+
+            return true;
+        }
 
         public static void CheckTriggers ( Player player, String Message, MessageChannel Channel ) {
             if ( Channel == MessageChannel.PM ) return;
@@ -27,6 +37,11 @@ namespace HelperBot {
                 }
                 return;
             }
+            if (IsAllUpper(Message))
+            {
+                Methods.SendPM( player, "&FPlease refrain from abusing caps.");
+            }
+
             if ( Triggers.MatchesTrigger( Message, RankTriggers.HowDoFullTrigger ) ) {
                 if ( player.Info.Rank == RankManager.HighestRank ) return;
                 if ( player.Can( Permission.ReadStaffChat ) ) {
@@ -34,6 +49,11 @@ namespace HelperBot {
                 } else {
                     Methods.SendMessage( player.ClassyName + "&f, " + Settings.HowToGetRankedBuilderString, Channel );
                 }
+                return;
+            }
+            if (Triggers.MatchesTrigger(Message, MaintenanceTriggers.PMFullTrigger))
+            {
+                Methods.SendMessage(player.ClassyName + "&f, to PM, type '@playername [message]'.", Channel);
                 return;
             }
             if ( Triggers.MatchesTrigger( Message, MaintenanceTriggers.TimeFullTrigger ) ) {

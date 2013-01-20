@@ -11,6 +11,7 @@ using System.IO;
 
 namespace HelperBot {
     public static class MaintenanceTriggers {
+
         static String[] FellTrigger = new String[]
         {
            "i",
@@ -55,14 +56,6 @@ namespace HelperBot {
            "this",
            "server"
         };
-        static String[] TimeTrigger = new String[]
-        {
-           "what",
-           "is",
-           "the",
-           "time"
-        };
-
         public static FileInfo swearFile = new FileInfo( "swearwords.txt" );
 
         static String[] HoursTrigger = new String[]
@@ -74,14 +67,28 @@ namespace HelperBot {
         };
         static String[] HoursTrigger2 = new String[]
         {
-            "are",
+           "are",
            "my",
            "hours"
         };
-
+        static String[] PMTrigger = new String[]
+        {
+           "how",
+           "PM"
+        };
+        static String[] PMTrigger2 = new String[]
+        {
+           "how",
+           "whisper"
+        };
+        public static String[][] PMFullTrigger = new String[][]
+        {
+            PMTrigger,
+            PMTrigger2
+        };
         public static String[][] TimeFullTrigger = new String[][]
         {
-            TimeTrigger
+            new String[]{"what", "is", "the", "time"}
         };
         public static String[][] SwearFullTrigger;
 
