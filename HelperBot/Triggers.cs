@@ -126,13 +126,8 @@ namespace HelperBot {
             {
                 if(SinceAnswer.Millisecond < 20000)
                 {
-                    String[] thanksArray = { "Np",
-                                               "Anytime",
-                                               "Always here for you",
-                                               "^^",
-                                               "Yw" };
                     Random thanksMsg = new Random();
-                    Methods.SendMessage("&f, " + thanksArray[thanksMsg.Next(0, thanksArray.Length)], MessageChannel.Global);
+                    Methods.SendMessage("&f, " + Values.ThankyouReplies[thanksMsg.Next(0, Values.ThankyouReplies.Length)], MessageChannel.Global);
                 }
             }
         }
