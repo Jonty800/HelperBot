@@ -57,7 +57,9 @@ namespace HelperBot {
         public static void PlayerConnected ( object sender, PlayerConnectedEventArgs e ) {
             PlayerInfo info = e.Player.Info;
             int LastKick = info.TimeSinceLastKick.Milliseconds;
-            //if the player left due to a kick, and it has been under two minutes
+            ///<summary>
+            ///Kickwarning event
+            ///<summary>
             if ( info.LeaveReason == LeaveReason.Kick && LastKick < 120000 ) {
                 if ( info.LastKickReason != null ) {
                     if ( info.LastKickReason.Length > 0 ) {
@@ -69,6 +71,9 @@ namespace HelperBot {
                     Methods.SendMessage( e.Player, info.Name + "&f, you were kicked by a staff member. Please follow the /Rules next time!", MessageChannel.PM );
                 }                
             }
+            ///<summary>
+            /// Player logging in for first time
+            /// <summary>
             else if (info.TimesVisited == 1)
             {
                 //should pick out all the admins online
@@ -81,6 +86,17 @@ namespace HelperBot {
                 {
                     Methods.SendPM(e.Player, info.ClassyName + "&f, welcome to the server!");
                 }
+            }
+        }
+        ///<summary>
+        ///Suggest ban for player that was kicked 2 times in 2 days
+        ///<summary>
+        public static void PlayerKicked ( object sender, PlayerBeingKickedEventArgs e )
+        {
+            PlayerInfo info = e.Player.Info;
+            if(info.TimeSinceLastKick < TimeSpan.FromDays(1))
+            {
+                Methods.SendStaff(info.ClassyName + "&f, has been kicked 2 times within the last two days. Please review if a ban is neccessary");               
             }
         }
 
