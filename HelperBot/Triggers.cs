@@ -124,10 +124,10 @@ namespace HelperBot {
             }
             if (Triggers.MatchesTrigger(Message, MiscTriggers.ThanksFullTrigger))
             {
-                if(SinceAnswer.Millisecond < 20000)
+                if(SinceAnswer.Ticks < 20000000)
                 {
                     Random thanksMsg = new Random();
-                    Methods.SendMessage("&f, " + Values.ThankyouReplies[thanksMsg.Next(0, Values.ThankyouReplies.Length)], MessageChannel.Global);
+                    Methods.SendMessage("&f, " + Values.ThankyouReplies[thanksMsg.Next(0, Values.ThankyouReplies.Length - 1)], MessageChannel.Global);
                 }
             }
         }
