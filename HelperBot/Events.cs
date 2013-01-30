@@ -85,6 +85,8 @@ namespace HelperBot {
                 else
                 {
                     Methods.SendPM(e.Player, info.ClassyName + "&f, welcome to the server!");
+                    Triggers.SinceAnswer = DateTime.Now;
+                    
                 }
             }
         }
@@ -94,7 +96,7 @@ namespace HelperBot {
         public static void PlayerKicked ( object sender, PlayerBeingKickedEventArgs e )
         {
             PlayerInfo info = e.Player.Info;
-            if(info.TimeSinceLastKick < TimeSpan.FromDays(1))
+            if(info.TimeSinceLastKick < TimeSpan.FromDays(1) && info.TimesKicked > 0)
             {
                 Methods.SendStaff(info.ClassyName + "&f, has been kicked 2 times within the last two days. Please review if a ban is neccessary");               
             }
@@ -119,6 +121,7 @@ namespace HelperBot {
         static void AnnouncePlayerPromotion ( PlayerInfo playerInfo ) {
             if ( playerInfo == null ) return;
             Methods.SendMessage( playerInfo.ClassyName + "&F, congratulations on your new rank! " + Methods.GetRandomPosComment(), MessageChannel.Global );
+            Triggers.SinceAnswer = DateTime.Now;
         }
     }
 }
