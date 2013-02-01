@@ -42,7 +42,7 @@ namespace HelperBot {
             }
             if (IsAllUpper(Message))
             {
-                Methods.SendPM( player, "&FPlease refrain from abusing caps.");
+                Methods.SendPM(player, Color.PM + "&FPlease refrain from abusing caps.");
             }
 
             if ( Triggers.MatchesTrigger( Message, RankTriggers.HowDoFullTrigger ) ) {
@@ -80,7 +80,7 @@ namespace HelperBot {
             if ( File.Exists( "SwearWords.txt" ) ) {
                 if ( !player.Can( Permission.Swear ) ) {
                     if ( Triggers.MatchesTrigger( Message, MaintenanceTriggers.SwearFullTrigger ) ) {
-                        Methods.SendMessage( player, "Please refrain from swearing :)", MessageChannel.PM );
+                        Methods.SendMessage( player, Color.PM + "Please refrain from swearing :)", MessageChannel.PM );
                         SinceAnswer = DateTime.Now;
                         return;
                     }
@@ -124,7 +124,8 @@ namespace HelperBot {
             }
             if (Triggers.MatchesTrigger(Message, MiscTriggers.ThanksFullTrigger))
             {
-                if(SinceAnswer.Ticks < 20000000)
+                double totalTime =  (DateTime.Now - SinceAnswer).TotalSeconds;
+                if (totalTime < 5)
                 {
                     Random thanksMsg = new Random();
                     Methods.SendMessage("&f, " + Values.ThankyouReplies[thanksMsg.Next(0, Values.ThankyouReplies.Length - 1)], MessageChannel.Global);
