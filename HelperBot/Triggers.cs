@@ -42,7 +42,7 @@ namespace HelperBot {
             }
             if (IsAllUpper(Message))
             {
-                Methods.SendPM(player, Color.PM + "&FPlease refrain from abusing caps.");
+                Methods.SendPM(player, Color.PM + "Please refrain from abusing caps.");
             }
 
             if ( Triggers.MatchesTrigger( Message, RankTriggers.HowDoFullTrigger ) ) {
@@ -73,7 +73,8 @@ namespace HelperBot {
                 return;
             }
             if ( Triggers.MatchesTrigger( Message, MaintenanceTriggers.HoursFullTrigger ) ) {
-                Methods.SendMessage( Methods.GetPlayerTotalHoursString( player ), Channel );
+                double hours = Convert.ToInt64(Methods.GetPlayerTotalHoursString(player));
+                Methods.SendMessage( Math.Round(hours, 0, MidpointRounding.AwayFromZero).ToString() , Channel);
                 SinceAnswer = DateTime.Now;
                 return;
             }
