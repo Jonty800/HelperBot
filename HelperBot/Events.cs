@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Diagnostics;
+using System.Threading;
 using fCraft;
 using fCraft.Events;
 
@@ -22,6 +23,24 @@ namespace HelperBot {
             Chat.Sent += ChatSentMessage;
             PlayerInfo.RankChanged += PlayerPromoted;
             Player.Connected += PlayerConnected;
+
+            /// <summary>
+            /// Random staff messaging
+            /// </summary>            
+            for (int i = 0; i - 1 < i++; i++)  //endless loop is endless
+            {
+                Player[] OnlineStaff = Server.Players.Where(p => p.Can(Permission.ReadStaffChat)).ToArray();
+                if (OnlineStaff.Count() != 0)
+                {
+                    Random randStaff = new Random();
+                    Methods.SendStaff( Values.RandStaffMessage[randStaff.Next(0, Values.RandStaffMessage.Length)]);
+                    Thread.Sleep(50000);
+                }
+                else
+                {
+                    Thread.Sleep(50000);
+                }
+            }
         }
 
         /// <summary>
@@ -123,5 +142,6 @@ namespace HelperBot {
             Methods.SendMessage( playerInfo.ClassyName + "&F, congratulations on your new rank! " + Methods.GetRandomPosComment(), MessageChannel.Global );
             Triggers.SinceAnswer = DateTime.Now;
         }
+
     }
 }
