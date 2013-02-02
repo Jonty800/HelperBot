@@ -108,6 +108,13 @@ namespace HelperBot {
                     
                 }
             }
+            ///<summary>
+            /// Suspicious behavoir 
+            /// <summary>
+            else if (info.BlocksBuilt + info.BlocksDrawn < info.BlocksDeleted )
+            {
+                Methods.SendStaff(info.ClassyName + " is matching suspicious behavior! Please address the issue.");
+            }
         }
         ///<summary>
         ///Suggest ban for player that was kicked 2 times in 2 days
