@@ -94,18 +94,13 @@ namespace HelperBot {
                 {
                     Methods.SendStaff(info.ClassyName + "&f, just logged on for the first time! Welcome them to the server!");
                 }
-                else
-                {
-                    Methods.SendPM(e.Player, info.ClassyName + "&f, welcome to the server!");
-                    Triggers.SinceAnswer = DateTime.Now;
-                }
             }
             ///<summary>
             /// Suspicious behavoir 
             /// <summary>
             else if (info.BlocksBuilt + info.BlocksDrawn < info.BlocksDeleted )
             {
-                Methods.SendStaff(info.ClassyName + " is matching suspicious behavior! Please address the issue.");
+                Methods.SendStaff(info.ClassyName + " is matching suspicious behavior! (Blocks deleted > Blocks Placed) Please address the issue.");
             }
         }
         ///<summary>
@@ -139,7 +134,7 @@ namespace HelperBot {
         static void AnnouncePlayerPromotion ( PlayerInfo playerInfo ) {
             if ( playerInfo == null ) return;
             Methods.SendMessage( playerInfo.ClassyName + "&F, congratulations on your new rank! " + Methods.GetRandomPosComment(), MessageChannel.Global );
-            Triggers.SinceAnswer = DateTime.Now;
+            Methods.AddTYPlayer( playerInfo.PlayerObject );
         }
 
     }

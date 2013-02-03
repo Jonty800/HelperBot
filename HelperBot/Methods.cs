@@ -284,6 +284,27 @@ namespace HelperBot {
             SetMostKicks();
         }
 
+        public static void AddTYPlayer ( Player player ) {
+            if ( Values.AwaitingThanks == null ) return;
+            Values.TYObject _TYOject = new Values.TYObject(){ player = player, Time = DateTime.Now };
+            lock ( Values.AwaitingThanks ) {
+                if ( Values.AwaitingThanks.Contains( _TYOject ) ) return;
+                Values.AwaitingThanks.Add( _TYOject );
+            }
+        }
+
+        public static void RemoveTYPlayer ( Player player ) {
+            if ( Values.AwaitingThanks == null ) return;
+            if ( Values.AwaitingThanks.Count < 1 ) return;
+            lock ( Values.AwaitingThanks ) {
+                foreach ( Values.TYObject _O in Values.AwaitingThanks ) {
+                    if ( _O.player == player ) {
+                        Values.AwaitingThanks.Remove( _O );
+                    }
+                }
+            }
+        }
+
         #region SetValues
         public static void LoadSwearArray () {
             if ( MaintenanceTriggers.SwearFullTrigger == null ) {

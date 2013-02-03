@@ -1,4 +1,4 @@
-//HelperBot - Copyright (c) Jonty800 and LeChosenOne <2013> (http://forums.au70.net)
+﻿//HelperBot - Copyright (c) Jonty800 and LeChosenOne <2013> (http://forums.au70.net)
 //This plugin is open source and designed to be used with 800Craft and LegendCraft server softwares
 using System;
 using System.Collections.Generic;
@@ -32,6 +32,13 @@ namespace HelperBot {
             get { return Settings.BotNameColor + Settings.Name; }
         }
 
+        public struct TYObject {
+            public Player player;
+            public DateTime Time;
+        }
+
+        public static List<TYObject> AwaitingThanks = new List<TYObject>();
+
         public static PlayerInfo FirstJoined;
         public static PlayerInfo OldestStaff;
         public static PlayerInfo FirstBanned;
@@ -48,7 +55,6 @@ namespace HelperBot {
             "There are currently " + Server.Players.Length + " players online, with " + Server.Players.Where(p => p.Can(Permission.ReadStaffChat)).ToArray().Length + " moderators online.",
             "The server has been online for " +  Math.Round(DateTime.UtcNow.Subtract( Server.StartTime ).TotalHours, 0, MidpointRounding.AwayFromZero) + " Hours.",
             "The server's cpu usage is currently " + Math.Round(Server.CPUUsageLastMinute * 100, 0, MidpointRounding.AwayFromZero) + "%"
-
         };
 
         /// <summary>

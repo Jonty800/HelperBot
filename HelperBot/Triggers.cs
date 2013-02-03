@@ -26,75 +26,69 @@ namespace HelperBot {
 
             return true;
         }
-        public static DateTime SinceAnswer;
 
         public static void CheckTriggers ( Player player, String Message, MessageChannel Channel ) {
             if ( Channel == MessageChannel.PM ) return;
             if ( Triggers.MatchesTrigger( Message, RankTriggers.NextRankFullTrigger ) ) {
                 if ( player.Info.Rank != RankManager.HighestRank ) {
                     Methods.SendMessage( player.ClassyName + "&F, your next rank is " + player.Info.Rank.NextRankUp.ClassyName, Channel );
-                    SinceAnswer = DateTime.Now;
+                    Methods.AddTYPlayer( player );
                 } else {
                     Methods.SendMessage( player.ClassyName + "&F, you are already the highest rank!", Channel );
-                    SinceAnswer = DateTime.Now;
+                    Methods.AddTYPlayer( player );
                 }
                 return;
-            }
-            if (IsAllUpper(Message))
-            {
-                Methods.SendPM(player, Color.PM + "Please refrain from abusing caps.");
             }
 
             if ( Triggers.MatchesTrigger( Message, RankTriggers.HowDoFullTrigger ) ) {
                 if ( player.Info.Rank == RankManager.HighestRank ) return;
                 if ( player.Can( Permission.ReadStaffChat ) ) {
                     Methods.SendMessage( player.ClassyName + "&f, " + Settings.HowToGetRankedStaffString, Channel );
-                    SinceAnswer = DateTime.Now;
+                    Methods.AddTYPlayer( player );
                 } else {
                     Methods.SendMessage( player.ClassyName + "&f, " + Settings.HowToGetRankedBuilderString, Channel );
-                    SinceAnswer = DateTime.Now;
+                    Methods.AddTYPlayer( player );
                 }
                 return;
             }
-            if (Triggers.MatchesTrigger(Message, MaintenanceTriggers.PMFullTrigger))
-            {
-                Methods.SendMessage(player.ClassyName + "&f, to PM, type '@playername [message]'.", Channel);
-                SinceAnswer = DateTime.Now;
+            if ( Triggers.MatchesTrigger( Message, MaintenanceTriggers.PMFullTrigger ) ) {
+                Methods.SendMessage( player.ClassyName + "&f, to PM, type '@playername [message]'.", Channel );
+                Methods.AddTYPlayer( player );
                 return;
             }
             if ( Triggers.MatchesTrigger( Message, MaintenanceTriggers.TimeFullTrigger ) ) {
                 Methods.SendMessage( player.ClassyName + "&f, the time is currently " + DateTime.Now.ToShortTimeString(), Channel );
-                SinceAnswer = DateTime.Now;
+                Methods.AddTYPlayer( player );
                 return;
             }
             if ( Triggers.MatchesTrigger( Message, MaintenanceTriggers.FellFullTrigger ) ) {
                 Methods.SendMessage( player.ClassyName + Settings.StuckMessage, Channel );
-                SinceAnswer = DateTime.Now;
+                Methods.AddTYPlayer( player );
                 return;
             }
             if ( Triggers.MatchesTrigger( Message, MaintenanceTriggers.HoursFullTrigger ) ) {
-                double hours = Convert.ToInt64(Methods.GetPlayerTotalHoursString(player));
-                Methods.SendMessage( Math.Round(hours, 0, MidpointRounding.AwayFromZero).ToString() , Channel);
-                SinceAnswer = DateTime.Now;
+                double hours = Convert.ToInt64( Methods.GetPlayerTotalHoursString( player ) );
+                Methods.SendMessage( Math.Round( hours, 0, MidpointRounding.AwayFromZero ).ToString(), Channel );
+                Methods.AddTYPlayer( player );
                 return;
             }
             if ( File.Exists( "SwearWords.txt" ) ) {
                 if ( !player.Can( Permission.Swear ) ) {
                     if ( Triggers.MatchesTrigger( Message, MaintenanceTriggers.SwearFullTrigger ) ) {
                         Methods.SendMessage( player, Color.PM + "Please refrain from swearing :)", MessageChannel.PM );
-                        SinceAnswer = DateTime.Now;
+                        Methods.AddTYPlayer( player );
                         return;
                     }
                 }
             }
             if ( Triggers.MatchesTrigger( Message, MaintenanceTriggers.WebFullTrigger ) ) {
                 Methods.SendMessage( player.ClassyName + "&F, the server's website is " + Settings.Website, Channel );
-                SinceAnswer = DateTime.Now;
+                Methods.AddTYPlayer( player );
                 return;
             }
             if ( Triggers.MatchesTrigger( Message, MaintenanceTriggers.ServFullTrigger ) ) {
                 Methods.SendMessage( player.ClassyName + "&F, you are currently playing on " + ConfigKey.ServerName.GetString(), Channel );
-                SinceAnswer = DateTime.Now;
+                Methods.AddTYPlayer( player );
                 return;
             }
             if ( Triggers.MatchesTrigger( Message, MiscTriggers.SpleefFullTrigger ) ) {
@@ -123,7 +117,7 @@ namespace HelperBot {
             }
             if ( Triggers.MatchesTrigger( Message, MiscTriggers.FlyFullTrigger ) ) {
                 Methods.SendMessage( player.ClassyName + "&F, to fly, type /fly, or download WoM at womjr.com/game_client.", MessageChannel.Global );
-                SinceAnswer = DateTime.Now;
+                Methods.AddTYPlayer( player );
                 return;
             }
 
@@ -132,13 +126,15 @@ namespace HelperBot {
                 return;
             }
 
-            if (Triggers.MatchesTrigger(Message, MiscTriggers.ThanksFullTrigger))
-            {
-                double totalTime =  (DateTime.Now - SinceAnswer).TotalSeconds;
-                if (totalTime < 5)
-                {
-                    Random thanksMsg = new Random();
-                    Methods.SendMessage("&f, " + Values.ThankyouReplies[thanksMsg.Next(0, Values.ThankyouReplies.Length - 1)], MessageChannel.Global);
+            if ( Triggers.MatchesTrigger( Message, MiscTriggers.ThanksFullTrigger ) ) {
+                foreach ( Values.TYObject _O in Values.AwaitingThanks ) {
+                    if ( _O.player == player ) {
+                        double totalTime = ( DateTime.Now - _O.Time ).TotalSeconds;
+                        if ( totalTime <= 20 ) {
+                            Methods.SendMessage( "&f, " + Values.ThankyouReplies[new Random().Next( 0, Values.ThankyouReplies.Length - 1 )], MessageChannel.Global );
+                            Values.AwaitingThanks.Remove( _O );
+                        }
+                    }
                 }
             }
         }
