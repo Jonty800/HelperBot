@@ -286,10 +286,10 @@ namespace HelperBot {
 
         public static void AddTYPlayer ( Player player ) {
             if ( Values.AwaitingThanks == null ) return;
-            Values.TYObject _TYOject = new Values.TYObject(){ player = player, Time = DateTime.Now };
+            Values.TYObject _TYObject = new Values.TYObject(){ player = player, Time = DateTime.Now };
             lock ( Values.AwaitingThanks ) {
-                if ( Values.AwaitingThanks.Contains( _TYOject ) ) return;
-                Values.AwaitingThanks.Add( _TYOject );
+                if ( Values.AwaitingThanks.Contains( _TYObject ) ) return;
+                Values.AwaitingThanks.Add( _TYObject );
             }
         }
 
