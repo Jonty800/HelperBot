@@ -24,21 +24,10 @@ namespace HelperBot {
             PlayerInfo.RankChanged += PlayerPromoted;
             Player.Connected += PlayerConnected;
 
-            //fix this shit         
-            for (int i = 0; i - 1 < i++; i++)  //endless loop is endless
-            {
-                Player[] OnlineStaff = Server.Players.Where(p => p.Can(Permission.ReadStaffChat)).ToArray();
-                if (OnlineStaff.Count() != 0)
-                {
-                    Random randStaff = new Random();
-                    Methods.SendStaff( Values.RandStaffMessage[randStaff.Next(0, Values.RandStaffMessage.Length)]);
-                    Thread.Sleep(50000);
-                }
-                else
-                {
-                    Thread.Sleep(50000);
-                }
-            }
+            //One line OP
+            //Do we even need this?
+            //Random staff messages?
+            Scheduler.NewTask( t => Methods.SendStaff( Values.RandStaffMessage[new Random().Next( 0, Values.RandStaffMessage.Length )] ) ).RunForever( TimeSpan.FromSeconds( 60 ) );
         }
 
         /// <summary>
