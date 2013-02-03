@@ -69,7 +69,7 @@ namespace HelperBot {
             else if (info.TimesVisited == 1)
             {
                 //should pick out all the admins online
-                String OnlineStaff = Server.Players.Can(Permission.ReadStaffChat).ToString();
+                Player[] OnlineStaff = Server.Players.Where( p => p.Can( Permission.ReadStaffChat ) ).ToArray();
                 if (OnlineStaff.Count() != 0)
                 {
                     Methods.SendStaff(info.Name + "&f, just logged on for the first time! Welcome them to the server!");
