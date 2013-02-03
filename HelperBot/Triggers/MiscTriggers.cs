@@ -12,7 +12,32 @@ namespace HelperBot {
     public static class MiscTriggers {
 
         //I'll throw some funfacts from RandomStat.cs later
+        
+        static String[] ThanksTrigger = new String[]
+        {
+           "Ty"
+        };
 
+        static String[] ThanksTrigger2 = new String[]
+        {
+           "Thanks"
+        };
+        static String[] ThanksTrigger3 = new String[]
+        {
+           "Thx"
+        };
+        static String[] ThanksTrigger4 = new String[]
+        {
+           "Thankyou"
+        };
+        static String[] ThanksTrigger5 = new String[]
+        {
+           "Thank you"
+        };
+        static String[] ThanksTrigger6 = new String[]
+        {
+           "Thank9you"
+        };
         static String[] FlyTrigger = new String[]
         {
            "how",
@@ -25,7 +50,15 @@ namespace HelperBot {
            "fly"
         };
 
-
+        public static String[][] ThanksFullTrigger = new String[][]
+        {
+            ThanksTrigger,
+            ThanksTrigger2,
+            ThanksTrigger3,
+            ThanksTrigger4,
+            ThanksTrigger5,
+            ThanksTrigger6
+        };
         public static String[][] SpleefFullTrigger = new String[][]
         {
             new String[]{"!spleef"}

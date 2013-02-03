@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Diagnostics;
+using System.Threading;
 using fCraft;
 using fCraft.Events;
 
@@ -18,10 +19,26 @@ namespace HelperBot {
             if ( Settings.ReleaseFlag == Flags.Debug ) {
                 Logger.Log( LogType.SystemActivity, "HelperBot: ServerStartedEvent" );
             }
-            Methods.SetAllValues(); //Load any player reply values
-            Chat.Sent += ChatSentMessage; //chat event
-            PlayerInfo.RankChanged += PlayerPromoted; //rankchanged event
-            Player.Connected += PlayerConnected; //connection event
+            Methods.SetAllValues(); //Load all the player reply values
+            Chat.Sent += ChatSentMessage;
+            PlayerInfo.RankChanged += PlayerPromoted;
+            Player.Connected += PlayerConnected;
+
+            //fix this shit         
+            for (int i = 0; i - 1 < i++; i++)  //endless loop is endless
+            {
+                Player[] OnlineStaff = Server.Players.Where(p => p.Can(Permission.ReadStaffChat)).ToArray();
+                if (OnlineStaff.Count() != 0)
+                {
+                    Random randStaff = new Random();
+                    Methods.SendStaff( Values.RandStaffMessage[randStaff.Next(0, Values.RandStaffMessage.Length)]);
+                    Thread.Sleep(50000);
+                }
+                else
+                {
+                    Thread.Sleep(50000);
+                }
+            }
         }
 
         /// <summary>
@@ -66,18 +83,40 @@ namespace HelperBot {
                     Methods.SendMessage( e.Player, info.Name + "&f, you were kicked by a staff member. Please follow the /Rules next time!", MessageChannel.PM );
                 }                
             }
+            ///<summary>
+            /// Player logging in for first time
+            /// <summary>
             else if (info.TimesVisited == 1)
             {
                 //should pick out all the admins online
-                Player[] OnlineStaff = Server.Players.Where( p => p.Can( Permission.ReadStaffChat ) ).ToArray();
+                Player[] OnlineStaff = Server.Players.Where(p => p.Can(Permission.ReadStaffChat)).ToArray();
                 if (OnlineStaff.Count() != 0)
                 {
-                    Methods.SendStaff(info.Name + "&f, just logged on for the first time! Welcome them to the server!");
+                    Methods.SendStaff(info.ClassyName + "&f, just logged on for the first time! Welcome them to the server!");
                 }
                 else
                 {
-                    Methods.SendPM(e.Player, info.Name + "&f, welcome to the server!");
+                    Methods.SendPM(e.Player, info.ClassyName + "&f, welcome to the server!");
+                    Triggers.SinceAnswer = DateTime.Now;
                 }
+            }
+            ///<summary>
+            /// Suspicious behavoir 
+            /// <summary>
+            else if (info.BlocksBuilt + info.BlocksDrawn < info.BlocksDeleted )
+            {
+                Methods.SendStaff(info.ClassyName + " is matching suspicious behavior! Please address the issue.");
+            }
+        }
+        ///<summary>
+        ///Suggest ban for player that was kicked 2 times in 2 days
+        ///<summary>
+        public static void PlayerKicked ( object sender, PlayerBeingKickedEventArgs e )
+        {
+            PlayerInfo info = e.Player.Info;
+            if(info.TimeSinceLastKick < TimeSpan.FromDays(1) && info.TimesKicked > 0)
+            {
+                Methods.SendStaff(info.ClassyName + "&f, has been kicked 2 times within the last two days. Please review if a ban is neccessary");               
             }
         }
 
@@ -100,6 +139,8 @@ namespace HelperBot {
         static void AnnouncePlayerPromotion ( PlayerInfo playerInfo ) {
             if ( playerInfo == null ) return;
             Methods.SendMessage( playerInfo.ClassyName + "&F, congratulations on your new rank! " + Methods.GetRandomPosComment(), MessageChannel.Global );
+            Triggers.SinceAnswer = DateTime.Now;
         }
+
     }
 }
