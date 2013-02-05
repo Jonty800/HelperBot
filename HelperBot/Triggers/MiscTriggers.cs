@@ -37,7 +37,7 @@ namespace HelperBot {
         };
         static String[] ThanksTrigger6 = new String[]
         {
-           "thank9you"
+           "thank-you"
         };
 
         static String[] FlyTrigger = new String[]
