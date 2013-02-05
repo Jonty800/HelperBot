@@ -15,29 +15,31 @@ namespace HelperBot {
         
         static String[] ThanksTrigger = new String[]
         {
-           "Ty"
+           "ty"
         };
 
         static String[] ThanksTrigger2 = new String[]
         {
-           "Thanks"
+           "thanks"
         };
         static String[] ThanksTrigger3 = new String[]
         {
-           "Thx"
+           "thx"
         };
         static String[] ThanksTrigger4 = new String[]
         {
-           "Thankyou"
+           "thankyou"
         };
         static String[] ThanksTrigger5 = new String[]
         {
-           "Thank you"
+           "thank", 
+           "you"
         };
         static String[] ThanksTrigger6 = new String[]
         {
-           "Thank9you"
+           "thank9you"
         };
+
         static String[] FlyTrigger = new String[]
         {
            "how",
