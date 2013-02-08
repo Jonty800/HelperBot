@@ -296,7 +296,7 @@ namespace HelperBot {
         }
 
         public static string GetRandomJoke () {
-            return Values.Jokes[new Random().Next( 0, Values.Jokes.Length - 1 )];
+            return Values.Jokes[new Random().Next( 0, Values.Jokes.Length)];
         }
 
         public static void SetAllValues () {
@@ -450,7 +450,7 @@ namespace HelperBot {
         #endregion
 
         public static string GetRandomPosComment () {
-            return Values.PositiveComments[new Random().Next( 0, Values.PositiveComments.Length - 1 )];
+            return Values.PositiveComments[new Random().Next( 0, Values.PositiveComments.Length)];
         }
     }
 }

@@ -156,7 +156,7 @@ namespace HelperBot {
                         if ( _O.player == player ) {
                             double totalTime = ( DateTime.Now - _O.Time ).TotalSeconds;
                             if ( totalTime <= 20 ) {
-                                Methods.SendMessage( Values.ThankyouReplies[new Random().Next( 0, Values.ThankyouReplies.Length - 1 )], MessageChannel.Global );
+                                Methods.SendMessage( Values.ThankyouReplies[new Random().Next( 0, Values.ThankyouReplies.Length)], MessageChannel.Global );
                             }
                         }
                     }
