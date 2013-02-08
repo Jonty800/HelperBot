@@ -17,6 +17,7 @@ namespace HelperBot {
            "i",
            "fell" 
         };
+
         static String[] FellTrigger2 = new String[]
         {
            "i",
@@ -29,6 +30,7 @@ namespace HelperBot {
            "i'm",
            "stuck"
         };
+
         static String[] WebTrigger = new String[]
         {
            "what",
@@ -56,6 +58,7 @@ namespace HelperBot {
            "this",
            "server"
         };
+
         public static FileInfo swearFile = new FileInfo( "swearwords.txt" );
 
         static String[] HoursTrigger = new String[]
@@ -65,31 +68,37 @@ namespace HelperBot {
            "hours",
            "have"
         };
+
         static String[] HoursTrigger2 = new String[]
         {
            "are",
            "my",
            "hours"
         };
+
         static String[] PMTrigger = new String[]
         {
            "how",
            "PM"
         };
+
         static String[] PMTrigger2 = new String[]
         {
            "how",
            "whisper"
         };
+
         public static String[][] PMFullTrigger = new String[][]
         {
             PMTrigger,
             PMTrigger2
         };
+
         public static String[][] TimeFullTrigger = new String[][]
         {
             new String[]{"what", "is", "the", "time"}
         };
+
         public static String[][] SwearFullTrigger;
 
         public static String[][] FellFullTrigger = new String[][]
@@ -98,16 +107,19 @@ namespace HelperBot {
             FellTrigger2,
             FellTrigger3
         };
+
         public static String[][] HoursFullTrigger = new String[][]
         {
             HoursTrigger,
             HoursTrigger2,
         };
+
         public static String[][] WebFullTrigger = new String[][]
         {
             WebTrigger,
             WebTrigger2
         };
+
         public static String[][] ServFullTrigger = new String[][]
         {
             ServTrigger,

@@ -45,7 +45,14 @@ namespace HelperBot {
         public static PlayerInfo FirstKicked;
         public static PlayerInfo MostBans;
         public static PlayerInfo MostKicks;
-
+        public static PlayerInfo MostPromoted;
+        public static PlayerInfo MostBuilt;
+        public static PlayerInfo MostTimesGotKicked;
+        public static PlayerInfo MostHours;
+        public static PlayerInfo MostMessagesSent;
+        public static PlayerInfo MostBlocksDrawn;
+        public static PlayerInfo NewestStaff;
+        public static PlayerInfo MostLogins;
 
         /// <summary>
         /// An array of RandomMessages to be sent to staff chat to report certain stats

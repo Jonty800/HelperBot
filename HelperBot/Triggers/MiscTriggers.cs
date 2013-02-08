@@ -22,19 +22,23 @@ namespace HelperBot {
         {
            "thanks"
         };
+
         static String[] ThanksTrigger3 = new String[]
         {
            "thx"
         };
+
         static String[] ThanksTrigger4 = new String[]
         {
            "thankyou"
         };
+
         static String[] ThanksTrigger5 = new String[]
         {
            "thank", 
            "you"
         };
+
         static String[] ThanksTrigger6 = new String[]
         {
            "thank-you"
@@ -61,6 +65,7 @@ namespace HelperBot {
             ThanksTrigger5,
             ThanksTrigger6
         };
+
         public static String[][] SpleefFullTrigger = new String[][]
         {
             new String[]{"!spleef"}
@@ -87,6 +92,5 @@ namespace HelperBot {
         {
             new String[]{"fun", "fact"}
         };
-
     }
 }

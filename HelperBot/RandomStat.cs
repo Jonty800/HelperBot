@@ -19,13 +19,12 @@ namespace HelperBot {
         MostHours = 5,
         MostMessagesSent = 6,
         MostBlocksDrawn = 7,
-        CurrentTime = 8,
-        FirstPersonKicked = 9,
-        FirstPersonBanned = 10,
-        NewestStaff = 11,
-        OldestStaff = 12,
-        MostLogins = 13,
-        FirstJoined = 14
+        FirstPersonKicked = 8,
+        FirstPersonBanned = 9,
+        NewestStaff = 10,
+        OldestStaff = 11,
+        MostLogins = 12,
+        FirstJoined = 13
         //more soon
     }
 }

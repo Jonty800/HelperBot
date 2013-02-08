@@ -209,38 +209,63 @@ namespace HelperBot {
             if ( player == null ) SendError( "HelperBot: Player cannot be null", MessageChannel.Global );
             byte Max = 13; //Max enum byte
             int StringID = new Random().Next( 0, Max );
+            if(Settings.ReleaseFlag == Flags.Debug) SendChat( StringID.ToString() );
             RandomStat Picked = ( RandomStat )StringID;
-            string StartOfMessage = player.ClassyName + "&F, ";
+            if ( Settings.ReleaseFlag == Flags.Debug ) SendChat( Picked.ToString() );
             switch ( Picked ) {
-                case RandomStat.CurrentTime:
-                    return "";
                 case RandomStat.FirstPersonBanned:
+                    if ( Values.FirstBanned.ClassyName == null ) {
+                        return "No one has been banned on this server.... yet";
+                    }
                     return "The first person to get banned on this server was " + Values.FirstBanned.ClassyName;
                 case RandomStat.FirstPersonKicked:
+                    if ( Values.FirstKicked == null ) {
+                        return "No one has been kicked on this server";
+                    }
                     return "The first person to get kicked on this server was " + Values.FirstKicked.ClassyName;
                 case RandomStat.MostBanned:
+                    if ( Values.MostBans == null ) {
+                        return "It appears that staff haven't banned anyone yet on this server... Unbeliveable!";
+                    }
                     return "The person with the most bans on this server is " + Values.MostBans.ClassyName;
                 case RandomStat.MostBlocksDrawn:
-                    return "";
+                    if ( Values.MostBlocksDrawn == null ) {
+                        return "No one has drawn a block yet on this server";
+                    }
+                    return "The person who has drawn the most blocks is " + Values.MostBlocksDrawn.ClassyName;
                 case RandomStat.MostBuilt:
-                    return "";
+                    if ( Values.MostBuilt == null ) {
+                        return "Not a single soul has placed a block on this server yet... sigh!";
+                    }
+                    return "The person who has placed the most blocks is " + Values.MostBuilt.ClassyName;
                 case RandomStat.MostHours:
-                    return "";
+                    if ( Values.MostHours == null ) return "No players have achieved 1 whole hour on this server :(";
+                    return "The person with the most hours on this server is " + Values.MostHours.ClassyName;
                 case RandomStat.MostKicked:
+                    if ( Values.MostKicks == null ) {
+                        return "No one has been kicked on this server";
+                    }
                     return "The person with the most kicks on this server is " + Values.MostKicks.ClassyName;
                 case RandomStat.MostLogins:
-                    return "";
+                    //cannot be null?
+                    return Values.MostLogins.ClassyName + "&F has connected to the server the most number of times";
                 case RandomStat.MostMessagesSent:
-                    return "";
+                    //cannot be null if "fun fact" is called?
+                    return Values.MostMessagesSent.ClassyName + "&F has sent the most number of messages on the server";
                 case RandomStat.MostPromoted:
-                    return "";
+                    if ( Values.MostPromoted == null ) return "No one has been promoted on this server yet :S";
+                    return Values.MostPromoted.ClassyName + "&F has promoted the more people on this server than anyone else!";
                 case RandomStat.MostTimesGotKicked:
-                    return "";
+                    if(Values.MostTimesGotKicked == null) return "No one has been kicked on this server";
+                    return Values.MostTimesGotKicked.ClassyName + "&F has cbeen kicked more times than anyone else on this server";
                 case RandomStat.NewestStaff:
-                    return "";
+                    if ( Values.NewestStaff == null ) return "This sever has no staff!";
+                    return Values.MostBans.ClassyName + "&F is the newest member of staff";
                 case RandomStat.OldestStaff:
+                    if ( Values.OldestStaff == null ) return "This sever has no staff!";
                     return "Our oldest active staff member is " + Values.OldestStaff.ClassyName;
                 case RandomStat.FirstJoined:
+                    //cannot be null
                     return "The first person to join the server was " +
                         Values.FirstJoined.ClassyName + "&Fon " + Values.FirstJoined.FirstLoginDate +
                         " (" + Values.FirstJoined.TimeSinceFirstLogin.ToMiniString() + " ago).";
@@ -282,6 +307,14 @@ namespace HelperBot {
             SetFirstKicked();
             SetMostBans();
             SetMostKicks();
+            SetMostPromoted();
+            SetMostBuilt();
+            SetMostTimesGotKicked();
+            SetMostHours();
+            SetMostMessagesSent();
+            SetMostBlocksDrawn();
+            SetNewestStaff();
+            SetMostLogins();
         }
 
         public static void AddTYPlayer ( Player player ) {
@@ -297,9 +330,9 @@ namespace HelperBot {
             if ( Values.AwaitingThanks == null ) return;
             if ( Values.AwaitingThanks.Count < 1 ) return;
             lock ( Values.AwaitingThanks ) {
-                foreach ( Values.TYObject _O in Values.AwaitingThanks ) {
-                    if ( _O.player == player ) {
-                        Values.AwaitingThanks.Remove( _O );
+                for ( int i = Values.AwaitingThanks.Count - 1; i >= 0; i-- ) {
+                    if ( Values.AwaitingThanks[i].player == player ) {
+                        Values.AwaitingThanks.RemoveAt( i );
                     }
                 }
             }
@@ -359,7 +392,63 @@ namespace HelperBot {
             Values.MostKicks = PlayerDB.PlayerInfoList.Where( p => p.TimesKickedOthers != 0 ).OrderByDescending( pi => pi.TimesKickedOthers ).FirstOrDefault( pi => pi.TimesKickedOthers != 0 );
         }
 
+        public static void SetNewestStaff() {
+            if ( PlayerDB.PlayerInfoList == null ) {
+                return;
+            }
+            Values.NewestStaff = PlayerDB.PlayerInfoList.Where( p => p.Can(Permission.ReadStaffChat) ).OrderByDescending( pi => pi.RankChangeDate ).FirstOrDefault( pi => pi.RankChangeDate != null );
+        }
+
+        public static void SetMostTimesGotKicked () {
+            if ( PlayerDB.PlayerInfoList == null ) {
+                return;
+            }
+            Values.MostTimesGotKicked = PlayerDB.PlayerInfoList.Where( p => p.TimesKicked > 0 ).OrderByDescending( pi => pi.TimesKicked ).FirstOrDefault( pi => pi.TimesKicked > 0 );
+        }
+
+        public static void SetMostPromoted () {
+            if ( PlayerDB.PlayerInfoList == null ) {
+                return;
+            }
+            Values.MostPromoted = PlayerDB.PlayerInfoList.Where( p => p.PromoCount > 0 ).OrderByDescending( pi => pi.PromoCount ).FirstOrDefault( pi => pi.PromoCount > 0 );
+        }
+
+        public static void SetMostMessagesSent () {
+            if ( PlayerDB.PlayerInfoList == null ) {
+                return;
+            }
+            Values.MostMessagesSent = PlayerDB.PlayerInfoList.Where( p => p.MessagesWritten > 0 ).OrderByDescending( pi => pi.MessagesWritten ).FirstOrDefault( pi => pi.MessagesWritten > 0 );
+        }
+
+        public static void SetMostLogins () {
+            if ( PlayerDB.PlayerInfoList == null ) {
+                return;
+            }
+            Values.MostLogins = PlayerDB.PlayerInfoList.Where( p => p.TimesVisited > 0 ).OrderByDescending( pi => pi.TimesVisited ).FirstOrDefault( pi => pi.TimesVisited > 0 );
+        }
+
+        public static void SetMostHours () {
+            if ( PlayerDB.PlayerInfoList == null ) {
+                return;
+            }
+            Values.MostHours = PlayerDB.PlayerInfoList.Where( p => p.TotalTime.TotalHours > 0 ).OrderByDescending( pi => pi.TotalTime.TotalHours ).FirstOrDefault( pi => pi.TotalTime.TotalHours > 0 );
+        }
+
+        public static void SetMostBuilt () {
+            if ( PlayerDB.PlayerInfoList == null ) {
+                return;
+            }
+            Values.MostBuilt = PlayerDB.PlayerInfoList.Where( p => p.BlocksBuilt > 0 ).OrderByDescending( pi => pi.BlocksBuilt ).FirstOrDefault( pi => pi.BlocksBuilt > 0 );
+        }
+
+        public static void SetMostBlocksDrawn () {
+            if ( PlayerDB.PlayerInfoList == null ) {
+                return;
+            }
+            Values.MostBlocksDrawn = PlayerDB.PlayerInfoList.Where( p => p.BlocksDrawn > 0 ).OrderByDescending( pi => pi.BlocksDrawn ).FirstOrDefault( pi => pi.BlocksDrawn > 0 );
+        }
         #endregion
+
         public static string GetRandomPosComment () {
             return Values.PositiveComments[new Random().Next( 0, Values.PositiveComments.Length - 1 )];
         }

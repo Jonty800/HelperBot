@@ -75,8 +75,7 @@ namespace HelperBot {
             ///<summary>
             /// Player logging in for first time
             /// <summary>
-            else if (info.TimesVisited == 1)
-            {
+            else if (info.TimesVisited == 1){
                 //should pick out all the admins online
                 Player[] OnlineStaff = Server.Players.Where(p => p.Can(Permission.ReadStaffChat)).ToArray();
                 if (OnlineStaff.Count() != 0)
@@ -87,8 +86,7 @@ namespace HelperBot {
             ///<summary>
             /// Suspicious behavoir 
             /// <summary>
-            else if (info.BlocksBuilt + info.BlocksDrawn < info.BlocksDeleted )
-            {
+            else if (info.BlocksBuilt + info.BlocksDrawn < info.BlocksDeleted ){
                 Methods.SendStaff(info.ClassyName + " is matching suspicious behavior! (Blocks deleted > Blocks Placed) Please address the issue.");
             }
         }
@@ -125,6 +123,5 @@ namespace HelperBot {
             Methods.SendMessage( playerInfo.ClassyName + "&F, congratulations on your new rank! " + Methods.GetRandomPosComment(), MessageChannel.Global );
             Methods.AddTYPlayer( playerInfo.PlayerObject );
         }
-
     }
 }
