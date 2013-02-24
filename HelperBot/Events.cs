@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Diagnostics;
 using System.Threading;
+using System.IO;
 using fCraft;
 using fCraft.Events;
 
@@ -23,6 +24,7 @@ namespace HelperBot {
             Chat.Sent += ChatSentMessage;
             PlayerInfo.RankChanged += PlayerPromoted;
             Player.Connected += PlayerConnected;
+            Settings.Load(); //Load HelperBot.xml
 
             //One line OP
             //Do we even need this?
@@ -43,7 +45,7 @@ namespace HelperBot {
             MessageChannel Channel = Methods.ParseChatType( e.MessageType );
             if ( Methods.DetectMessageImpersonation( e.Message ) || Methods.IsPlayersDisplayedNameBots(e.Player)) {
                 if ( e.Player != Player.Console ) {
-                    if ( Settings.KickForImpersonation ) {
+                    if ( Settings.AnnounceImpersonation) {
                         e.Player.Kick( Player.Console, "Impersonation Detected", LeaveReason.Kick, true, true, false ); //tad harsh? //it will stop it from happening!
                     } else {
                         Methods.SendMessage( "That wasn't me, that was " + e.Player.Info.Rank.Color + e.Player.Name, Channel ); //DetectMessageImpersonation shouldnt work for PMs
@@ -61,7 +63,7 @@ namespace HelperBot {
         public static void PlayerConnected ( object sender, PlayerConnectedEventArgs e ) {
             PlayerInfo info = e.Player.Info;
             //if the player left due to a kick
-            if ( info.LeaveReason == LeaveReason.Kick ) {
+            if ( info.LeaveReason == LeaveReason.Kick && Settings.AnnounceWarnKick) {
                 if ( info.LastKickReason != null ) {
                     if ( info.LastKickReason.Length > 0 ) {
                         Methods.SendMessage( e.Player, info.Name + "&f, you were kicked by a staff member. Please follow the /Rules next time! Kick Reason: " + info.LastKickReason, MessageChannel.PM );
@@ -75,7 +77,7 @@ namespace HelperBot {
             ///<summary>
             /// Player logging in for first time
             /// <summary>
-            else if (info.TimesVisited == 1){
+            else if (info.TimesVisited == 1 && Settings.AnnounceGreeting){
                 //should pick out all the admins online
                 Player[] OnlineStaff = Server.Players.Where(p => p.Can(Permission.ReadStaffChat)).ToArray();
                 if (OnlineStaff.Count() != 0)
@@ -86,7 +88,7 @@ namespace HelperBot {
             ///<summary>
             /// Suspicious behavoir 
             /// <summary>
-            else if (info.BlocksBuilt + info.BlocksDrawn < info.BlocksDeleted ){
+            else if (info.BlocksBuilt + info.BlocksDrawn < info.BlocksDeleted && Settings.AnnounceSuggestBan){
                 Methods.SendStaff(info.ClassyName + " is matching suspicious behavior! (Blocks deleted > Blocks Placed) Please address the issue.");
             }
         }
@@ -96,7 +98,7 @@ namespace HelperBot {
         public static void PlayerKicked ( object sender, PlayerBeingKickedEventArgs e )
         {
             PlayerInfo info = e.Player.Info;
-            if(info.TimeSinceLastKick < TimeSpan.FromDays(1) && info.TimesKicked > 0)
+            if(info.TimeSinceLastKick < TimeSpan.FromDays(1) && info.TimesKicked > 0 && Settings.AnnounceSuggestBan)
             {
                 Methods.SendStaff(info.ClassyName + "&f, has been kicked 2 times within the last two days. Please review if a ban is neccessary");               
             }
