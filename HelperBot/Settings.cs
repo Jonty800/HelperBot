@@ -175,12 +175,119 @@ namespace HelperBot {
 
         #endregion
 
+        #region ColorParsing
+        public static bool IsValidColorCode(char code)
+        {
+            return (code >= '0' && code <= '9') || (code >= 'a' && code <= 'f') || (code >= 'A' && code <= 'F');
+        }
+        public static readonly SortedList<char, string> ColorNames = new SortedList<char, string>{
+            { '0', "black" },
+            { '1', "navy" },
+            { '2', "green" },
+            { '3', "teal" },
+            { '4', "maroon" },
+            { '5', "purple" },
+            { '6', "olive" },
+            { '7', "silver" },
+            { '8', "gray" },
+            { '9', "blue" },
+            { 'a', "lime" },
+            { 'b', "aqua" },
+            { 'c', "red" },
+            { 'd', "magenta" },
+            { 'e', "yellow" },
+            { 'f', "white" }
+        };
+        public static string Parse(char code)
+        {
+            code = Char.ToLower(code);
+            if (IsValidColorCode(code))
+            {
+                return "&" + code;
+            }
+            else
+            {
+                return null;
+            }
+        }
+        public static string Parse(string color)
+        {
+            if (color == null)
+            {
+                return null;
+            }
+            color = color.ToLower();
+            switch (color.Length)
+            {
+                case 2:
+                    if (color[0] == '&' && IsValidColorCode(color[1]))
+                    {
+                        return color;
+                    }
+                    break;
+
+                case 1:
+                    return Parse(color[0]);
+
+                case 0:
+                    return "";
+            }
+            if (ColorNames.ContainsValue(color))
+            {
+                return "&" + ColorNames.Keys[ColorNames.IndexOfValue(color)];
+            }
+            else
+            {
+                return null;
+            }
+        }
+        //color code to name
+        public static string GetName(char code)
+        {
+            code = Char.ToLower(code);
+            if (IsValidColorCode(code))
+            {
+                return ColorNames[code];
+            }
+            string color = Parse(code);
+            if (color == null)
+            {
+                return null;
+            }
+            return ColorNames[color[1]];
+        }
+        //name to color code
+        public static string GetName(string color)
+        {
+            if (color == null)
+            {
+                return null;
+            }
+            else if (color.Length == 0)
+            {
+                return "";
+            }
+            else
+            {
+                string parsedColor = Parse(color);
+                if (parsedColor == null)
+                {
+                    return null;
+                }
+                else
+                {
+                    return GetName(parsedColor[1]);
+                }
+            }
+        }
+        #endregion
+
         #region Other
         /// <summary>
         /// The color of the bots name
         /// Default: Red
         /// </summary>
-        public static string BotNameColor = "%c";
+        public static string BotNameColor = "&c";
         #endregion
 
         public static void Load()
@@ -281,7 +388,7 @@ namespace HelperBot {
                          }
                          if (reader.Name == "BotColor")
                          {
-                             BotNameColor = Color.Parse(reader.GetAttribute(0)); ;
+                             BotNameColor = Parse(reader.GetAttribute(0));
                          }
                          if (reader.Name == "CurrentVersion")
                          {
