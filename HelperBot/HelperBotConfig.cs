@@ -112,13 +112,17 @@ namespace HelperBotConfig
                         if (reader.Name == "BotColor")
                         {
                             colorBox.SelectedItem = reader.GetAttribute(0);
-                        }                        
+                        }
+                        
                     }                    
                 }
                 reader.Close();
             }
+            #region colorReader
+
             #endregion
-          
+            #endregion
+
             #region tooltips
             ToolTip colorTip = new ToolTip();
             ToolTip webTip = new ToolTip();
@@ -158,10 +162,11 @@ namespace HelperBotConfig
             fellTip.SetToolTip(this.xFell, "Bot will assist in helping players who are stuck or who have fallen by explaining how to return to spawn point.");
             spleefTip.SetToolTip(this.xSpleef, "Bot will start a spleef timer when a player types '!Spleef'.");
             greetingTip.SetToolTip(this.xGreeting, "Bot will greet a player if it is their fitst time joining the server.");
-            demotedTip.SetToolTip(this.xDemoted, "Bot will explain what to do if a player wants to know why they were demoted..");
-            jokesTip.SetToolTip(this.xImpersonation, "Bot will display random jokes/facts when provoked .");
+            demotedTip.SetToolTip(this.xDemoted, "Bot will explain what to do when demoted.");
+            jokesTip.SetToolTip(this.xImpersonation, "Bot will display random jokes/facts when provoked.");
             capsTip.SetToolTip(this.xCaps, "Bot will warn players that spam caps on the server.");
             #endregion
+
         }
 
         private void xBoxes_CheckedChanged(object sender, EventArgs e)
@@ -207,91 +212,73 @@ namespace HelperBotConfig
                 xDemoted.Checked = false;
             }
         }
-        #region color
-
-        string botColor = "%c"; //default will be red
-
+        #region color            
+       
         private void colorBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (colorBox.SelectedItem == "Black") 
             {
                 colorView.BackColor = System.Drawing.Color.Black;
-                botColor = "%0";
             }
             if (colorBox.SelectedItem == "Gray")
             {
                 colorView.BackColor = System.Drawing.Color.Gray;
-                botColor = "%8";
             }
             if (colorBox.SelectedItem == "Navy")
             {
                 colorView.BackColor = System.Drawing.Color.Navy;
-                botColor = "%1";
             }
             if (colorBox.SelectedItem == "Blue")
             {
                 colorView.BackColor = System.Drawing.Color.Blue;
-                botColor = "%9";
             }
             if (colorBox.SelectedItem == "Green")
             {
                 colorView.BackColor = System.Drawing.Color.Green;
-                botColor = "%2";
             }
             if (colorBox.SelectedItem == "Lime")
             {
                 colorView.BackColor = System.Drawing.Color.LimeGreen;
-                botColor = "%a";
             }
             if (colorBox.SelectedItem == "Teal")
             {
                 colorView.BackColor = System.Drawing.Color.Teal;
-                botColor = "%3";
             }
             if (colorBox.SelectedItem == "Aqua")
             {
                 colorView.BackColor = System.Drawing.Color.Aqua;
-                botColor = "%b";
             }
             if (colorBox.SelectedItem == "Maroon")
             {
                 colorView.BackColor = System.Drawing.Color.Maroon;
-                botColor = "%4";
             }
             if (colorBox.SelectedItem == "Red")
             {
                 colorView.BackColor = System.Drawing.Color.Red;
-                botColor = "%c";
             }
             if (colorBox.SelectedItem == "Purple")
             {
                 colorView.BackColor = System.Drawing.Color.Purple;
-                botColor = "%5";
             }
             if (colorBox.SelectedItem == "Magenta")
             {
                 colorView.BackColor = System.Drawing.Color.Magenta;
-                botColor = "%d";
             }
             if (colorBox.SelectedItem == "Olive")
             {
                 colorView.BackColor = System.Drawing.Color.Olive;
-                botColor = "%6";
             }
             if (colorBox.SelectedItem == "Yellow")
             {
                 colorView.BackColor = System.Drawing.Color.Yellow;
-                botColor = "%e";
             }
             if (colorBox.SelectedItem == "Silver")
             {
                 colorView.BackColor = System.Drawing.Color.Silver;
-                botColor = "%7";
             }
             if (colorBox.SelectedItem == "White")
             {
                 colorView.BackColor = System.Drawing.Color.White;
-                botColor = "%f";
             }
         }
         #endregion
@@ -370,7 +357,7 @@ namespace HelperBotConfig
             writer.WriteAttributeString("value", webBox.Text);
             writer.WriteEndElement();
             writer.WriteStartElement("BotColor");
-            writer.WriteAttributeString("value", botColor);
+            writer.WriteAttributeString("value", colorBox.SelectedItem.ToString());
             writer.WriteEndElement();
             writer.WriteStartElement("CurrentVersion");
             writer.WriteAttributeString("value", "1");
