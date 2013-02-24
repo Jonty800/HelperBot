@@ -1,4 +1,4 @@
-﻿//HelperBot - Copyright (c) Jonty800 and LeChosenOne <2013> (http://forums.au70.net)
+//HelperBot - Copyright (c) Jonty800 and LeChosenOne <2013> (http://forums.au70.net)
 //This plugin is open source and designed to be used with 800Craft and LegendCraft server softwares
 
 //NOTE: I am not happy with this class, I need to rethink and rewrite it
@@ -6,10 +6,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using fCraft;
 using System.IO;
 using System.Xml;
 using System.Xml.Linq;
+using fCraft;
+using fCraft.Events;
 
 namespace HelperBot {
     public enum Flags {
@@ -23,14 +24,15 @@ namespace HelperBot {
 
         #region XML settings
         /// <summary>
-        /// Current version of the config file
+        /// Current version of the config file and xml file
         /// </summary>
-        public const int CurrentVersion = 1;
+        public static int CurrentVersion = 1;
+        public static int XmlVersion = 1;
 
         /// <summary>
         /// The XML root name
         /// </summary>
-        const string ConfigXmlRootName = "HelperBotConfig";
+        const string ConfigXmlRootName = "HelperBotConfig"; //unneeded?
 
         /// <summary>
         /// The location of the XML file
@@ -44,7 +46,7 @@ namespace HelperBot {
         /// <summary>
         /// Whether a server announces how to fly or not
         /// </summary>
-        public static bool AnnounceHowToFly = true;
+        public static bool AnnounceFly = true;
 
         /// <summary>
         /// Announce the server name upon asking
@@ -54,29 +56,78 @@ namespace HelperBot {
         /// <summary>
         /// Announce a players current hours upon asking
         /// </summary>
-        public static bool AnnouncePlayerHours = true;
+        public static bool AnnounceHours = true;
 
         /// <summary>
         /// Announce what a players next rank is
         /// </summary>
-        public static bool AnnounceNextRankUp = true;
+        public static bool AnnounceRank = true;
 
         /// <summary>
         /// Warn a player when they log back in after a kick (Via PM)
         /// </summary>
-        public static bool WarnPlayersAfterKick = true;
+        public static bool AnnounceWarnKick = true;
 
         /// <summary>
         /// Warn players when they swear via PM
         /// </summary>
-        public static bool WarnPlayersForSwearing = true;
+        public static bool AnnounceWarnSwear = true;
 
         /// <summary>
         /// Suggest to mods in staff chat that a ban is in order
         /// </summary>
-        public static bool SuggestBan = true;
+        public static bool AnnounceSuggestBan = true;
 
-        public static bool KickForImpersonation = true;
+        /// <summary>
+        /// Bot will display time of day
+        /// </summary>
+        public static bool AnnounceTime = true;
+
+        /// <summary>
+        /// Sends random messages to staff about important server stats, and sends misc messages in global chat
+        /// </summary>
+        public static bool AnnounceRandomMessages = true;
+
+        /// <summary>
+        /// Explains how to use PM
+        /// </summary>
+        public static bool AnnouncePM = true;
+
+        /// <summary>
+        /// Explains how to return to spawn (r)
+        /// </summary>
+        public static bool AnnounceFell= true;
+
+        /// <summary>
+        /// Bot will start a timer for spleef
+        /// </summary>
+        public static bool AnnounceSpleefTimer = true;
+
+        /// <summary>
+        /// Greets a player if they are logging in for the first time
+        /// </summary>
+        public static bool AnnounceGreeting = true;
+
+        /// <summary>
+        /// Explains why a player was demoted
+        /// </summary>
+        public static bool AnnounceDemoted = true;
+
+        /// <summary>
+        /// Warns players for spamming caps
+        /// </summary>
+        public static bool AnnounceCaps = true;
+
+        /// <summary>
+        /// Bot will display jokes/funfacts
+        /// </summary>
+        public static bool AnnounceJokes = true;
+
+        /// <summary>
+        /// Bot will kick a player if impersonating the bot
+        /// </summary>
+        public static bool AnnounceImpersonation = true;
+
 
         #endregion
 
@@ -113,6 +164,8 @@ namespace HelperBot {
         /// </summary>
         public static string StuckMessage = "&F, if you are stuck press R to respawn";
 
+     
+
         #region Personality (Maybe)
         public static int Age = 21;
         public static string Hometown = "London, England";
@@ -127,88 +180,122 @@ namespace HelperBot {
         /// The color of the bots name
         /// Default: Red
         /// </summary>
-        public static string BotNameColor = Color.Red;
+        public static string BotNameColor = "%c";
         #endregion
 
-        /// <summary>
-        /// Designed to load the settings from the XML config file and replace the default values
-        /// </summary>
-        /// <returns>true if everything went smoothly</returns>
-        public static bool Load ( ) {
-            if ( Settings.ReleaseFlag == Flags.Debug ) {
-                Logger.Log( LogType.SystemActivity, "HelperBot: Settings.Load called" );
+        public static void Load()
+        {
+            if (Settings.ReleaseFlag == Flags.Debug)
+            {
+                Logger.Log(LogType.SystemActivity, "HelperBot: Settings.Load called");
             }
-            bool fromFile = false;
-            XDocument file;
-            if ( File.Exists( FilePath ) ) {
-                try {
-                    file = XDocument.Load( FilePath );
-                    if ( file.Root == null || file.Root.Name != ConfigXmlRootName ) {
-                        Logger.Log( LogType.Warning,
-                                    "(HelperBot)Config.Load: Malformed or incompatible config file {0}. Loading defaults.",
-                                    FilePath );
-                        file = new XDocument();
-                        file.Add( new XElement( ConfigXmlRootName ) );
-                    } else {
-                        Logger.Log( LogType.Debug,
-                                    "(HelperBot)Config.Load: Config file {0} loaded succesfully.",
-                                    FilePath );
-                        fromFile = true;
-                    }
-                } catch ( Exception ex ) {
-                    Logger.LogAndReportCrash( "Config failed to load", "HelperBot", ex, true );
-                    return false;
-                }
-            } else {
-                // create a new one (with defaults) if no file exists
-                file = new XDocument();
-                file.Add( new XElement( ConfigXmlRootName ) );
+            if (!File.Exists(FilePath))
+            {
+                Logger.Log(LogType.SystemActivity, "HelperBot: HelperBot.xml was not found. Please configure HelperBot with HelperBot.exe. Using default settings.");               
+                return;
             }
 
-            XElement config = file.Root;
-            if ( config == null ) throw new Exception( "HelperBot.xml has no root. Never happens." );
+            else
+            {
+                 XmlReader reader = XmlReader.Create(FilePath);
 
-            int version = 0;
-            if ( fromFile ) {
-                XAttribute attr = config.Attribute( "version" );
-                if ( attr != null && Int32.TryParse( attr.Value, out version ) ) {
-                    if ( version != CurrentVersion ) {
-                        Logger.Log( LogType.Warning,
-                                    "(HelperBot)Config.Load: Your HelperBot.xml was made for a different version." +
-                                    "Some obsolete settings might be ignored, and some recently-added settings will be set to defaults. " +
-                                    "It is recommended that you run HelperBot.exe to make sure that everything is in order." );
-                    }
-                } else {
-                    Logger.Log( LogType.Warning,
-                                "(HelperBot)Config.Load: Unknown version of HelperBot.xml found. It might be corrupted. " +
-                                "Please run HelperBot.exe to make sure that everything is in order." );
-                }
+                 while (reader.Read())
+                 {
+                     if (reader.NodeType == XmlNodeType.Element)
+                     {
+                         if (reader.Name == "AnnounceFly")
+                         {
+                             AnnounceFly = Convert.ToBoolean(reader.GetAttribute(0).ToLower()); ;
+                         }
+                         if (reader.Name == "AnnounceServer")
+                         {
+                             AnnounceServerName = Convert.ToBoolean(reader.GetAttribute(0).ToLower()); ;
+                         }
+                         if (reader.Name == "AnnounceHours")
+                         {
+                             AnnounceHours = Convert.ToBoolean(reader.GetAttribute(0).ToLower()); ;
+                         }
+                         if (reader.Name == "AnnounceRank")
+                         {
+                             AnnounceRank = Convert.ToBoolean(reader.GetAttribute(0).ToLower()); ;
+                         }
+                         if (reader.Name == "AnnounceWarnKick")
+                         {
+                             AnnounceWarnKick = Convert.ToBoolean(reader.GetAttribute(0).ToLower()); ;
+                         }
+                         if (reader.Name == "AnnounceWarnSwear")
+                         {
+                             AnnounceWarnSwear = Convert.ToBoolean(reader.GetAttribute(0).ToLower()); ;
+                         }
+                         if (reader.Name == "AnnounceSuggestBan")
+                         {
+                             AnnounceSuggestBan = Convert.ToBoolean(reader.GetAttribute(0).ToLower());
+                         }
+                         if (reader.Name == "AnnounceImpersonation")
+                         {
+                             AnnounceImpersonation = Convert.ToBoolean(reader.GetAttribute(0).ToLower()); ;
+                         }
+                         if (reader.Name == "AnnounceTime")
+                         {
+                             AnnounceTime = Convert.ToBoolean(reader.GetAttribute(0).ToLower()); ;
+                         }
+                         if (reader.Name == "AnnounceRandomMessages")
+                         {
+                             AnnounceRandomMessages = Convert.ToBoolean(reader.GetAttribute(0).ToLower()); ;
+                         }
+                         if (reader.Name == "AnnouncePM")
+                         {
+                             AnnouncePM = Convert.ToBoolean(reader.GetAttribute(0).ToLower()); ;
+                         }
+                         if (reader.Name == "AnnounceFell")
+                         {
+                             AnnounceFell = Convert.ToBoolean(reader.GetAttribute(0).ToLower()); ;
+                         }
+                         if (reader.Name == "AnnounceSpleefTimer")
+                         {
+                             AnnounceSpleefTimer = Convert.ToBoolean(reader.GetAttribute(0).ToLower());
+                         }
+                         if (reader.Name == "AnnounceGreeting")
+                         {
+                             AnnounceGreeting = Convert.ToBoolean(reader.GetAttribute(0).ToLower()); ;
+                         }
+                         if (reader.Name == "AnnounceDemoted")
+                         {
+                             AnnounceDemoted = Convert.ToBoolean(reader.GetAttribute(0).ToLower()); ;
+                         }
+                         if (reader.Name == "AnnounceJokes")
+                         {
+                             AnnounceJokes = Convert.ToBoolean(reader.GetAttribute(0).ToLower()); ;
+                         }
+                         if (reader.Name == "AnnounceCaps")
+                         {
+                             AnnounceCaps = Convert.ToBoolean(reader.GetAttribute(0).ToLower()); ;
+                         }
+                         if (reader.Name == "BotName")
+                         {
+                             Name = reader.GetAttribute(0);
+                         }
+                         if (reader.Name == "Website")
+                         {
+                             Website = reader.GetAttribute(0);
+                         }
+                         if (reader.Name == "BotColor")
+                         {
+                             BotNameColor = Color.Parse(reader.GetAttribute(0)); ;
+                         }
+                         if (reader.Name == "CurrentVersion")
+                         {
+                             XmlVersion = Convert.ToInt32(reader.GetAttribute(0));
+                         }  
+                     }                    
+                 }
+                 reader.Close();
             }
 
-            //exmaple loading of a key
-            XElement settings = config.Element( "Settings" );
-            if ( settings != null ) {
-                foreach ( XElement element in settings.Elements( "ConfigKey" ) ) {
-
-                    string keyName = element.Attribute( "key" ).Value;
-                    string value = element.Attribute( "value" ).Value;
-                    int key;
-                    if ( keyName == "Version" ) {
-                        if ( int.TryParse( value, out key ) ) {
-                            version = key;
-                        } else {
-                            // unknown key
-                            Logger.Log( LogType.Warning,
-                                        "Config: Unrecognized entry ignored: {0} = {1}",
-                                        element.Name, element.Value );
-                        }
-                    }
-                }
-            } else {
-                Logger.Log( LogType.Warning,
-                            "(HelperBot)Config.Load: No <Settings> tag present. Using default for everything." );
+            if (Settings.CurrentVersion != Settings.XmlVersion)
+            {
+                Logger.Log(LogType.Error, " HelperBot: Warning, HelperBot.xml was made for a different version than your current HelperBot program. Please configure your new HelperBot.xml in HelperBot.exe");
             }
-            return true;
         }
     }
 }
