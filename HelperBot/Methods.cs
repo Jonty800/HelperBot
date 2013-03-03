@@ -110,12 +110,12 @@ namespace HelperBot {
         }
 
         public static void SendError ( Exception e, MessageChannel Channel ) {
-            SendError( null, "&WError!!! " + e.Message, Channel );
+            SendError( null, e.Message, Channel );
         }
 
         public static void SendError ( String Msg, MessageChannel Channel ) {
             if ( Channel != MessageChannel.Logger ) {
-                SendError( null, "&WError!!! " + Msg, Channel );
+                SendError( null, Msg, Channel );
             } else {
                 Logger.Log( LogType.Error, Msg );
             }
