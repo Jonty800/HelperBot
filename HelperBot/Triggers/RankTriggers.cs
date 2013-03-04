@@ -1,4 +1,4 @@
-﻿//HelperBot - Copyright (c) Jonty800 and LeChosenOne <2013> (http://forums.au70.net)
+//HelperBot - Copyright (c) Jonty800 and LeChosenOne <2013> (http://forums.au70.net)
 //This plugin is open source and designed to be used with 800Craft and LegendCraft server softwares
 
 using System;
@@ -9,6 +9,18 @@ using System.Text;
 namespace HelperBot {
     public static class RankTriggers {
 
+        static String[] DemotedTrigger = new String[]
+        {
+           "I",
+           "was",
+           "demoted"
+        };
+        static String[] DemotedTrigger2 = new String[]
+        {
+           "I",
+           "got",
+           "demoted"
+        };
         static String[] NextRankTrigger = new String[]
         {
            "what",
@@ -43,6 +55,12 @@ namespace HelperBot {
            "how",
            "do",
            "promoted"
+        };
+
+        public static String[][] DemotedFullTrigger = new String[][]
+        {
+            DemotedTrigger,
+            DemotedTrigger2
         };
 
         public static String[][] NextRankFullTrigger = new String[][]
