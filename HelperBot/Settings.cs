@@ -84,17 +84,12 @@ namespace HelperBot {
         public static bool AnnounceTime = true;
 
         /// <summary>
-        /// Sends random messages to staff about important server stats, and sends misc messages in global chat
-        /// </summary>
-        public static bool AnnounceRandomMessages = true;
-
-        /// <summary>
         /// Explains how to use PM
         /// </summary>
         public static bool AnnouncePM = true;
 
         /// <summary>
-        /// Explains how to return to spawn (r)
+        /// Explains how to return to respawn (r)
         /// </summary>
         public static bool AnnounceFell= true;
 
@@ -198,6 +193,7 @@ namespace HelperBot {
             { 'e', "yellow" },
             { 'f', "white" }
         };
+        //parses the colorcode
         public static string Parse(char code)
         {
             code = Char.ToLower(code);
@@ -210,6 +206,7 @@ namespace HelperBot {
                 return null;
             }
         }
+        //parses the colorname
         public static string Parse(string color)
         {
             if (color == null)
@@ -345,10 +342,6 @@ namespace HelperBot {
                          if (reader.Name == "AnnounceTime")
                          {
                              AnnounceTime = Convert.ToBoolean(reader.GetAttribute(0).ToLower()); ;
-                         }
-                         if (reader.Name == "AnnounceRandomMessages")
-                         {
-                             AnnounceRandomMessages = Convert.ToBoolean(reader.GetAttribute(0).ToLower()); ;
                          }
                          if (reader.Name == "AnnouncePM")
                          {
