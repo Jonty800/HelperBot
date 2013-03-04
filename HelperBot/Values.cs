@@ -1,4 +1,4 @@
-﻿//HelperBot - Copyright (c) Jonty800 and LeChosenOne <2013> (http://forums.au70.net)
+//HelperBot - Copyright (c) Jonty800 and LeChosenOne <2013> (http://forums.au70.net)
 //This plugin is open source and designed to be used with 800Craft and LegendCraft server softwares
 using System;
 using System.Collections.Generic;
@@ -23,6 +23,7 @@ namespace HelperBot {
     /// <summary>
     /// This class will be used to store constant values, such as arrays of replies
     /// </summary>
+    /// 
     public static class Values {
         /// <summary>
         /// The name of the bot, colored using Settings.BotNameColor
@@ -59,9 +60,7 @@ namespace HelperBot {
         /// </summary>
         public static string[] RandStaffMessage = new string[]
         {
-            "There are currently " + Server.Players.Length + " players online, with " + Server.Players.Where(p => p.Can(Permission.ReadStaffChat)).ToArray().Length + " moderators online.",
-            "The server has been online for " +  Math.Round(DateTime.UtcNow.Subtract( Server.StartTime ).TotalHours, 0, MidpointRounding.AwayFromZero) + " Hours.",
-            "The server's cpu usage is currently " + Math.Round(Server.CPUUsageLastMinute * 100, 0, MidpointRounding.AwayFromZero) + "%"
+            //silly idea lulz
         };
 
         /// <summary>
@@ -70,7 +69,7 @@ namespace HelperBot {
         /// </summary>
         public static string[] RandomMessage = new string[]
         {
-
+            //what is this for again?
         };
 
         /// <summary>
@@ -80,7 +79,8 @@ namespace HelperBot {
         { 
           "No problem",
           "You're Welcome",
-          "Anytime :P",
+          "Anytime!",
+          "I'm here for you",
           "Only for you",
           "Np",
           "Yw",
@@ -96,6 +96,21 @@ namespace HelperBot {
          "Light travels faster than sound. This is why some people appear bright until you hear them speak.",
          "War does not determine who is right - only who is left...",
          "Never hit a man with glasses. Hit him with a baseball bat instead.",
+         "Energizer Bunny was arrested, charged with battery.",
+         "I usually take steps to avoid elevators.",
+         "You do not need a parachute to skydive. You only need a parachute to skydive twice.",
+         "I bet you I could stop gambling!",
+         "We never really grow up, we only learn how to act in public.",
+         "If God is watching us, the least we can do is be entertaining.",
+         "Better to remain silent and be thought a fool, than to speak and remove all doubt.",
+         "How is it one careless match can start a forest fire, but it takes a whole box to start a campfire?",
+         "Did you know that dolphins are so smart that within a few weeks of captivity, they can train people to stand on the very edge of the pool and throw them fish?",
+         "Never, under any circumstances, take a sleeping pill and a laxative on the same night.",
+         "A clear conscience is usually the sign of a bad memory.",
+         "Laugh at your problems, everybody else does.",
+         "It's not the fall that kills you; it's the sudden stop at the end.",
+         "Hospitality: making your guests feel like they're at home, even if you wish they were.",
+         "I used to be indecisive. Now I'm not sure.",
          "Nostalgia isn't what it used to be."                                                         
         };
 
