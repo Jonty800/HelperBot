@@ -19,12 +19,18 @@ namespace HelperBot {
         public static bool IsAllUpper(String text)
         {
             for (int i = 0; i < text.Length; i++)
-            { 
-                if (!Char.IsUpper(text[i]))
+            {
+                if (!Char.IsUpper(text[i])) //if text is not caps, false
+                {
                     return false;
+                }
+                if (text.Length < 4)  //if text is less than 4 characters, false
+                {
+                    return false;
+                }
             }
 
-            return true;
+            return true; //else, true
         }
 
         public static void CheckTriggers ( Player player, String Message, MessageChannel Channel ) {
@@ -56,7 +62,7 @@ namespace HelperBot {
                 return;
             }
             //Caps checker
-            if (IsAllUpper(Message))
+            if (IsAllUpper(Message) && Settings.AnnounceCaps)
             {
                 Methods.SendPM(player, "Please refrain from abusing caps.");
             }
