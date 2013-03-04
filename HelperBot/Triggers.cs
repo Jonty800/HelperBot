@@ -80,6 +80,14 @@ namespace HelperBot {
                 return;
             }
 
+            //I was demoted
+            if (Triggers.MatchesTrigger(Message, RankTriggers.DemotedFullTrigger) && Settings.AnnounceDemoted)
+            {
+                Methods.SendMessage(player.ClassyName + Settings.DemotedMessage, Channel);
+                Methods.AddTYPlayer(player);
+                return;
+            }
+
             //How do I PM players?
             if ( Triggers.MatchesTrigger( Message, MaintenanceTriggers.PMFullTrigger ) && Settings.AnnouncePM) {
                 Methods.SendMessage( player.ClassyName + "&f, to PM, type '@playername [message]'.", Channel );
