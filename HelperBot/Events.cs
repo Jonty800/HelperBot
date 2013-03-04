@@ -26,10 +26,6 @@ namespace HelperBot {
             Player.Connected += PlayerConnected;
             Settings.Load(); //Load HelperBot.xml
 
-            //One line OP
-            //Do we even need this?
-            //Random staff messages?
-            Scheduler.NewTask( t => Methods.SendStaff( Values.RandStaffMessage[new Random().Next( 0, Values.RandStaffMessage.Length )] ) ).RunForever( TimeSpan.FromSeconds( 60 ) );
         }
 
         /// <summary>
