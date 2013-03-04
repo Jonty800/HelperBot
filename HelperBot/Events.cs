@@ -62,12 +62,12 @@ namespace HelperBot {
             if ( info.LeaveReason == LeaveReason.Kick && Settings.AnnounceWarnKick) {
                 if ( info.LastKickReason != null ) {
                     if ( info.LastKickReason.Length > 0 ) {
-                        Methods.SendMessage( e.Player, info.Name + "&f, you were kicked by a staff member. Please follow the /Rules next time! Kick Reason: " + info.LastKickReason, MessageChannel.PM );
+                        Methods.SendMessage( e.Player, info.Name + " you were kicked by a staff member. Please follow the /Rules next time! Kick Reason: " + info.LastKickReason, MessageChannel.PM );
                     } else {
-                        Methods.SendMessage( e.Player, info.Name + "&f, you were kicked by a staff member. Please follow the /Rules next time!", MessageChannel.PM );
+                        Methods.SendMessage( e.Player, info.Name + " you were kicked by a staff member. Please follow the /Rules next time!", MessageChannel.PM );
                     }
                 } else {
-                    Methods.SendMessage( e.Player, info.Name + "&f, you were kicked by a staff member. Please follow the /Rules next time!", MessageChannel.PM );
+                    Methods.SendMessage( e.Player, info.Name + " you were kicked by a staff member. Please follow the /Rules next time!", MessageChannel.PM );
                 }                
             }
             ///<summary>
@@ -78,7 +78,7 @@ namespace HelperBot {
                 Player[] OnlineStaff = Server.Players.Where(p => p.Can(Permission.ReadStaffChat)).ToArray();
                 if (OnlineStaff.Count() != 0)
                 {
-                    Methods.SendStaff(info.ClassyName + "&f, just logged on for the first time! Welcome them to the server!");
+                    Methods.SendStaff(info.ClassyName + " just logged on for the first time! Welcome them to the server!");
                 }
             }
             ///<summary>
@@ -96,7 +96,7 @@ namespace HelperBot {
             PlayerInfo info = e.Player.Info;
             if(info.TimeSinceLastKick < TimeSpan.FromDays(1) && info.TimesKicked > 0 && Settings.AnnounceSuggestBan)
             {
-                Methods.SendStaff(info.ClassyName + "&f, has been kicked 2 times within the last two days. Please review if a ban is neccessary");               
+                Methods.SendStaff(info.ClassyName + " has been kicked 2 times within the last two days. Please review if a ban is neccessary");               
             }
         }
 
