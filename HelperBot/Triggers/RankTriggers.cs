@@ -11,13 +11,13 @@ namespace HelperBot {
 
         static String[] DemotedTrigger = new String[]
         {
-           "I",
+           "i",
            "was",
            "demoted"
         };
         static String[] DemotedTrigger2 = new String[]
         {
-           "I",
+           "i",
            "got",
            "demoted"
         };
