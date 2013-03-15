@@ -79,7 +79,7 @@ namespace HelperBot {
         static String[] PMTrigger = new String[]
         {
            "how",
-           "PM"
+           "pm"
         };
 
         static String[] PMTrigger2 = new String[]
