@@ -249,11 +249,18 @@ namespace HelperBot
             switch (Picked)
             {
                 case RandomStat.FirstPersonBanned:
-                    if (Values.FirstBanned.ClassyName == null)
+                    try
+                    {
+                        if (Values.FirstBanned.ClassyName == null)
+                        {
+                            return "No one has been banned on this server.... yet";
+                        }
+                        return "The first person to get banned on this server was " + Values.FirstBanned.ClassyName;
+                    }
+                    catch (NullReferenceException)
                     {
                         return "No one has been banned on this server.... yet";
                     }
-                    return "The first person to get banned on this server was " + Values.FirstBanned.ClassyName;
                 case RandomStat.FirstPersonKicked:
                     if (Values.FirstKicked == null)
                     {
@@ -288,11 +295,18 @@ namespace HelperBot
                     }
                     return "The person with the most kicks on this server is " + Values.MostKicks.ClassyName;
                 case RandomStat.MostLogins:
-                    //cannot be null?
+                     if (Values.MostLogins == null) return "No one has the most log ins!!";
                     return Values.MostLogins.ClassyName + "&F has connected to the server the most number of times";
                 case RandomStat.MostMessagesSent:
-                    //cannot be null if "fun fact" is called?
-                    return Values.MostMessagesSent.ClassyName + "&F has sent the most number of messages on the server";
+                    try
+                    {
+                        if (Values.MostMessagesSent == null) return "No one has sent the most messages yet!";
+                        return Values.MostMessagesSent.ClassyName + "&F has sent the most number of messages on the server";
+                    }
+                    catch (NullReferenceException)
+                    {
+                        return "No one has sent the most messages yet!";
+                    }
                 case RandomStat.MostPromoted:
                     if (Values.MostPromoted == null) return "No one has been promoted on this server yet :S";
                     return Values.MostPromoted.ClassyName + "&F has promoted the more people on this server than anyone else!";
@@ -300,8 +314,15 @@ namespace HelperBot
                     if (Values.MostTimesGotKicked == null) return "No one has been kicked on this server";
                     return Values.MostTimesGotKicked.ClassyName + "&F has cbeen kicked more times than anyone else on this server";
                 case RandomStat.NewestStaff:
-                    if (Values.NewestStaff == null) return "This sever has no staff!";
-                    return Values.MostBans.ClassyName + "&F is the newest member of staff";
+                    try
+                    {
+                        if (Values.NewestStaff == null) return "This sever has no staff!";
+                        return Values.MostBans.ClassyName + "&F is the newest member of staff";
+                    }
+                    catch (NullReferenceException)
+                    {
+                        return "This sever has no staff!";
+                    }
                 case RandomStat.OldestStaff:
                     if (Values.OldestStaff == null) return "This sever has no staff!";
                     return "Our oldest active staff member is " + Values.OldestStaff.ClassyName;
