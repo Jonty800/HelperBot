@@ -20,7 +20,7 @@ namespace HelperBot {
 
     public static class Settings {
 
-        public static Flags ReleaseFlag = Flags.Debug;
+        public static Flags ReleaseFlag = Flags.Release;
 
         #region XML settings
         /// <summary>
@@ -91,7 +91,7 @@ namespace HelperBot {
         /// <summary>
         /// Explains how to return to respawn (r)
         /// </summary>
-        public static bool AnnounceFell= true;
+        public static bool AnnounceFell = true;
 
         /// <summary>
         /// Bot will start a timer for spleef
@@ -159,7 +159,7 @@ namespace HelperBot {
         /// </summary>
         public static string StuckMessage = "&F, if you are stuck press R to respawn";
 
-     
+
 
         #region Personality (Maybe)
         public static int Age = 21;
@@ -171,9 +171,8 @@ namespace HelperBot {
         #endregion
 
         #region ColorParsing
-        public static bool IsValidColorCode(char code)
-        {
-            return (code >= '0' && code <= '9') || (code >= 'a' && code <= 'f') || (code >= 'A' && code <= 'F');
+        public static bool IsValidColorCode ( char code ) {
+            return ( code >= '0' && code <= '9' ) || ( code >= 'a' && code <= 'f' ) || ( code >= 'A' && code <= 'F' );
         }
         public static readonly SortedList<char, string> ColorNames = new SortedList<char, string>{
             { '0', "black" },
@@ -194,86 +193,63 @@ namespace HelperBot {
             { 'f', "white" }
         };
         //parses the colorcode
-        public static string Parse(char code)
-        {
-            code = Char.ToLower(code);
-            if (IsValidColorCode(code))
-            {
+        public static string Parse ( char code ) {
+            code = Char.ToLower( code );
+            if ( IsValidColorCode( code ) ) {
                 return "&" + code;
-            }
-            else
-            {
+            } else {
                 return null;
             }
         }
         //parses the colorname
-        public static string Parse(string color)
-        {
-            if (color == null)
-            {
+        public static string Parse ( string color ) {
+            if ( color == null ) {
                 return null;
             }
             color = color.ToLower();
-            switch (color.Length)
-            {
+            switch ( color.Length ) {
                 case 2:
-                    if (color[0] == '&' && IsValidColorCode(color[1]))
-                    {
+                    if ( color[0] == '&' && IsValidColorCode( color[1] ) ) {
                         return color;
                     }
                     break;
 
                 case 1:
-                    return Parse(color[0]);
+                    return Parse( color[0] );
 
                 case 0:
                     return "";
             }
-            if (ColorNames.ContainsValue(color))
-            {
-                return "&" + ColorNames.Keys[ColorNames.IndexOfValue(color)];
-            }
-            else
-            {
+            if ( ColorNames.ContainsValue( color ) ) {
+                return "&" + ColorNames.Keys[ColorNames.IndexOfValue( color )];
+            } else {
                 return null;
             }
         }
         //color code to name
-        public static string GetName(char code)
-        {
-            code = Char.ToLower(code);
-            if (IsValidColorCode(code))
-            {
+        public static string GetName ( char code ) {
+            code = Char.ToLower( code );
+            if ( IsValidColorCode( code ) ) {
                 return ColorNames[code];
             }
-            string color = Parse(code);
-            if (color == null)
-            {
+            string color = Parse( code );
+            if ( color == null ) {
                 return null;
             }
             return ColorNames[color[1]];
         }
         //name to color code
-        public static string GetName(string color)
-        {
-            if (color == null)
-            {
+        public static string GetName ( string color ) {
+            if ( color == null ) {
                 return null;
-            }
-            else if (color.Length == 0)
-            {
+            } else if ( color.Length == 0 ) {
                 return "";
-            }
-            else
-            {
-                string parsedColor = Parse(color);
-                if (parsedColor == null)
-                {
+            } else {
+                string parsedColor = Parse( color );
+                if ( parsedColor == null ) {
                     return null;
-                }
-                else
-                {
-                    return GetName(parsedColor[1]);
+                } else {
+                    return GetName( parsedColor[1] );
                 }
             }
         }
@@ -287,114 +263,85 @@ namespace HelperBot {
         public static string BotNameColor = "&c";
         #endregion
 
-        public static void Load()
-        {
-            if (Settings.ReleaseFlag == Flags.Debug)
-            {
-                Logger.Log(LogType.SystemActivity, "HelperBot: Settings.Load called");
+        public static void Load () {
+            if ( Settings.ReleaseFlag == Flags.Debug ) {
+                Logger.Log( LogType.SystemActivity, "HelperBot: Settings.Load called" );
             }
-            if (!File.Exists(FilePath))
-            {
-                Logger.Log(LogType.SystemActivity, "HelperBot: HelperBot.xml was not found. Please configure HelperBot with HelperBot.exe. Using default settings.");               
+            if ( !File.Exists( FilePath ) ) {
+                Logger.Log( LogType.SystemActivity, "HelperBot: HelperBot.xml was not found. Please configure HelperBot with HelperBot.exe. Using default settings." );
                 return;
+            } else {
+                XmlReader reader = XmlReader.Create( FilePath );
+
+                while ( reader.Read() ) {
+                    if ( reader.NodeType == XmlNodeType.Element ) {
+                        if ( reader.Name == "AnnounceFly" ) {
+                            AnnounceFly = Convert.ToBoolean( reader.GetAttribute( 0 ).ToLower() ); ;
+                        }
+                        if ( reader.Name == "AnnounceServer" ) {
+                            AnnounceServerName = Convert.ToBoolean( reader.GetAttribute( 0 ).ToLower() ); ;
+                        }
+                        if ( reader.Name == "AnnounceHours" ) {
+                            AnnounceHours = Convert.ToBoolean( reader.GetAttribute( 0 ).ToLower() ); ;
+                        }
+                        if ( reader.Name == "AnnounceRank" ) {
+                            AnnounceRank = Convert.ToBoolean( reader.GetAttribute( 0 ).ToLower() ); ;
+                        }
+                        if ( reader.Name == "AnnounceWarnKick" ) {
+                            AnnounceWarnKick = Convert.ToBoolean( reader.GetAttribute( 0 ).ToLower() ); ;
+                        }
+                        if ( reader.Name == "AnnounceWarnSwear" ) {
+                            AnnounceWarnSwear = Convert.ToBoolean( reader.GetAttribute( 0 ).ToLower() ); ;
+                        }
+                        if ( reader.Name == "AnnounceSuggestBan" ) {
+                            AnnounceSuggestBan = Convert.ToBoolean( reader.GetAttribute( 0 ).ToLower() );
+                        }
+                        if ( reader.Name == "AnnounceImpersonation" ) {
+                            AnnounceImpersonation = Convert.ToBoolean( reader.GetAttribute( 0 ).ToLower() ); ;
+                        }
+                        if ( reader.Name == "AnnounceTime" ) {
+                            AnnounceTime = Convert.ToBoolean( reader.GetAttribute( 0 ).ToLower() ); ;
+                        }
+                        if ( reader.Name == "AnnouncePM" ) {
+                            AnnouncePM = Convert.ToBoolean( reader.GetAttribute( 0 ).ToLower() ); ;
+                        }
+                        if ( reader.Name == "AnnounceFell" ) {
+                            AnnounceFell = Convert.ToBoolean( reader.GetAttribute( 0 ).ToLower() ); ;
+                        }
+                        if ( reader.Name == "AnnounceSpleefTimer" ) {
+                            AnnounceSpleefTimer = Convert.ToBoolean( reader.GetAttribute( 0 ).ToLower() );
+                        }
+                        if ( reader.Name == "AnnounceGreeting" ) {
+                            AnnounceGreeting = Convert.ToBoolean( reader.GetAttribute( 0 ).ToLower() ); ;
+                        }
+                        if ( reader.Name == "AnnounceDemoted" ) {
+                            AnnounceDemoted = Convert.ToBoolean( reader.GetAttribute( 0 ).ToLower() ); ;
+                        }
+                        if ( reader.Name == "AnnounceJokes" ) {
+                            AnnounceJokes = Convert.ToBoolean( reader.GetAttribute( 0 ).ToLower() ); ;
+                        }
+                        if ( reader.Name == "AnnounceCaps" ) {
+                            AnnounceCaps = Convert.ToBoolean( reader.GetAttribute( 0 ).ToLower() ); ;
+                        }
+                        if ( reader.Name == "BotName" ) {
+                            Name = reader.GetAttribute( 0 );
+                        }
+                        if ( reader.Name == "Website" ) {
+                            Website = reader.GetAttribute( 0 );
+                        }
+                        if ( reader.Name == "BotColor" ) {
+                            BotNameColor = Parse( reader.GetAttribute( 0 ) );
+                        }
+                        if ( reader.Name == "CurrentVersion" ) {
+                            XmlVersion = Convert.ToInt32( reader.GetAttribute( 0 ) );
+                        }
+                    }
+                }
+                reader.Close();
             }
 
-            else
-            {
-                 XmlReader reader = XmlReader.Create(FilePath);
-
-                 while (reader.Read())
-                 {
-                     if (reader.NodeType == XmlNodeType.Element)
-                     {
-                         if (reader.Name == "AnnounceFly")
-                         {
-                             AnnounceFly = Convert.ToBoolean(reader.GetAttribute(0).ToLower()); ;
-                         }
-                         if (reader.Name == "AnnounceServer")
-                         {
-                             AnnounceServerName = Convert.ToBoolean(reader.GetAttribute(0).ToLower()); ;
-                         }
-                         if (reader.Name == "AnnounceHours")
-                         {
-                             AnnounceHours = Convert.ToBoolean(reader.GetAttribute(0).ToLower()); ;
-                         }
-                         if (reader.Name == "AnnounceRank")
-                         {
-                             AnnounceRank = Convert.ToBoolean(reader.GetAttribute(0).ToLower()); ;
-                         }
-                         if (reader.Name == "AnnounceWarnKick")
-                         {
-                             AnnounceWarnKick = Convert.ToBoolean(reader.GetAttribute(0).ToLower()); ;
-                         }
-                         if (reader.Name == "AnnounceWarnSwear")
-                         {
-                             AnnounceWarnSwear = Convert.ToBoolean(reader.GetAttribute(0).ToLower()); ;
-                         }
-                         if (reader.Name == "AnnounceSuggestBan")
-                         {
-                             AnnounceSuggestBan = Convert.ToBoolean(reader.GetAttribute(0).ToLower());
-                         }
-                         if (reader.Name == "AnnounceImpersonation")
-                         {
-                             AnnounceImpersonation = Convert.ToBoolean(reader.GetAttribute(0).ToLower()); ;
-                         }
-                         if (reader.Name == "AnnounceTime")
-                         {
-                             AnnounceTime = Convert.ToBoolean(reader.GetAttribute(0).ToLower()); ;
-                         }
-                         if (reader.Name == "AnnouncePM")
-                         {
-                             AnnouncePM = Convert.ToBoolean(reader.GetAttribute(0).ToLower()); ;
-                         }
-                         if (reader.Name == "AnnounceFell")
-                         {
-                             AnnounceFell = Convert.ToBoolean(reader.GetAttribute(0).ToLower()); ;
-                         }
-                         if (reader.Name == "AnnounceSpleefTimer")
-                         {
-                             AnnounceSpleefTimer = Convert.ToBoolean(reader.GetAttribute(0).ToLower());
-                         }
-                         if (reader.Name == "AnnounceGreeting")
-                         {
-                             AnnounceGreeting = Convert.ToBoolean(reader.GetAttribute(0).ToLower()); ;
-                         }
-                         if (reader.Name == "AnnounceDemoted")
-                         {
-                             AnnounceDemoted = Convert.ToBoolean(reader.GetAttribute(0).ToLower()); ;
-                         }
-                         if (reader.Name == "AnnounceJokes")
-                         {
-                             AnnounceJokes = Convert.ToBoolean(reader.GetAttribute(0).ToLower()); ;
-                         }
-                         if (reader.Name == "AnnounceCaps")
-                         {
-                             AnnounceCaps = Convert.ToBoolean(reader.GetAttribute(0).ToLower()); ;
-                         }
-                         if (reader.Name == "BotName")
-                         {
-                             Name = reader.GetAttribute(0);
-                         }
-                         if (reader.Name == "Website")
-                         {
-                             Website = reader.GetAttribute(0);
-                         }
-                         if (reader.Name == "BotColor")
-                         {
-                             BotNameColor = Parse(reader.GetAttribute(0));
-                         }
-                         if (reader.Name == "CurrentVersion")
-                         {
-                             XmlVersion = Convert.ToInt32(reader.GetAttribute(0));
-                         }  
-                     }                    
-                 }
-                 reader.Close();
-            }
-
-            if (Settings.CurrentVersion != Settings.XmlVersion)
-            {
-                Logger.Log(LogType.Error, " HelperBot: Warning, HelperBot.xml was made for a different version than your current HelperBot program. Please configure your new HelperBot.xml in HelperBot.exe");
+            if ( Settings.CurrentVersion != Settings.XmlVersion ) {
+                Logger.Log( LogType.Error, " HelperBot: Warning, HelperBot.xml was made for a different version than your current HelperBot program. Please configure your new HelperBot.xml in HelperBot.exe" );
             }
         }
     }

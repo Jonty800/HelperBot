@@ -31,6 +31,7 @@ namespace HelperBotConfig
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(HelperBotConfig));
             this.SettingsBox = new System.Windows.Forms.GroupBox();
+            this.xCaps = new System.Windows.Forms.CheckBox();
             this.xFell = new System.Windows.Forms.CheckBox();
             this.xDemoted = new System.Windows.Forms.CheckBox();
             this.xJokes = new System.Windows.Forms.CheckBox();
@@ -43,7 +44,6 @@ namespace HelperBotConfig
             this.xFly = new System.Windows.Forms.CheckBox();
             this.xHours = new System.Windows.Forms.CheckBox();
             this.xRank = new System.Windows.Forms.CheckBox();
-            this.xCaps = new System.Windows.Forms.CheckBox();
             this.xImpersonation = new System.Windows.Forms.CheckBox();
             this.xSuggestBan = new System.Windows.Forms.CheckBox();
             this.xWarnSwear = new System.Windows.Forms.CheckBox();
@@ -63,6 +63,7 @@ namespace HelperBotConfig
             this.bSave = new System.Windows.Forms.Button();
             this.webTip = new System.Windows.Forms.ToolTip(this.components);
             this.bApply = new System.Windows.Forms.Button();
+            this.ExitButton = new System.Windows.Forms.Button();
             this.SettingsBox.SuspendLayout();
             this.configBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.colorView)).BeginInit();
@@ -94,10 +95,20 @@ namespace HelperBotConfig
             this.SettingsBox.TabStop = false;
             this.SettingsBox.Text = "Settings";
             // 
+            // xCaps
+            // 
+            this.xCaps.AutoSize = true;
+            this.xCaps.Location = new System.Drawing.Point(17, 157);
+            this.xCaps.Name = "xCaps";
+            this.xCaps.Size = new System.Drawing.Size(94, 17);
+            this.xCaps.TabIndex = 11;
+            this.xCaps.Text = "Warn for Caps";
+            this.xCaps.UseVisualStyleBackColor = true;
+            // 
             // xFell
             // 
             this.xFell.AutoSize = true;
-            this.xFell.Location = new System.Drawing.Point(6, 208);
+            this.xFell.Location = new System.Drawing.Point(17, 203);
             this.xFell.Name = "xFell";
             this.xFell.Size = new System.Drawing.Size(152, 17);
             this.xFell.TabIndex = 13;
@@ -107,7 +118,7 @@ namespace HelperBotConfig
             // xDemoted
             // 
             this.xDemoted.AutoSize = true;
-            this.xDemoted.Location = new System.Drawing.Point(6, 277);
+            this.xDemoted.Location = new System.Drawing.Point(17, 272);
             this.xDemoted.Name = "xDemoted";
             this.xDemoted.Size = new System.Drawing.Size(94, 17);
             this.xDemoted.TabIndex = 11;
@@ -117,7 +128,7 @@ namespace HelperBotConfig
             // xJokes
             // 
             this.xJokes.AutoSize = true;
-            this.xJokes.Location = new System.Drawing.Point(6, 300);
+            this.xJokes.Location = new System.Drawing.Point(17, 295);
             this.xJokes.Name = "xJokes";
             this.xJokes.Size = new System.Drawing.Size(155, 17);
             this.xJokes.TabIndex = 13;
@@ -127,7 +138,7 @@ namespace HelperBotConfig
             // xGreeting
             // 
             this.xGreeting.AutoSize = true;
-            this.xGreeting.Location = new System.Drawing.Point(6, 254);
+            this.xGreeting.Location = new System.Drawing.Point(17, 249);
             this.xGreeting.Name = "xGreeting";
             this.xGreeting.Size = new System.Drawing.Size(66, 17);
             this.xGreeting.TabIndex = 12;
@@ -137,7 +148,7 @@ namespace HelperBotConfig
             // xPM
             // 
             this.xPM.AutoSize = true;
-            this.xPM.Location = new System.Drawing.Point(6, 185);
+            this.xPM.Location = new System.Drawing.Point(17, 180);
             this.xPM.Name = "xPM";
             this.xPM.Size = new System.Drawing.Size(131, 17);
             this.xPM.TabIndex = 10;
@@ -147,7 +158,7 @@ namespace HelperBotConfig
             // xSpleef
             // 
             this.xSpleef.AutoSize = true;
-            this.xSpleef.Location = new System.Drawing.Point(6, 231);
+            this.xSpleef.Location = new System.Drawing.Point(17, 226);
             this.xSpleef.Name = "xSpleef";
             this.xSpleef.Size = new System.Drawing.Size(85, 17);
             this.xSpleef.TabIndex = 10;
@@ -157,7 +168,7 @@ namespace HelperBotConfig
             // xTime
             // 
             this.xTime.AutoSize = true;
-            this.xTime.Location = new System.Drawing.Point(6, 139);
+            this.xTime.Location = new System.Drawing.Point(17, 134);
             this.xTime.Name = "xTime";
             this.xTime.Size = new System.Drawing.Size(101, 17);
             this.xTime.TabIndex = 12;
@@ -167,7 +178,7 @@ namespace HelperBotConfig
             // xBoxes
             // 
             this.xBoxes.AutoSize = true;
-            this.xBoxes.Location = new System.Drawing.Point(6, 24);
+            this.xBoxes.Location = new System.Drawing.Point(17, 19);
             this.xBoxes.Name = "xBoxes";
             this.xBoxes.Size = new System.Drawing.Size(152, 17);
             this.xBoxes.TabIndex = 9;
@@ -178,7 +189,7 @@ namespace HelperBotConfig
             // xServer
             // 
             this.xServer.AutoSize = true;
-            this.xServer.Location = new System.Drawing.Point(6, 70);
+            this.xServer.Location = new System.Drawing.Point(17, 65);
             this.xServer.Name = "xServer";
             this.xServer.Size = new System.Drawing.Size(135, 17);
             this.xServer.TabIndex = 8;
@@ -188,7 +199,7 @@ namespace HelperBotConfig
             // xFly
             // 
             this.xFly.AutoSize = true;
-            this.xFly.Location = new System.Drawing.Point(6, 47);
+            this.xFly.Location = new System.Drawing.Point(17, 42);
             this.xFly.Name = "xFly";
             this.xFly.Size = new System.Drawing.Size(135, 17);
             this.xFly.TabIndex = 1;
@@ -198,7 +209,7 @@ namespace HelperBotConfig
             // xHours
             // 
             this.xHours.AutoSize = true;
-            this.xHours.Location = new System.Drawing.Point(6, 93);
+            this.xHours.Location = new System.Drawing.Point(17, 88);
             this.xHours.Name = "xHours";
             this.xHours.Size = new System.Drawing.Size(145, 17);
             this.xHours.TabIndex = 3;
@@ -208,27 +219,17 @@ namespace HelperBotConfig
             // xRank
             // 
             this.xRank.AutoSize = true;
-            this.xRank.Location = new System.Drawing.Point(6, 116);
+            this.xRank.Location = new System.Drawing.Point(17, 111);
             this.xRank.Name = "xRank";
             this.xRank.Size = new System.Drawing.Size(129, 17);
             this.xRank.TabIndex = 4;
             this.xRank.Text = "Announce Next Rank";
             this.xRank.UseVisualStyleBackColor = true;
             // 
-            // xCaps
-            // 
-            this.xCaps.AutoSize = true;
-            this.xCaps.Location = new System.Drawing.Point(6, 162);
-            this.xCaps.Name = "xCaps";
-            this.xCaps.Size = new System.Drawing.Size(94, 17);
-            this.xCaps.TabIndex = 11;
-            this.xCaps.Text = "Warn for Caps";
-            this.xCaps.UseVisualStyleBackColor = true;
-            // 
             // xImpersonation
             // 
             this.xImpersonation.AutoSize = true;
-            this.xImpersonation.Location = new System.Drawing.Point(6, 211);
+            this.xImpersonation.Location = new System.Drawing.Point(15, 211);
             this.xImpersonation.Name = "xImpersonation";
             this.xImpersonation.Size = new System.Drawing.Size(134, 17);
             this.xImpersonation.TabIndex = 7;
@@ -238,7 +239,7 @@ namespace HelperBotConfig
             // xSuggestBan
             // 
             this.xSuggestBan.AutoSize = true;
-            this.xSuggestBan.Location = new System.Drawing.Point(6, 188);
+            this.xSuggestBan.Location = new System.Drawing.Point(15, 188);
             this.xSuggestBan.Name = "xSuggestBan";
             this.xSuggestBan.Size = new System.Drawing.Size(157, 17);
             this.xSuggestBan.TabIndex = 5;
@@ -248,7 +249,7 @@ namespace HelperBotConfig
             // xWarnSwear
             // 
             this.xWarnSwear.AutoSize = true;
-            this.xWarnSwear.Location = new System.Drawing.Point(6, 165);
+            this.xWarnSwear.Location = new System.Drawing.Point(15, 165);
             this.xWarnSwear.Name = "xWarnSwear";
             this.xWarnSwear.Size = new System.Drawing.Size(160, 17);
             this.xWarnSwear.TabIndex = 6;
@@ -258,7 +259,7 @@ namespace HelperBotConfig
             // xWarnKick
             // 
             this.xWarnKick.AutoSize = true;
-            this.xWarnKick.Location = new System.Drawing.Point(6, 234);
+            this.xWarnKick.Location = new System.Drawing.Point(15, 234);
             this.xWarnKick.Name = "xWarnKick";
             this.xWarnKick.Size = new System.Drawing.Size(138, 17);
             this.xWarnKick.TabIndex = 2;
@@ -268,7 +269,7 @@ namespace HelperBotConfig
             // nameBox
             // 
             this.nameBox.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.nameBox.Location = new System.Drawing.Point(6, 44);
+            this.nameBox.Location = new System.Drawing.Point(15, 44);
             this.nameBox.Name = "nameBox";
             this.nameBox.Size = new System.Drawing.Size(107, 20);
             this.nameBox.TabIndex = 1;
@@ -277,7 +278,7 @@ namespace HelperBotConfig
             // nameLabel
             // 
             this.nameLabel.AutoSize = true;
-            this.nameLabel.Location = new System.Drawing.Point(3, 28);
+            this.nameLabel.Location = new System.Drawing.Point(12, 24);
             this.nameLabel.Name = "nameLabel";
             this.nameLabel.Size = new System.Drawing.Size(66, 13);
             this.nameLabel.TabIndex = 2;
@@ -286,7 +287,7 @@ namespace HelperBotConfig
             // colorLabel
             // 
             this.colorLabel.AutoSize = true;
-            this.colorLabel.Location = new System.Drawing.Point(3, 74);
+            this.colorLabel.Location = new System.Drawing.Point(12, 74);
             this.colorLabel.Name = "colorLabel";
             this.colorLabel.Size = new System.Drawing.Size(62, 13);
             this.colorLabel.TabIndex = 3;
@@ -309,7 +310,7 @@ namespace HelperBotConfig
             this.configBox.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.configBox.Location = new System.Drawing.Point(6, 19);
             this.configBox.Name = "configBox";
-            this.configBox.Size = new System.Drawing.Size(175, 260);
+            this.configBox.Size = new System.Drawing.Size(183, 260);
             this.configBox.TabIndex = 0;
             this.configBox.TabStop = false;
             this.configBox.Text = "Configuration";
@@ -343,7 +344,7 @@ namespace HelperBotConfig
             "Yellow",
             "Silver",
             "White"});
-            this.colorBox.Location = new System.Drawing.Point(6, 89);
+            this.colorBox.Location = new System.Drawing.Point(15, 89);
             this.colorBox.Name = "colorBox";
             this.colorBox.Size = new System.Drawing.Size(81, 21);
             this.colorBox.TabIndex = 8;
@@ -352,7 +353,7 @@ namespace HelperBotConfig
             // 
             // webBox
             // 
-            this.webBox.Location = new System.Drawing.Point(6, 139);
+            this.webBox.Location = new System.Drawing.Point(15, 139);
             this.webBox.Name = "webBox";
             this.webBox.Size = new System.Drawing.Size(123, 20);
             this.webBox.TabIndex = 7;
@@ -361,7 +362,7 @@ namespace HelperBotConfig
             // webLabel
             // 
             this.webLabel.AutoSize = true;
-            this.webLabel.Location = new System.Drawing.Point(3, 120);
+            this.webLabel.Location = new System.Drawing.Point(12, 120);
             this.webLabel.Name = "webLabel";
             this.webLabel.Size = new System.Drawing.Size(77, 13);
             this.webLabel.TabIndex = 6;
@@ -386,14 +387,14 @@ namespace HelperBotConfig
             this.contactBox.Controls.Add(this.bCredits);
             this.contactBox.Location = new System.Drawing.Point(6, 285);
             this.contactBox.Name = "contactBox";
-            this.contactBox.Size = new System.Drawing.Size(175, 56);
+            this.contactBox.Size = new System.Drawing.Size(183, 56);
             this.contactBox.TabIndex = 1;
             this.contactBox.TabStop = false;
             this.contactBox.Text = "Contact Us";
             // 
             // bWiki
             // 
-            this.bWiki.Location = new System.Drawing.Point(97, 25);
+            this.bWiki.Location = new System.Drawing.Point(105, 19);
             this.bWiki.Name = "bWiki";
             this.bWiki.Size = new System.Drawing.Size(72, 25);
             this.bWiki.TabIndex = 1;
@@ -403,7 +404,7 @@ namespace HelperBotConfig
             // 
             // bCredits
             // 
-            this.bCredits.Location = new System.Drawing.Point(6, 25);
+            this.bCredits.Location = new System.Drawing.Point(6, 19);
             this.bCredits.Name = "bCredits";
             this.bCredits.Size = new System.Drawing.Size(72, 25);
             this.bCredits.TabIndex = 0;
@@ -413,9 +414,9 @@ namespace HelperBotConfig
             // 
             // bSave
             // 
-            this.bSave.Location = new System.Drawing.Point(309, 365);
+            this.bSave.Location = new System.Drawing.Point(232, 365);
             this.bSave.Name = "bSave";
-            this.bSave.Size = new System.Drawing.Size(101, 25);
+            this.bSave.Size = new System.Drawing.Size(86, 25);
             this.bSave.TabIndex = 1;
             this.bSave.Text = "Save and Exit";
             this.bSave.UseVisualStyleBackColor = true;
@@ -427,7 +428,7 @@ namespace HelperBotConfig
             // 
             // bApply
             // 
-            this.bApply.Location = new System.Drawing.Point(231, 365);
+            this.bApply.Location = new System.Drawing.Point(154, 365);
             this.bApply.Name = "bApply";
             this.bApply.Size = new System.Drawing.Size(72, 25);
             this.bApply.TabIndex = 12;
@@ -435,15 +436,28 @@ namespace HelperBotConfig
             this.bApply.UseVisualStyleBackColor = true;
             this.bApply.Click += new System.EventHandler(this.bApply_Click);
             // 
+            // ExitButton
+            // 
+            this.ExitButton.Location = new System.Drawing.Point(324, 365);
+            this.ExitButton.Name = "ExitButton";
+            this.ExitButton.Size = new System.Drawing.Size(86, 25);
+            this.ExitButton.TabIndex = 1;
+            this.ExitButton.Text = "Exit";
+            this.ExitButton.UseVisualStyleBackColor = true;
+            this.ExitButton.Click += new System.EventHandler(this.ExitButton_Click);
+            // 
             // HelperBotConfig
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoSize = true;
             this.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
             this.ClientSize = new System.Drawing.Size(424, 391);
             this.Controls.Add(this.bApply);
+            this.Controls.Add(this.ExitButton);
             this.Controls.Add(this.bSave);
             this.Controls.Add(this.bigBox);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "HelperBotConfig";
             this.Text = "HelperBot Configuration Tool";
@@ -495,6 +509,7 @@ namespace HelperBotConfig
         private System.Windows.Forms.CheckBox xDemoted;
         private System.Windows.Forms.CheckBox xPM;
         private System.Windows.Forms.CheckBox xTime;
+        private System.Windows.Forms.Button ExitButton;
 
     }
 }
