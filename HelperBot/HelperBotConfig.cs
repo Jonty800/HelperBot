@@ -208,67 +208,67 @@ namespace HelperBotConfig
        
         private void colorBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (colorBox.SelectedItem == "Black") 
+            if (colorBox.SelectedItem as string == "Black") 
             {
                 colorView.BackColor = System.Drawing.Color.Black;
             }
-            if (colorBox.SelectedItem == "Gray")
+            if ( colorBox.SelectedItem as string == "Gray" )
             {
                 colorView.BackColor = System.Drawing.Color.Gray;
             }
-            if (colorBox.SelectedItem == "Navy")
+            if ( colorBox.SelectedItem as string == "Navy" )
             {
                 colorView.BackColor = System.Drawing.Color.Navy;
             }
-            if (colorBox.SelectedItem == "Blue")
+            if ( colorBox.SelectedItem as string == "Blue" )
             {
                 colorView.BackColor = System.Drawing.Color.Blue;
             }
-            if (colorBox.SelectedItem == "Green")
+            if ( colorBox.SelectedItem as string == "Green" )
             {
                 colorView.BackColor = System.Drawing.Color.Green;
             }
-            if (colorBox.SelectedItem == "Lime")
+            if ( colorBox.SelectedItem as string == "Lime" )
             {
                 colorView.BackColor = System.Drawing.Color.LimeGreen;
             }
-            if (colorBox.SelectedItem == "Teal")
+            if ( colorBox.SelectedItem as string == "Teal" )
             {
                 colorView.BackColor = System.Drawing.Color.Teal;
             }
-            if (colorBox.SelectedItem == "Aqua")
+            if ( colorBox.SelectedItem as string == "Aqua" )
             {
                 colorView.BackColor = System.Drawing.Color.Aqua;
             }
-            if (colorBox.SelectedItem == "Maroon")
+            if ( colorBox.SelectedItem as string == "Maroon" )
             {
                 colorView.BackColor = System.Drawing.Color.Maroon;
             }
-            if (colorBox.SelectedItem == "Red")
+            if ( colorBox.SelectedItem as string == "Red" )
             {
                 colorView.BackColor = System.Drawing.Color.Red;
             }
-            if (colorBox.SelectedItem == "Purple")
+            if ( colorBox.SelectedItem as string == "Purple" )
             {
                 colorView.BackColor = System.Drawing.Color.Purple;
             }
-            if (colorBox.SelectedItem == "Magenta")
+            if ( colorBox.SelectedItem as string == "Magenta" )
             {
                 colorView.BackColor = System.Drawing.Color.Magenta;
             }
-            if (colorBox.SelectedItem == "Olive")
+            if ( colorBox.SelectedItem as string == "Olive" )
             {
                 colorView.BackColor = System.Drawing.Color.Olive;
             }
-            if (colorBox.SelectedItem == "Yellow")
+            if ( colorBox.SelectedItem as string == "Yellow" )
             {
                 colorView.BackColor = System.Drawing.Color.Yellow;
             }
-            if (colorBox.SelectedItem == "Silver")
+            if ( colorBox.SelectedItem as string == "Silver" )
             {
                 colorView.BackColor = System.Drawing.Color.Silver;
             }
-            if (colorBox.SelectedItem == "White")
+            if ( colorBox.SelectedItem as string == "White" )
             {
                 colorView.BackColor = System.Drawing.Color.White;
             }
