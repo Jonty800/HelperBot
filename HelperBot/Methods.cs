@@ -373,8 +373,12 @@ namespace HelperBot {
         #region SetValues
 
         public static void LoadSwearArray() {
-            if ( MaintenanceTriggers.SwearFullTrigger == null ) {
-                MaintenanceTriggers.SwearFullTrigger = new String[][] { System.IO.File.ReadAllLines( MaintenanceTriggers.swearFile.FullName ) };
+            if ( System.IO.File.Exists( MaintenanceTriggers.swearFile.FullName ) ) {
+                if ( MaintenanceTriggers.SwearFullTrigger == null ) {
+                    MaintenanceTriggers.SwearFullTrigger = new String[][] { System.IO.File.ReadAllLines( MaintenanceTriggers.swearFile.FullName ) };
+                }
+            } else {
+                MaintenanceTriggers.SwearFullTrigger = new String[][] { }; //empty
             }
         }
 
