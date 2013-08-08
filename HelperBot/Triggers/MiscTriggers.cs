@@ -2,55 +2,52 @@
 //This plugin is open source and designed to be used with 800Craft and LegendCraft server softwares
 
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 //May rename/move when other trigger files are created
 
 namespace HelperBot {
-    public static class MiscTriggers {
 
+    public static class MiscTriggers {
         //I'll throw some funfacts from RandomStat.cs later
-        
-        static String[] ThanksTrigger = new String[]
+
+        private static String[] ThanksTrigger = new String[]
         {
            "ty"
         };
 
-        static String[] ThanksTrigger2 = new String[]
+        private static String[] ThanksTrigger2 = new String[]
         {
            "thanks"
         };
 
-        static String[] ThanksTrigger3 = new String[]
+        private static String[] ThanksTrigger3 = new String[]
         {
            "thx"
         };
 
-        static String[] ThanksTrigger4 = new String[]
+        private static String[] ThanksTrigger4 = new String[]
         {
            "thankyou"
         };
 
-        static String[] ThanksTrigger5 = new String[]
+        private static String[] ThanksTrigger5 = new String[]
         {
-           "thank", 
+           "thank",
            "you"
         };
 
-        static String[] ThanksTrigger6 = new String[]
+        private static String[] ThanksTrigger6 = new String[]
         {
            "thank-you"
         };
 
-        static String[] FlyTrigger = new String[]
+        private static String[] FlyTrigger = new String[]
         {
            "how",
            "fly"
         };
 
-        static String[] FlyTrigger2 = new String[]
+        private static String[] FlyTrigger2 = new String[]
         {
            "help",
            "fly"

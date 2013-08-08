@@ -2,8 +2,6 @@
 //This plugin is open source and designed to be used with 800Craft and LegendCraft server softwares
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using fCraft;
 
 /*        ____
@@ -18,13 +16,14 @@ using fCraft;
         '.____.'|      |
                 '.____.'*/
 
-
 namespace HelperBot {
+
     /// <summary>
     /// This class will be used to store constant values, such as arrays of replies
     /// </summary>
-    /// 
+    ///
     public static class Values {
+
         /// <summary>
         /// The name of the bot, colored using Settings.BotNameColor
         /// </summary>
@@ -76,7 +75,7 @@ namespace HelperBot {
         /// An array of thankyou replies to send back to the player
         /// </summary>
         public static string[] ThankyouReplies = new string[]
-        { 
+        {
           "No problem",
           "You're Welcome",
           "Anytime!",
@@ -111,7 +110,7 @@ namespace HelperBot {
          "It's not the fall that kills you; it's the sudden stop at the end.",
          "Hospitality: making your guests feel like they're at home, even if you wish they were.",
          "I used to be indecisive. Now I'm not sure.",
-         "Nostalgia isn't what it used to be."                                                         
+         "Nostalgia isn't what it used to be."
         };
 
         /// <summary>

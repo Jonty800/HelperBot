@@ -2,26 +2,26 @@
 //This plugin is open source and designed to be used with 800Craft and LegendCraft server softwares
 
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace HelperBot {
+
     public static class RankTriggers {
 
-        static String[] DemotedTrigger = new String[]
+        private static String[] DemotedTrigger = new String[]
         {
            "i",
            "was",
            "demoted"
         };
-        static String[] DemotedTrigger2 = new String[]
+
+        private static String[] DemotedTrigger2 = new String[]
         {
            "i",
            "got",
            "demoted"
         };
-        static String[] NextRankTrigger = new String[]
+
+        private static String[] NextRankTrigger = new String[]
         {
            "what",
            "my",
@@ -29,28 +29,28 @@ namespace HelperBot {
            "rank"
         };
 
-        static String[] HowDoTrigger1 = new String[]
+        private static String[] HowDoTrigger1 = new String[]
         {
            "how",
            "get",
            "ranks"
         };
 
-        static String[] HowDoTrigger2 = new String[]
+        private static String[] HowDoTrigger2 = new String[]
         {
            "how",
            "get",
            "ranked"
         };
 
-        static String[] HowDoTrigger3 = new String[]
+        private static String[] HowDoTrigger3 = new String[]
         {
            "how",
            "get",
            "promoted"
         };
 
-        static String[] HowDoTrigger4 = new String[]
+        private static String[] HowDoTrigger4 = new String[]
         {
            "how",
            "do",

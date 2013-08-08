@@ -4,42 +4,40 @@
 //NOTE: I am not happy with this class, I need to rethink and rewrite it
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.IO;
 using System.Xml;
-using System.Xml.Linq;
 using fCraft;
-using fCraft.Events;
 
 namespace HelperBot {
+
     public enum Flags {
         Debug,
         Release
     }
 
     public static class Settings {
-
         public static Flags ReleaseFlag = Flags.Release;
 
         #region XML settings
+
         /// <summary>
         /// Current version of the config file and xml file
         /// </summary>
         public static int CurrentVersion = 1;
+
         public static int XmlVersion = 1;
 
         /// <summary>
         /// The XML root name
         /// </summary>
-        const string ConfigXmlRootName = "HelperBotConfig"; //unneeded?
+        private const string ConfigXmlRootName = "HelperBotConfig"; //unneeded?
 
         /// <summary>
         /// The location of the XML file
         /// </summary>
-        const string FilePath = "plugins/HelperBot.xml";
+        private const string FilePath = "plugins/HelperBot.xml";
 
-        #endregion
+        #endregion XML settings
 
         #region Booleans
 
@@ -123,8 +121,7 @@ namespace HelperBot {
         /// </summary>
         public static bool AnnounceImpersonation = true;
 
-
-        #endregion
+        #endregion Booleans
 
         #region Strings
 
@@ -150,30 +147,27 @@ namespace HelperBot {
         public static string Website = "http://yourwebsite.com";
 
         /// <summary>
-        /// String value for "I got demoted" reply
-        /// </summary>
-        public static string DemotedMessage = "&F, if you were wrongfully demoted you can appeal at " + Website;
-
-        /// <summary>
         /// String value for "I am stuck" reply
         /// </summary>
         public static string StuckMessage = "&F, if you are stuck press R to respawn";
 
-
-
         #region Personality (Maybe)
+
         public static int Age = 21;
         public static string Hometown = "London, England";
         public static string Sex = "female";
         public static string Occupation = "botting 'n stuff"; //My occupation is + Occupation (lowercase starting)
-        #endregion
 
-        #endregion
+        #endregion Personality (Maybe)
+
+        #endregion Strings
 
         #region ColorParsing
-        public static bool IsValidColorCode ( char code ) {
+
+        public static bool IsValidColorCode( char code ) {
             return ( code >= '0' && code <= '9' ) || ( code >= 'a' && code <= 'f' ) || ( code >= 'A' && code <= 'F' );
         }
+
         public static readonly SortedList<char, string> ColorNames = new SortedList<char, string>{
             { '0', "black" },
             { '1', "navy" },
@@ -192,8 +186,9 @@ namespace HelperBot {
             { 'e', "yellow" },
             { 'f', "white" }
         };
+
         //parses the colorcode
-        public static string Parse ( char code ) {
+        public static string Parse( char code ) {
             code = Char.ToLower( code );
             if ( IsValidColorCode( code ) ) {
                 return "&" + code;
@@ -201,8 +196,9 @@ namespace HelperBot {
                 return null;
             }
         }
+
         //parses the colorname
-        public static string Parse ( string color ) {
+        public static string Parse( string color ) {
             if ( color == null ) {
                 return null;
             }
@@ -226,8 +222,9 @@ namespace HelperBot {
                 return null;
             }
         }
+
         //color code to name
-        public static string GetName ( char code ) {
+        public static string GetName( char code ) {
             code = Char.ToLower( code );
             if ( IsValidColorCode( code ) ) {
                 return ColorNames[code];
@@ -238,8 +235,9 @@ namespace HelperBot {
             }
             return ColorNames[color[1]];
         }
+
         //name to color code
-        public static string GetName ( string color ) {
+        public static string GetName( string color ) {
             if ( color == null ) {
                 return null;
             } else if ( color.Length == 0 ) {
@@ -253,17 +251,20 @@ namespace HelperBot {
                 }
             }
         }
-        #endregion
+
+        #endregion ColorParsing
 
         #region Other
+
         /// <summary>
         /// The color of the bots name
         /// Default: Red
         /// </summary>
         public static string BotNameColor = "&c";
-        #endregion
 
-        public static void Load () {
+        #endregion Other
+
+        public static void Load() {
             if ( Settings.ReleaseFlag == Flags.Debug ) {
                 Logger.Log( LogType.SystemActivity, "HelperBot: Settings.Load called" );
             }
@@ -276,52 +277,66 @@ namespace HelperBot {
                 while ( reader.Read() ) {
                     if ( reader.NodeType == XmlNodeType.Element ) {
                         if ( reader.Name == "AnnounceFly" ) {
-                            AnnounceFly = Convert.ToBoolean( reader.GetAttribute( 0 ).ToLower() ); ;
+                            AnnounceFly = Convert.ToBoolean( reader.GetAttribute( 0 ).ToLower() );
+                            ;
                         }
                         if ( reader.Name == "AnnounceServer" ) {
-                            AnnounceServerName = Convert.ToBoolean( reader.GetAttribute( 0 ).ToLower() ); ;
+                            AnnounceServerName = Convert.ToBoolean( reader.GetAttribute( 0 ).ToLower() );
+                            ;
                         }
                         if ( reader.Name == "AnnounceHours" ) {
-                            AnnounceHours = Convert.ToBoolean( reader.GetAttribute( 0 ).ToLower() ); ;
+                            AnnounceHours = Convert.ToBoolean( reader.GetAttribute( 0 ).ToLower() );
+                            ;
                         }
                         if ( reader.Name == "AnnounceRank" ) {
-                            AnnounceRank = Convert.ToBoolean( reader.GetAttribute( 0 ).ToLower() ); ;
+                            AnnounceRank = Convert.ToBoolean( reader.GetAttribute( 0 ).ToLower() );
+                            ;
                         }
                         if ( reader.Name == "AnnounceWarnKick" ) {
-                            AnnounceWarnKick = Convert.ToBoolean( reader.GetAttribute( 0 ).ToLower() ); ;
+                            AnnounceWarnKick = Convert.ToBoolean( reader.GetAttribute( 0 ).ToLower() );
+                            ;
                         }
                         if ( reader.Name == "AnnounceWarnSwear" ) {
-                            AnnounceWarnSwear = Convert.ToBoolean( reader.GetAttribute( 0 ).ToLower() ); ;
+                            AnnounceWarnSwear = Convert.ToBoolean( reader.GetAttribute( 0 ).ToLower() );
+                            ;
                         }
                         if ( reader.Name == "AnnounceSuggestBan" ) {
                             AnnounceSuggestBan = Convert.ToBoolean( reader.GetAttribute( 0 ).ToLower() );
                         }
                         if ( reader.Name == "AnnounceImpersonation" ) {
-                            AnnounceImpersonation = Convert.ToBoolean( reader.GetAttribute( 0 ).ToLower() ); ;
+                            AnnounceImpersonation = Convert.ToBoolean( reader.GetAttribute( 0 ).ToLower() );
+                            ;
                         }
                         if ( reader.Name == "AnnounceTime" ) {
-                            AnnounceTime = Convert.ToBoolean( reader.GetAttribute( 0 ).ToLower() ); ;
+                            AnnounceTime = Convert.ToBoolean( reader.GetAttribute( 0 ).ToLower() );
+                            ;
                         }
                         if ( reader.Name == "AnnouncePM" ) {
-                            AnnouncePM = Convert.ToBoolean( reader.GetAttribute( 0 ).ToLower() ); ;
+                            AnnouncePM = Convert.ToBoolean( reader.GetAttribute( 0 ).ToLower() );
+                            ;
                         }
                         if ( reader.Name == "AnnounceFell" ) {
-                            AnnounceFell = Convert.ToBoolean( reader.GetAttribute( 0 ).ToLower() ); ;
+                            AnnounceFell = Convert.ToBoolean( reader.GetAttribute( 0 ).ToLower() );
+                            ;
                         }
                         if ( reader.Name == "AnnounceSpleefTimer" ) {
                             AnnounceSpleefTimer = Convert.ToBoolean( reader.GetAttribute( 0 ).ToLower() );
                         }
                         if ( reader.Name == "AnnounceGreeting" ) {
-                            AnnounceGreeting = Convert.ToBoolean( reader.GetAttribute( 0 ).ToLower() ); ;
+                            AnnounceGreeting = Convert.ToBoolean( reader.GetAttribute( 0 ).ToLower() );
+                            ;
                         }
                         if ( reader.Name == "AnnounceDemoted" ) {
-                            AnnounceDemoted = Convert.ToBoolean( reader.GetAttribute( 0 ).ToLower() ); ;
+                            AnnounceDemoted = Convert.ToBoolean( reader.GetAttribute( 0 ).ToLower() );
+                            ;
                         }
                         if ( reader.Name == "AnnounceJokes" ) {
-                            AnnounceJokes = Convert.ToBoolean( reader.GetAttribute( 0 ).ToLower() ); ;
+                            AnnounceJokes = Convert.ToBoolean( reader.GetAttribute( 0 ).ToLower() );
+                            ;
                         }
                         if ( reader.Name == "AnnounceCaps" ) {
-                            AnnounceCaps = Convert.ToBoolean( reader.GetAttribute( 0 ).ToLower() ); ;
+                            AnnounceCaps = Convert.ToBoolean( reader.GetAttribute( 0 ).ToLower() );
+                            ;
                         }
                         if ( reader.Name == "BotName" ) {
                             Name = reader.GetAttribute( 0 );

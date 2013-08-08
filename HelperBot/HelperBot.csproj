@@ -32,7 +32,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="fCraft">
-      <HintPath>F:\Old PC\800Craft 0.3\bin\Release\fCraft.dll</HintPath>
+      <HintPath>E:\Old PC\800Craft 0.3\bin\Release\fCraft.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />

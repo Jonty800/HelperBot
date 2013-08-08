@@ -2,29 +2,26 @@
 //This plugin is open source and designed to be used with 800Craft and LegendCraft server softwares
 
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.IO;
+using System.Linq;
 using System.Threading;
 using fCraft;
 
 namespace HelperBot {
+
     /// <summary>
     /// Static class containing Trigger for the bot to respond to a player.
     /// </summary>
     public static class Triggers {
-
         public static bool SpleefInProgress = false;
-        public static bool IsAllUpper(String text)
-        {
-            for (int i = 0; i < text.Length; i++)
-            {
-                if (!Char.IsUpper(text[i])) //if text is not caps, false
+
+        public static bool IsAllUpper( String text ) {
+            for ( int i = 0; i < text.Length; i++ ) {
+                if ( !Char.IsUpper( text[i] ) ) //if text is not caps, false
                 {
                     return false;
                 }
-                if (text.Length < 4)  //if text is less than 4 characters, false
+                if ( text.Length < 4 )  //if text is less than 4 characters, false
                 {
                     return false;
                 }
@@ -33,22 +30,20 @@ namespace HelperBot {
             return true; //else, true
         }
 
-        public static void CheckTriggers ( Player player, String Message, MessageChannel Channel ) {
+        public static void CheckTriggers( Player player, String Message, MessageChannel Channel ) {
             //Check swears in PMs
             if ( Channel == MessageChannel.PM ) {
-                if (File.Exists("SwearWords.txt") && Settings.AnnounceWarnSwear)
-                {
-                    if (!player.Can(Permission.Swear))
-                    {
-                        if (Triggers.MatchesTrigger(Message, MaintenanceTriggers.SwearFullTrigger))
-                        {
-                            Methods.SendMessage(player, Color.PM + "Please refrain from swearing :)", MessageChannel.PM);
+                if ( File.Exists( "SwearWords.txt" ) && Settings.AnnounceWarnSwear ) {
+                    if ( !player.Can( Permission.Swear ) ) {
+                        if ( Triggers.MatchesTrigger( Message, MaintenanceTriggers.SwearFullTrigger ) ) {
+                            Methods.SendMessage( player, Color.PM + "Please refrain from swearing :)", MessageChannel.PM );
                             return;
                         }
                     }
                 }
             }
-            if ( Channel == MessageChannel.PM ) return; //ignore PMs for this
+            if ( Channel == MessageChannel.PM )
+                return; //ignore PMs for this
 
             //What is my next rank?
             if ( Triggers.MatchesTrigger( Message, RankTriggers.NextRankFullTrigger ) && Settings.AnnounceRank ) {
@@ -62,14 +57,13 @@ namespace HelperBot {
                 return;
             }
             //Caps checker
-            if (IsAllUpper(Message) && Settings.AnnounceCaps)
-            {
-                Methods.SendPM(player, "Please refrain from abusing caps.");
+            if ( IsAllUpper( Message ) && Settings.AnnounceCaps ) {
+                Methods.SendPM( player, "Please refrain from abusing caps." );
             }
             //How do I get the next rank?
-            if (Triggers.MatchesTrigger(Message, RankTriggers.HowDoFullTrigger) && Settings.AnnounceRank)
-            {
-                if ( player.Info.Rank == RankManager.HighestRank ) return;
+            if ( Triggers.MatchesTrigger( Message, RankTriggers.HowDoFullTrigger ) && Settings.AnnounceRank ) {
+                if ( player.Info.Rank == RankManager.HighestRank )
+                    return;
                 if ( player.Can( Permission.ReadStaffChat ) ) {
                     Methods.SendMessage( player.ClassyName + "&f, " + Settings.HowToGetRankedStaffString, Channel );
                     Methods.AddTYPlayer( player );
@@ -81,50 +75,49 @@ namespace HelperBot {
             }
 
             //I was demoted
-            if (Triggers.MatchesTrigger(Message, RankTriggers.DemotedFullTrigger) && Settings.AnnounceDemoted)
-            {
-                Methods.SendMessage(player.ClassyName + Settings.DemotedMessage, Channel);
-                Methods.AddTYPlayer(player);
+            if ( Triggers.MatchesTrigger( Message, RankTriggers.DemotedFullTrigger ) && Settings.AnnounceDemoted ) {
+                Methods.SendMessage( player.ClassyName + "&F, if you were wrongfully demoted you can appeal at " + Settings.Website, Channel );
+                Methods.AddTYPlayer( player );
                 return;
             }
 
             //How do I PM players?
-            if ( Triggers.MatchesTrigger( Message, MaintenanceTriggers.PMFullTrigger ) && Settings.AnnouncePM) {
+            if ( Triggers.MatchesTrigger( Message, MaintenanceTriggers.PMFullTrigger ) && Settings.AnnouncePM ) {
                 Methods.SendMessage( player.ClassyName + "&f, to PM, type '@playername [message]'.", Channel );
                 Methods.AddTYPlayer( player );
                 return;
             }
 
             //What is the time
-            if ( Triggers.MatchesTrigger( Message, MaintenanceTriggers.TimeFullTrigger ) && Settings.AnnounceTime) {
+            if ( Triggers.MatchesTrigger( Message, MaintenanceTriggers.TimeFullTrigger ) && Settings.AnnounceTime ) {
                 Methods.SendMessage( player.ClassyName + "&f, the server's time is currently " + DateTime.Now.ToShortTimeString(), Channel );
                 Methods.AddTYPlayer( player );
                 return;
             }
 
             //I fell
-            if ( Triggers.MatchesTrigger( Message, MaintenanceTriggers.FellFullTrigger ) && Settings.AnnounceFell) {
+            if ( Triggers.MatchesTrigger( Message, MaintenanceTriggers.FellFullTrigger ) && Settings.AnnounceFell ) {
                 Methods.SendMessage( player.ClassyName + Settings.StuckMessage, Channel );
                 Methods.AddTYPlayer( player );
                 return;
             }
 
             //What are my hours?
-            if ( Triggers.MatchesTrigger( Message, MaintenanceTriggers.HoursFullTrigger ) && Settings.AnnounceHours) {
-                Methods.SendMessage(Methods.GetPlayerTotalHoursString(player) , Channel);
+            if ( Triggers.MatchesTrigger( Message, MaintenanceTriggers.HoursFullTrigger ) && Settings.AnnounceHours ) {
+                Methods.SendMessage( Methods.GetPlayerTotalHoursString( player ), Channel );
                 Methods.AddTYPlayer( player );
                 return;
             }
-            
+
             //What is the website?
-            if ( Triggers.MatchesTrigger( Message, MaintenanceTriggers.WebFullTrigger )) {
+            if ( Triggers.MatchesTrigger( Message, MaintenanceTriggers.WebFullTrigger ) ) {
                 Methods.SendMessage( player.ClassyName + "&F, the server's website is " + Settings.Website, Channel );
                 Methods.AddTYPlayer( player );
                 return;
             }
 
             //What is the server's name?
-            if ( Triggers.MatchesTrigger( Message, MaintenanceTriggers.ServFullTrigger ) && Settings.AnnounceServerName) {
+            if ( Triggers.MatchesTrigger( Message, MaintenanceTriggers.ServFullTrigger ) && Settings.AnnounceServerName ) {
                 Methods.SendMessage( player.ClassyName + "&F, you are currently playing on " + ConfigKey.ServerName.GetString(), Channel );
                 Methods.AddTYPlayer( player );
                 return;
@@ -153,20 +146,20 @@ namespace HelperBot {
             }
 
             //Alice, Joke
-            if ( Triggers.MatchesNameAndTrigger( Message, MiscTriggers.JokeFullTrigger ) && Settings.AnnounceJokes) {
+            if ( Triggers.MatchesNameAndTrigger( Message, MiscTriggers.JokeFullTrigger ) && Settings.AnnounceJokes ) {
                 Methods.SendMessage( Methods.GetRandomJoke(), MessageChannel.Global );
                 return;
             }
 
             //how do I fly? Using CM now since Java 7 is such a pain
-            if ( Triggers.MatchesTrigger( Message, MiscTriggers.FlyFullTrigger ) && Settings.AnnounceFly) {
+            if ( Triggers.MatchesTrigger( Message, MiscTriggers.FlyFullTrigger ) && Settings.AnnounceFly ) {
                 Methods.SendMessage( player.ClassyName + "&F, to fly, type /fly, or download CM at http://is.gd/charged.", MessageChannel.Global );
                 Methods.AddTYPlayer( player );
                 return;
             }
 
             //fun fact
-            if ( Triggers.MatchesNameAndTrigger( Message, MiscTriggers.FunFactFullTrigger ) && Settings.AnnounceJokes) {
+            if ( Triggers.MatchesNameAndTrigger( Message, MiscTriggers.FunFactFullTrigger ) && Settings.AnnounceJokes ) {
                 Methods.SendMessage( Methods.GetRandomStatString( player ), Channel );
                 return;
             }
@@ -178,7 +171,7 @@ namespace HelperBot {
                         if ( _O.player == player ) {
                             double totalTime = ( DateTime.Now - _O.Time ).TotalSeconds;
                             if ( totalTime <= 20 ) {
-                                Methods.SendMessage( Values.ThankyouReplies[new Random().Next( 0, Values.ThankyouReplies.Length)], MessageChannel.Global );
+                                Methods.SendMessage( Values.ThankyouReplies[new Random().Next( 0, Values.ThankyouReplies.Length )], MessageChannel.Global );
                             }
                         }
                     }
@@ -188,7 +181,8 @@ namespace HelperBot {
         }
 
         #region Trigger Checkers
-        public static bool MatchesNameAndTrigger ( string rawMessage, String[][] ArrayContainer ) {
+
+        public static bool MatchesNameAndTrigger( string rawMessage, String[][] ArrayContainer ) {
             if ( rawMessage.ToLower().Contains( Settings.Name.ToLower() ) ) {
                 if ( MatchesTrigger( rawMessage, ArrayContainer ) ) {
                     return true;
@@ -197,7 +191,7 @@ namespace HelperBot {
             return false;
         }
 
-        public static bool MatchesTrigger ( string rawMessage, String[][] ArrayContainer ) {
+        public static bool MatchesTrigger( string rawMessage, String[][] ArrayContainer ) {
             rawMessage = fCraft.Color.StripColors( rawMessage );
             rawMessage = rawMessage.ToLower();
             foreach ( String[] Array in ArrayContainer ) {
@@ -208,7 +202,7 @@ namespace HelperBot {
             return false;
         }
 
-        public static bool MessageIsTrigger ( string rawMessage, String[][] ArrayContainer ) {
+        public static bool MessageIsTrigger( string rawMessage, String[][] ArrayContainer ) {
             rawMessage = fCraft.Color.StripColors( rawMessage );
             rawMessage = rawMessage.ToLower();
             foreach ( String[] Array in ArrayContainer ) {
@@ -219,6 +213,6 @@ namespace HelperBot {
             return false;
         }
 
-        #endregion
+        #endregion Trigger Checkers
     }
 }
