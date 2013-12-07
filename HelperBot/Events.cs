@@ -115,8 +115,12 @@ namespace HelperBot {
         private static void AnnouncePlayerPromotion( PlayerInfo playerInfo ) {
             if ( playerInfo == null )
                 return;
-            Methods.SendMessage( playerInfo.ClassyName + "&F, congratulations on your new rank! " + Methods.GetRandomPosComment(), MessageChannel.Global );
-            Methods.AddTYPlayer( playerInfo.PlayerObject );
+                
+            if (playerInfo.IsOnline)//only send message if player is online
+            {
+                Methods.SendMessage(playerInfo.ClassyName + "&F, congratulations on your new rank! " + Methods.GetRandomPosComment(), MessageChannel.Global);
+                Methods.AddTYPlayer(playerInfo.PlayerObject);
+            }
         }
     }
 }
