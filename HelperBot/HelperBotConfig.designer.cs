@@ -64,6 +64,7 @@ namespace HelperBotConfig
             this.webTip = new System.Windows.Forms.ToolTip(this.components);
             this.bApply = new System.Windows.Forms.Button();
             this.ExitButton = new System.Windows.Forms.Button();
+            this.xIRC = new System.Windows.Forms.CheckBox();
             this.SettingsBox.SuspendLayout();
             this.configBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.colorView)).BeginInit();
@@ -98,9 +99,10 @@ namespace HelperBotConfig
             // xCaps
             // 
             this.xCaps.AutoSize = true;
+            this.xCaps.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.xCaps.Location = new System.Drawing.Point(17, 157);
             this.xCaps.Name = "xCaps";
-            this.xCaps.Size = new System.Drawing.Size(94, 17);
+            this.xCaps.Size = new System.Drawing.Size(91, 17);
             this.xCaps.TabIndex = 11;
             this.xCaps.Text = "Warn for Caps";
             this.xCaps.UseVisualStyleBackColor = true;
@@ -108,9 +110,10 @@ namespace HelperBotConfig
             // xFell
             // 
             this.xFell.AutoSize = true;
+            this.xFell.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.xFell.Location = new System.Drawing.Point(17, 203);
             this.xFell.Name = "xFell";
-            this.xFell.Size = new System.Drawing.Size(152, 17);
+            this.xFell.Size = new System.Drawing.Size(149, 17);
             this.xFell.TabIndex = 13;
             this.xFell.Text = "Player Trapped Assistance";
             this.xFell.UseVisualStyleBackColor = true;
@@ -118,9 +121,10 @@ namespace HelperBotConfig
             // xDemoted
             // 
             this.xDemoted.AutoSize = true;
+            this.xDemoted.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.xDemoted.Location = new System.Drawing.Point(17, 272);
             this.xDemoted.Name = "xDemoted";
-            this.xDemoted.Size = new System.Drawing.Size(94, 17);
+            this.xDemoted.Size = new System.Drawing.Size(91, 17);
             this.xDemoted.TabIndex = 11;
             this.xDemoted.Text = "Demoted Help";
             this.xDemoted.UseVisualStyleBackColor = true;
@@ -128,9 +132,10 @@ namespace HelperBotConfig
             // xJokes
             // 
             this.xJokes.AutoSize = true;
+            this.xJokes.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.xJokes.Location = new System.Drawing.Point(17, 295);
             this.xJokes.Name = "xJokes";
-            this.xJokes.Size = new System.Drawing.Size(155, 17);
+            this.xJokes.Size = new System.Drawing.Size(152, 17);
             this.xJokes.TabIndex = 13;
             this.xJokes.Text = "Announce Jokes/FunFacts";
             this.xJokes.UseVisualStyleBackColor = true;
@@ -138,9 +143,10 @@ namespace HelperBotConfig
             // xGreeting
             // 
             this.xGreeting.AutoSize = true;
+            this.xGreeting.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.xGreeting.Location = new System.Drawing.Point(17, 249);
             this.xGreeting.Name = "xGreeting";
-            this.xGreeting.Size = new System.Drawing.Size(66, 17);
+            this.xGreeting.Size = new System.Drawing.Size(63, 17);
             this.xGreeting.TabIndex = 12;
             this.xGreeting.Text = "Greeting";
             this.xGreeting.UseVisualStyleBackColor = true;
@@ -148,9 +154,10 @@ namespace HelperBotConfig
             // xPM
             // 
             this.xPM.AutoSize = true;
+            this.xPM.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.xPM.Location = new System.Drawing.Point(17, 180);
             this.xPM.Name = "xPM";
-            this.xPM.Size = new System.Drawing.Size(131, 17);
+            this.xPM.Size = new System.Drawing.Size(128, 17);
             this.xPM.TabIndex = 10;
             this.xPM.Text = "Announce How to PM";
             this.xPM.UseVisualStyleBackColor = true;
@@ -158,9 +165,10 @@ namespace HelperBotConfig
             // xSpleef
             // 
             this.xSpleef.AutoSize = true;
+            this.xSpleef.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.xSpleef.Location = new System.Drawing.Point(17, 226);
             this.xSpleef.Name = "xSpleef";
-            this.xSpleef.Size = new System.Drawing.Size(85, 17);
+            this.xSpleef.Size = new System.Drawing.Size(82, 17);
             this.xSpleef.TabIndex = 10;
             this.xSpleef.Text = "Spleef Timer";
             this.xSpleef.UseVisualStyleBackColor = true;
@@ -168,9 +176,10 @@ namespace HelperBotConfig
             // xTime
             // 
             this.xTime.AutoSize = true;
+            this.xTime.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.xTime.Location = new System.Drawing.Point(17, 134);
             this.xTime.Name = "xTime";
-            this.xTime.Size = new System.Drawing.Size(101, 17);
+            this.xTime.Size = new System.Drawing.Size(98, 17);
             this.xTime.TabIndex = 12;
             this.xTime.Text = "Announce Time";
             this.xTime.UseVisualStyleBackColor = true;
@@ -178,20 +187,23 @@ namespace HelperBotConfig
             // xBoxes
             // 
             this.xBoxes.AutoSize = true;
+            this.xBoxes.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.xBoxes.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.xBoxes.Location = new System.Drawing.Point(17, 19);
             this.xBoxes.Name = "xBoxes";
-            this.xBoxes.Size = new System.Drawing.Size(152, 17);
+            this.xBoxes.Size = new System.Drawing.Size(149, 17);
             this.xBoxes.TabIndex = 9;
             this.xBoxes.Text = "Check/Uncheck All Boxes";
-            this.xBoxes.UseVisualStyleBackColor = true;
+            this.xBoxes.UseVisualStyleBackColor = false;
             this.xBoxes.CheckedChanged += new System.EventHandler(this.xBoxes_CheckedChanged);
             // 
             // xServer
             // 
             this.xServer.AutoSize = true;
+            this.xServer.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.xServer.Location = new System.Drawing.Point(17, 65);
             this.xServer.Name = "xServer";
-            this.xServer.Size = new System.Drawing.Size(135, 17);
+            this.xServer.Size = new System.Drawing.Size(132, 17);
             this.xServer.TabIndex = 8;
             this.xServer.Text = "Announce Servername";
             this.xServer.UseVisualStyleBackColor = true;
@@ -199,9 +211,10 @@ namespace HelperBotConfig
             // xFly
             // 
             this.xFly.AutoSize = true;
+            this.xFly.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.xFly.Location = new System.Drawing.Point(17, 42);
             this.xFly.Name = "xFly";
-            this.xFly.Size = new System.Drawing.Size(135, 17);
+            this.xFly.Size = new System.Drawing.Size(132, 17);
             this.xFly.TabIndex = 1;
             this.xFly.Text = "Announce How To Fly ";
             this.xFly.UseVisualStyleBackColor = true;
@@ -209,9 +222,10 @@ namespace HelperBotConfig
             // xHours
             // 
             this.xHours.AutoSize = true;
+            this.xHours.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.xHours.Location = new System.Drawing.Point(17, 88);
             this.xHours.Name = "xHours";
-            this.xHours.Size = new System.Drawing.Size(145, 17);
+            this.xHours.Size = new System.Drawing.Size(142, 17);
             this.xHours.TabIndex = 3;
             this.xHours.Text = "Announce Player\'s Hours";
             this.xHours.UseVisualStyleBackColor = true;
@@ -219,9 +233,10 @@ namespace HelperBotConfig
             // xRank
             // 
             this.xRank.AutoSize = true;
+            this.xRank.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.xRank.Location = new System.Drawing.Point(17, 111);
             this.xRank.Name = "xRank";
-            this.xRank.Size = new System.Drawing.Size(129, 17);
+            this.xRank.Size = new System.Drawing.Size(126, 17);
             this.xRank.TabIndex = 4;
             this.xRank.Text = "Announce Next Rank";
             this.xRank.UseVisualStyleBackColor = true;
@@ -229,9 +244,10 @@ namespace HelperBotConfig
             // xImpersonation
             // 
             this.xImpersonation.AutoSize = true;
-            this.xImpersonation.Location = new System.Drawing.Point(15, 211);
+            this.xImpersonation.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.xImpersonation.Location = new System.Drawing.Point(12, 210);
             this.xImpersonation.Name = "xImpersonation";
-            this.xImpersonation.Size = new System.Drawing.Size(134, 17);
+            this.xImpersonation.Size = new System.Drawing.Size(131, 17);
             this.xImpersonation.TabIndex = 7;
             this.xImpersonation.Text = "Kick For Impersonation";
             this.xImpersonation.UseVisualStyleBackColor = true;
@@ -239,9 +255,10 @@ namespace HelperBotConfig
             // xSuggestBan
             // 
             this.xSuggestBan.AutoSize = true;
-            this.xSuggestBan.Location = new System.Drawing.Point(15, 188);
+            this.xSuggestBan.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.xSuggestBan.Location = new System.Drawing.Point(12, 180);
             this.xSuggestBan.Name = "xSuggestBan";
-            this.xSuggestBan.Size = new System.Drawing.Size(157, 17);
+            this.xSuggestBan.Size = new System.Drawing.Size(154, 17);
             this.xSuggestBan.TabIndex = 5;
             this.xSuggestBan.Text = "Report Suspicious Behavoir";
             this.xSuggestBan.UseVisualStyleBackColor = true;
@@ -249,9 +266,10 @@ namespace HelperBotConfig
             // xWarnSwear
             // 
             this.xWarnSwear.AutoSize = true;
-            this.xWarnSwear.Location = new System.Drawing.Point(15, 165);
+            this.xWarnSwear.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.xWarnSwear.Location = new System.Drawing.Point(12, 165);
             this.xWarnSwear.Name = "xWarnSwear";
-            this.xWarnSwear.Size = new System.Drawing.Size(160, 17);
+            this.xWarnSwear.Size = new System.Drawing.Size(157, 17);
             this.xWarnSwear.TabIndex = 6;
             this.xWarnSwear.Text = "Warn Players after Swearing";
             this.xWarnSwear.UseVisualStyleBackColor = true;
@@ -259,9 +277,10 @@ namespace HelperBotConfig
             // xWarnKick
             // 
             this.xWarnKick.AutoSize = true;
-            this.xWarnKick.Location = new System.Drawing.Point(15, 234);
+            this.xWarnKick.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.xWarnKick.Location = new System.Drawing.Point(12, 195);
             this.xWarnKick.Name = "xWarnKick";
-            this.xWarnKick.Size = new System.Drawing.Size(138, 17);
+            this.xWarnKick.Size = new System.Drawing.Size(135, 17);
             this.xWarnKick.TabIndex = 2;
             this.xWarnKick.Text = "Warn Players After Kick";
             this.xWarnKick.UseVisualStyleBackColor = true;
@@ -296,6 +315,7 @@ namespace HelperBotConfig
             // configBox
             // 
             this.configBox.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.configBox.Controls.Add(this.xIRC);
             this.configBox.Controls.Add(this.xImpersonation);
             this.configBox.Controls.Add(this.colorView);
             this.configBox.Controls.Add(this.colorBox);
@@ -394,32 +414,44 @@ namespace HelperBotConfig
             // 
             // bWiki
             // 
+            this.bWiki.BackColor = System.Drawing.Color.White;
+            this.bWiki.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Silver;
+            this.bWiki.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Gray;
+            this.bWiki.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.bWiki.Location = new System.Drawing.Point(105, 19);
             this.bWiki.Name = "bWiki";
             this.bWiki.Size = new System.Drawing.Size(72, 25);
             this.bWiki.TabIndex = 1;
             this.bWiki.Text = "Wiki";
-            this.bWiki.UseVisualStyleBackColor = true;
+            this.bWiki.UseVisualStyleBackColor = false;
             this.bWiki.Click += new System.EventHandler(this.bWiki_Click);
             // 
             // bCredits
             // 
+            this.bCredits.BackColor = System.Drawing.Color.White;
+            this.bCredits.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Silver;
+            this.bCredits.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Gray;
+            this.bCredits.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.bCredits.Location = new System.Drawing.Point(6, 19);
             this.bCredits.Name = "bCredits";
             this.bCredits.Size = new System.Drawing.Size(72, 25);
             this.bCredits.TabIndex = 0;
             this.bCredits.Text = "Credits";
-            this.bCredits.UseVisualStyleBackColor = true;
+            this.bCredits.UseVisualStyleBackColor = false;
             this.bCredits.Click += new System.EventHandler(this.bCredits_Click);
             // 
             // bSave
             // 
+            this.bSave.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.bSave.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Silver;
+            this.bSave.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Gray;
+            this.bSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.bSave.Location = new System.Drawing.Point(232, 365);
             this.bSave.Name = "bSave";
             this.bSave.Size = new System.Drawing.Size(86, 25);
             this.bSave.TabIndex = 1;
             this.bSave.Text = "Save and Exit";
-            this.bSave.UseVisualStyleBackColor = true;
+            this.bSave.UseVisualStyleBackColor = false;
             this.bSave.Click += new System.EventHandler(this.bSave_Click);
             // 
             // webTip
@@ -428,23 +460,42 @@ namespace HelperBotConfig
             // 
             // bApply
             // 
+            this.bApply.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.bApply.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Silver;
+            this.bApply.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Gray;
+            this.bApply.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.bApply.Location = new System.Drawing.Point(154, 365);
             this.bApply.Name = "bApply";
             this.bApply.Size = new System.Drawing.Size(72, 25);
             this.bApply.TabIndex = 12;
             this.bApply.Text = "Apply";
-            this.bApply.UseVisualStyleBackColor = true;
+            this.bApply.UseVisualStyleBackColor = false;
             this.bApply.Click += new System.EventHandler(this.bApply_Click);
             // 
             // ExitButton
             // 
+            this.ExitButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.ExitButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Gray;
+            this.ExitButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
+            this.ExitButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.ExitButton.Location = new System.Drawing.Point(324, 365);
             this.ExitButton.Name = "ExitButton";
             this.ExitButton.Size = new System.Drawing.Size(86, 25);
             this.ExitButton.TabIndex = 1;
             this.ExitButton.Text = "Exit";
-            this.ExitButton.UseVisualStyleBackColor = true;
+            this.ExitButton.UseVisualStyleBackColor = false;
             this.ExitButton.Click += new System.EventHandler(this.ExitButton_Click);
+            // 
+            // xIRC
+            // 
+            this.xIRC.AutoSize = true;
+            this.xIRC.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.xIRC.Location = new System.Drawing.Point(12, 225);
+            this.xIRC.Name = "xIRC";
+            this.xIRC.Size = new System.Drawing.Size(107, 17);
+            this.xIRC.TabIndex = 10;
+            this.xIRC.Text = "Forward IRC Chat";
+            this.xIRC.UseVisualStyleBackColor = true;
             // 
             // HelperBotConfig
             // 
@@ -510,6 +561,7 @@ namespace HelperBotConfig
         private System.Windows.Forms.CheckBox xPM;
         private System.Windows.Forms.CheckBox xTime;
         private System.Windows.Forms.Button ExitButton;
+        private System.Windows.Forms.CheckBox xIRC;
 
     }
 }
