@@ -16,7 +16,12 @@ namespace HelperBot {
         /// <summary>
         /// Send a message without the need of a player name (DO NOT use this for PMs)
         /// </summary>
-        public static void SendMessage( string Message, MessageChannel Channel ) {
+        public static void SendMessage( string Message, MessageChannel Channel ) 
+        {
+            if (Channel == MessageChannel.Global)
+            {
+                IRC.SendChannelMessage(Settings.BotNameColor + Settings.Name + "&0: " + Message);
+            }
             SendMessage( null, Message, Channel );
         }
 
