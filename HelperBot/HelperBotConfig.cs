@@ -8,7 +8,6 @@ using System.Windows.Forms;
 using System.Xml;
 using System.IO;
 using System.Diagnostics;
-using fCraft;
 
 namespace HelperBotConfig {
     public partial class HelperBotConfig : Form {
@@ -81,6 +80,10 @@ namespace HelperBotConfig {
                         if ( reader.Name == "BotColor" ) {
                             colorBox.SelectedItem = reader.GetAttribute( 0 );
                         }
+                        if (reader.Name == "AnnounceIRC")
+                        {
+                            xIRC.Checked = Convert.ToBoolean(reader.GetAttribute(0).ToLower());
+                        }
 
                     }
                 }
@@ -115,6 +118,7 @@ namespace HelperBotConfig {
             ToolTip demotedTip = new ToolTip();
             ToolTip jokesTip = new ToolTip();
             ToolTip capsTip = new ToolTip();
+            ToolTip ircTip = new ToolTip();
             flyTip.SetToolTip( this.xFly, "Bot will respond to players who are enquiring about /Fly or Fly Clients." );
             serverTip.SetToolTip( this.xServer, "Bot will respond when asked about the server name." );
             hourTip.SetToolTip( this.xHours, "Bot will display the player's hours when asked." );
@@ -131,6 +135,8 @@ namespace HelperBotConfig {
             demotedTip.SetToolTip( this.xDemoted, "Bot will explain what to do when demoted." );
             jokesTip.SetToolTip( this.xImpersonation, "Bot will display random jokes/facts when provoked." );
             capsTip.SetToolTip( this.xCaps, "Bot will warn players that spam caps on the server." );
+            ircTip.SetToolTip(this.xIRC, "Bot forward all chat to the irc channel.");
+
             #endregion
         }
 
@@ -152,6 +158,7 @@ namespace HelperBotConfig {
                 xJokes.Checked = true;
                 xCaps.Checked = true;
                 xDemoted.Checked = true;
+                xIRC.Checked = true;
             } else {
                 xFly.Checked = false;
                 xServer.Checked = false;
@@ -169,6 +176,7 @@ namespace HelperBotConfig {
                 xJokes.Checked = false;
                 xCaps.Checked = false;
                 xDemoted.Checked = false;
+                xIRC.Checked = false;
             }
         }
         #region color
@@ -297,7 +305,10 @@ namespace HelperBotConfig {
             writer.WriteAttributeString( "value", colorBox.SelectedItem.ToString() );
             writer.WriteEndElement();
             writer.WriteStartElement( "CurrentVersion" );
-            writer.WriteAttributeString( "value", "1" );
+            writer.WriteAttributeString( "value", "2" );
+            writer.WriteEndElement();
+            writer.WriteStartElement("AnnounceIRC");
+            writer.WriteAttributeString("value", xIRC.Checked.ToString());
             writer.WriteEndElement();
             writer.WriteEndElement();
             writer.WriteEndDocument();
