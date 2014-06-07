@@ -23,9 +23,9 @@ namespace HelperBot {
         /// <summary>
         /// Current version of the config file and xml file
         /// </summary>
-        public static int CurrentVersion = 1;
+        public static int CurrentVersion = 2;
 
-        public static int XmlVersion = 1;
+        public static int XmlVersion = 2;
 
         /// <summary>
         /// The XML root name
@@ -120,6 +120,11 @@ namespace HelperBot {
         /// Bot will kick a player if impersonating the bot
         /// </summary>
         public static bool AnnounceImpersonation = true;
+
+        /// <summary>
+        /// Bot will forward all chat to the irc channel
+        /// </summary>
+        public static bool AnnounceIRC = true;
 
         #endregion Booleans
 
@@ -278,65 +283,51 @@ namespace HelperBot {
                     if ( reader.NodeType == XmlNodeType.Element ) {
                         if ( reader.Name == "AnnounceFly" ) {
                             AnnounceFly = Convert.ToBoolean( reader.GetAttribute( 0 ).ToLower() );
-                            ;
                         }
                         if ( reader.Name == "AnnounceServer" ) {
                             AnnounceServerName = Convert.ToBoolean( reader.GetAttribute( 0 ).ToLower() );
-                            ;
                         }
                         if ( reader.Name == "AnnounceHours" ) {
                             AnnounceHours = Convert.ToBoolean( reader.GetAttribute( 0 ).ToLower() );
-                            ;
                         }
                         if ( reader.Name == "AnnounceRank" ) {
                             AnnounceRank = Convert.ToBoolean( reader.GetAttribute( 0 ).ToLower() );
-                            ;
                         }
                         if ( reader.Name == "AnnounceWarnKick" ) {
                             AnnounceWarnKick = Convert.ToBoolean( reader.GetAttribute( 0 ).ToLower() );
-                            ;
                         }
                         if ( reader.Name == "AnnounceWarnSwear" ) {
                             AnnounceWarnSwear = Convert.ToBoolean( reader.GetAttribute( 0 ).ToLower() );
-                            ;
                         }
                         if ( reader.Name == "AnnounceSuggestBan" ) {
                             AnnounceSuggestBan = Convert.ToBoolean( reader.GetAttribute( 0 ).ToLower() );
                         }
                         if ( reader.Name == "AnnounceImpersonation" ) {
                             AnnounceImpersonation = Convert.ToBoolean( reader.GetAttribute( 0 ).ToLower() );
-                            ;
                         }
                         if ( reader.Name == "AnnounceTime" ) {
                             AnnounceTime = Convert.ToBoolean( reader.GetAttribute( 0 ).ToLower() );
-                            ;
                         }
                         if ( reader.Name == "AnnouncePM" ) {
                             AnnouncePM = Convert.ToBoolean( reader.GetAttribute( 0 ).ToLower() );
-                            ;
                         }
                         if ( reader.Name == "AnnounceFell" ) {
                             AnnounceFell = Convert.ToBoolean( reader.GetAttribute( 0 ).ToLower() );
-                            ;
                         }
                         if ( reader.Name == "AnnounceSpleefTimer" ) {
                             AnnounceSpleefTimer = Convert.ToBoolean( reader.GetAttribute( 0 ).ToLower() );
                         }
                         if ( reader.Name == "AnnounceGreeting" ) {
                             AnnounceGreeting = Convert.ToBoolean( reader.GetAttribute( 0 ).ToLower() );
-                            ;
                         }
                         if ( reader.Name == "AnnounceDemoted" ) {
                             AnnounceDemoted = Convert.ToBoolean( reader.GetAttribute( 0 ).ToLower() );
-                            ;
                         }
                         if ( reader.Name == "AnnounceJokes" ) {
                             AnnounceJokes = Convert.ToBoolean( reader.GetAttribute( 0 ).ToLower() );
-                            ;
                         }
                         if ( reader.Name == "AnnounceCaps" ) {
                             AnnounceCaps = Convert.ToBoolean( reader.GetAttribute( 0 ).ToLower() );
-                            ;
                         }
                         if ( reader.Name == "BotName" ) {
                             Name = reader.GetAttribute( 0 );
@@ -349,6 +340,10 @@ namespace HelperBot {
                         }
                         if ( reader.Name == "CurrentVersion" ) {
                             XmlVersion = Convert.ToInt32( reader.GetAttribute( 0 ) );
+                        }
+                        if (reader.Name == "AnnounceIRC")
+                        {
+                            AnnounceIRC = Convert.ToBoolean(reader.GetAttribute(0).ToLower());
                         }
                     }
                 }
