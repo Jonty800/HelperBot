@@ -18,10 +18,6 @@ namespace HelperBot {
         /// </summary>
         public static void SendMessage( string Message, MessageChannel Channel ) 
         {
-            if (Channel == MessageChannel.Global)
-            {
-                IRC.SendChannelMessage(Settings.BotNameColor + Settings.Name + "&0: " + Message);
-            }
             SendMessage( null, Message, Channel );
         }
 
@@ -92,7 +88,10 @@ namespace HelperBot {
                 SendError( "HelperBot: Msg cannot be 0-length", MessageChannel.Global );
                 return;
             }
+           
             msg = Color.ReplacePercentCodes( msg );
+            IRC.SendChannelMessage(Settings.BotNameColor + Color.StripColors(Settings.Name) + Color.Black + ": " + Color.StripColors(msg));
+            Logger.Log(LogType.GlobalChat, (Settings.BotNameColor + Color.StripColors(Settings.Name) + Color.White + ": " + Color.StripColors(msg)));
             Server.Players.Message( "{0}&F: {1}", Values.ClassyName, msg );
         }
 
