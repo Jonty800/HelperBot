@@ -62,9 +62,14 @@ namespace HelperBot {
             }
             //How do I get the next rank?
             if ( Triggers.MatchesTrigger( Message, RankTriggers.HowDoFullTrigger ) && Settings.AnnounceRank ) {
-                if ( player.Info.Rank == RankManager.HighestRank )
+                if (player.Info.Rank == RankManager.HighestRank)
+                {
+                    Methods.SendMessage(player.ClassyName + "&F, you are already the highest rank!", Channel);
+                    Methods.AddTYPlayer(player);
                     return;
-                if ( player.Can( Permission.ReadStaffChat ) ) {
+                }
+                if (player.Can(Permission.ReadStaffChat))
+                {
                     Methods.SendMessage( player.ClassyName + "&f, " + Settings.HowToGetRankedStaffString, Channel );
                     Methods.AddTYPlayer( player );
                 } else {
@@ -153,7 +158,7 @@ namespace HelperBot {
 
             //how do I fly? Using CM now since Java 7 is such a pain
             if ( Triggers.MatchesTrigger( Message, MiscTriggers.FlyFullTrigger ) && Settings.AnnounceFly ) {
-                Methods.SendMessage( player.ClassyName + "&F, to fly, type /fly, or download CM at http://is.gd/charged.", MessageChannel.Global );
+                Methods.SendMessage( player.ClassyName + "&F, to fly, type /fly, or download ClassiCube at http://Classicube.net.", MessageChannel.Global );
                 Methods.AddTYPlayer( player );
                 return;
             }
