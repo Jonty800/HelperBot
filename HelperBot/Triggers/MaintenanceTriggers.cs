@@ -86,6 +86,22 @@ namespace HelperBot {
            "whisper"
         };
 
+        private static String[] TimeTrigger = new String[]
+        {
+           "what",
+           "is",
+           "the",
+           "time"
+        };
+
+        private static String[] TimeTrigger2 = new String[]
+        {
+           "what",
+           "time",
+           "is",
+           "it"
+        };
+
         public static String[][] PMFullTrigger = new String[][]
         {
             PMTrigger,
@@ -94,7 +110,8 @@ namespace HelperBot {
 
         public static String[][] TimeFullTrigger = new String[][]
         {
-            new String[]{"what", "is", "the", "time"}
+            TimeTrigger,
+            TimeTrigger2
         };
 
         public static String[][] SwearFullTrigger;
